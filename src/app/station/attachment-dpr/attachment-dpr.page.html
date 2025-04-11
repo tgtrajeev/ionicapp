@@ -1,0 +1,178 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent">
+		<ion-col size="2">
+			<ion-back-button defaultHref="attachment"></ion-back-button>
+		</ion-col>
+		<ion-col size="8">
+			<h4 class="ion-text-center">DPR Other Attachments</h4>
+		</ion-col>
+		<!--<ion-col size="2">
+			<ion-button color="light" size="small" (click)="searchCollapse()"><ion-icon name="search" class="font22"></ion-icon></ion-button>
+		</ion-col>
+		 <ion-col size="12" class="searchbar_container" *ngIf="searchShow">
+			<ion-searchbar showCancelButton="always" (ionCancel)="hideSearchBar()" ></ion-searchbar>
+		</ion-col> -->
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<div class="form_inp_container">
+			<div class="label_container">
+				<label>Date From</label>
+			</div>
+			<div class="input_container">
+				<ion-item>
+					<ion-label>Select Date:</ion-label>
+					<ion-datetime #selcteddateFrom class="inp_control date" displayFormat="DD-MMM-YYYY"
+						pickerFormat="DD MMM YYYY" [ngModel]="DateFrom" name="selcteddateForm"
+						(ngModelChange)="OnDateChnageFrom(selcteddateFrom.value)" [max]="secondMaxDate"></ion-datetime>
+				</ion-item>
+			</div>
+		</div>
+		<div class="form_inp_container">
+			<div class="label_container">
+				<label>Date To</label>
+			</div>
+			<div class="input_container">
+				<ion-item>
+					<ion-label>Select Date:</ion-label>
+					<ion-datetime #selcteddateTo class="inp_control date" displayFormat="DD-MMM-YYYY"
+						pickerFormat="DD MMM YYYY" [ngModel]="DateTo" name="selcteddateTo"
+						(ngModelChange)="OnDateChnageTo(selcteddateTo.value)" [min]="DateFromMy" [max]="secondMaxDate">
+					</ion-datetime>
+				</ion-item>
+			</div>
+		</div>
+		<ion-row>
+			<ion-col>
+				<div class="card_box" *ngFor="let item of AttachmentData; let i=index">
+					<div class="card_heading">
+						<h5>
+							<span class="span1">
+								<span>{{i+1}} </span> {{item.CertificateType}}
+							</span>
+						</h5>
+					</div>
+					<div class="card_content">
+						<ion-grid>
+							<ion-row>
+								<ion-col size="12">
+									<div class="item">
+										<ion-label>Attachement For</ion-label>
+										<ion-text>{{item.name}}</ion-text>
+									</div>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="12">
+									<div class="item">
+										<ion-label>Entry Date</ion-label>
+										<ion-text>{{item.EntryDate}}</ion-text>
+									</div>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="12">
+									<div class="item">
+										<ion-label>Type</ion-label>
+										<ion-text>{{item.CertificateType}}</ion-text>
+									</div>
+								</ion-col>
+							</ion-row>
+							<ion-row class="bottom_row ion-align-items-center">
+								<ion-col>
+									<div class="item ion-text-left">
+										<ion-label>Jump Certificate</ion-label>
+									</div>
+								</ion-col>
+								<ion-col class="ion-text-right" (click)="GenerateJumpCertificate(item);"
+									*ngIf="item.IsApprovedByInstrumental == 1">
+									<ion-text>
+										<ion-button color="light" size="small">
+											<ion-icon name="cloud-download"></ion-icon>
+										</ion-button>
+									</ion-text>
+								</ion-col>
+							</ion-row>
+							<ion-row class="bottom_row ion-align-items-center">
+								<ion-col>
+									<div class="item ion-text-left">
+										<ion-label>Approved By Instrumental </ion-label>
+									</div>
+								</ion-col>
+								<ion-col class="ion-text-right">
+									<ion-text><i class="fas fa-check mycheck"
+											*ngIf="item.IsApprovedByInstrumental == 1"></i>
+										<i class="fas fa-times myclose" *ngIf="item.IsApprovedByInstrumental==2"></i>
+										<i class="fas fa-minus myminus" *ngIf="item.IsApprovedByInstrumental == 0"></i>
+									</ion-text>
+								</ion-col>
+							</ion-row>
+							<ion-row class="bottom_row ion-align-items-center">
+								<ion-col>
+									<div class="item ion-text-left">
+										<ion-label>Approved By ONM </ion-label>
+									</div>
+								</ion-col>
+								<ion-col class="ion-text-right">
+									<ion-text><i class="fas fa-check mycheck" *ngIf="item.IsApprovedByONM == 1"></i>
+										<i class="fas fa-times myclose" *ngIf="item.IsApprovedByONM==2"></i>
+										<i class="fas fa-minus myminus" *ngIf="item.IsApprovedByONM == 0"></i>
+									</ion-text>
+								</ion-col>
+							</ion-row>
+							<ion-row class="bottom_row ion-align-items-center">
+								<ion-col>
+									<div class="item ion-text-left">
+										<ion-label>Approved By DSO</ion-label>
+									</div>
+								</ion-col>
+								<ion-col class="ion-text-right">
+									<ion-text><i class="fas fa-check mycheck" *ngIf="item.IsApprovedByMO == 1"></i>
+										<i class="fas fa-times myclose" *ngIf="item.IsApprovedByMO==2"></i>
+										<i class="fas fa-minus myminus" *ngIf="item.IsApprovedByMO == 0"></i>
+									</ion-text>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col *ngIf="item.CertificatePath == '' ">
+									<div class="item ion-text-center">
+										<ion-button color="light" class="xyz" (click)="selectImage(item)">
+											Upload&nbsp;<ion-icon name="cloud-upload"></ion-icon>
+										</ion-button>
+									</div>
+								</ion-col>
+								<ion-col *ngIf="item.CertificatePath != '' ">
+									<div class="item ion-text-center">
+										<ion-button color="light" class="xyz"
+											(click)="presentModal1(item.CertificatePath)">
+											View&nbsp;<ion-icon name="eye"></ion-icon>
+										</ion-button>
+									</div>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
+	</div>
+</ion-content>

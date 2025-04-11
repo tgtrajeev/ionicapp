@@ -1,0 +1,228 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home" *ngIf="DepartmentCode == 'SO'">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<div class="logo_div" routerLink="/mo-dashboard"  *ngIf="DepartmentCode == 'MO'">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<div class="logo_div" routerLink="/co-dashboard"  *ngIf="DepartmentCode == 'CO'">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<div class="logo_div" routerLink="/so-dashboard" *ngIf="DepartmentCode == 'SOP'">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<div class="logo_div" routerLink="/admin-home" *ngIf="DepartmentCode == 'HO'">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<h1 class="text_white text_center title">Jump Reading System</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent" *ngIf="showmaincontent==true">
+		<ion-col size="2">
+			<ion-back-button defaultHref="attachment"></ion-back-button>
+		</ion-col>
+		<ion-col size="8">
+			<h4 class="ion-text-center">Jump Reading System</h4>
+		</ion-col>
+		<!-- <ion-col size="2" offset="4">
+			<ion-button size="small" color="light" (click)="searchCollapse()">
+				<ion-icon name="search" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col> -->
+		<!-- <ion-col size="5"></ion-col>
+		<ion-col size="5"> -->
+			<!-- <ion-button size="small" color="light" class="date_btn">
+				<ion-datetime #selcteddate class="datepick" displayFormat=" DD-MM-YYYY" pickerFormat="DD MMMM YYYY"
+					[(ngModel)]="CDate" name="CDate" (ngModelChange)="OnDateChnage(selcteddate.value)"></ion-datetime>
+			</ion-button> -->
+		<!-- </ion-col> -->
+		<ion-col size="12" *ngIf="searchShow" class="searchbar_container">
+			<ion-searchbar type="text" debounce="500" (ionInput)="getItems($event)" showCancelButton="always"
+				(ionCancel)="hideSearchBar()"></ion-searchbar>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<div class="mycard">
+			<div class="form_inp_container">
+				<div class="label_container">
+					<label>Date From</label>
+				</div>
+				<div class="input_container">
+					<ion-item>
+						<ion-label>Select Date:</ion-label>
+						<ion-datetime #selcteddateFrom class="inp_control date" displayFormat="DD-MMM-YYYY"
+							pickerFormat="DD MMM YYYY" [ngModel]="DateFrom" name="selcteddateForm"
+							(ngModelChange)="OnDateChnageFrom(selcteddateFrom.value)" [max]="secondMaxDate">
+						</ion-datetime>
+					</ion-item>
+				</div>
+			</div>
+			<div class="form_inp_container">
+				<div class="label_container">
+					<label>Date To</label>
+				</div>
+				<div class="input_container">
+					<ion-item>
+						<ion-label>Select Date:</ion-label>
+						<ion-datetime #selcteddateTo class="inp_control date" displayFormat="DD-MMM-YYYY"
+							pickerFormat="DD MMM YYYY" [ngModel]="DateTo" name="selcteddateTo"
+							(ngModelChange)="OnDateChnageTo(selcteddateTo.value)" [min]="DateFromMy"
+							[max]="secondMaxDate"></ion-datetime>
+					</ion-item>
+				</div>
+			</div>
+			<ion-grid *ngIf="showmaincontent==true">
+				<ion-row>
+					<ion-col>
+						<div class="my_table_container">
+							<table class="my_table">
+								<thead>
+									<tr>
+										<th>Action</th>
+										<th>Date</th>
+										<th>Station</th>
+										<th>Equipment</th>
+										<th>Arms</th>
+										<th>Redading Before Jump</th>
+										<th>Redading After Jump</th>
+										<th>Total Jump</th>
+										<th>Approved By Station</th>
+										<th>Approved By ONM</th>
+										<th>Approved By AMO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of JumpReadingData let i = index" (click)="GetRowdata(itm)">
+										<td *ngIf="itm.UserRole == 'SO'">
+											<ion-button size="small" color="success" *ngIf="itm.ApprovedByStation == 1" class="btn_CRS_default">
+											  Accepted
+											</ion-button>
+											<ion-button size="small" color="danger" *ngIf="itm.ApprovedByStation == 2" data-toggle="modal" >
+											  Rejected
+											</ion-button>
+											<ion-button size="small" color="success" *ngIf="itm.ApprovedByStation == 0" (click)="UpdateJumpReadingStatusByRole('A', itm)">
+											  Accept
+											</ion-button>
+											<ion-button size="small" color="danger" *ngIf="itm.ApprovedByStation == 0" (click)="UpdateJumpReadingStatusByRole('R', itm)">
+											  Reject
+											</ion-button>
+										  </td>
+
+										  <td *ngIf="itm.UserRole == 'CO'">
+											<ion-button size="small" color="success" *ngIf="itm.IsApprovedByONM == 1" class="btn_CRS_default">
+											  Accepted
+											</ion-button>
+											<ion-button size="small" color="danger" *ngIf="itm.IsApprovedByONM == 2" data-toggle="modal" data-target="#myModal">
+											  Rejected
+											</ion-button>
+											<ion-button size="small" color="success" *ngIf="itm.IsApprovedByONM == 0" (click)="UpdateJumpReadingStatusByRole('A', itm)">
+											  Accept
+											</ion-button>
+											<ion-button size="small" color="danger" *ngIf="itm.IsApprovedByONM == 0" (click)="UpdateJumpReadingStatusByRole('R', itm)">
+											  Reject
+											</ion-button>
+										  </td>
+										  
+										  
+										<td *ngIf="itm.UserRole == 'HO'">
+											<ion-button size="small" color="success"
+												*ngIf="itm.IsApprovedByInstrumental== 1">Accept</ion-button>
+											<ion-button size="small" color="danger"
+												*ngIf="itm.IsApprovedByInstrumental== 2"
+												(click)="goToJumpReamrk(true,itm)">Reject</ion-button>
+											<ion-button size="small" color="success"
+												*ngIf="itm.IsApprovedByInstrumental==0"
+												(click)="UpdateJumpReadingStatusByRole('A',itm)">Accept</ion-button>
+											<!-- <ion-button size="small" color="primary" *ngIf="itm.IsApprovedByONM == 2">Approved</ion-button> -->
+											<ion-button size="small" color="danger"
+												*ngIf="itm.IsApprovedByInstrumental==0"
+												(click)="UpdateJumpReadingStatusByRole('R', itm)">Reject</ion-button>
+										</td>
+										<td *ngIf="itm.UserRole == 'MO'">
+											<ion-button size="small" color="success" *ngIf="itm.IsApprovedByMO== 1">
+												Accept</ion-button>
+											<ion-button size="small" color="danger" *ngIf="itm.IsApprovedByMO== 2">
+												Reject</ion-button>
+											<ion-button size="small" color="success" *ngIf="itm.IsApprovedByMO==0"
+												(click)="UpdateJumpReadingStatusByRole('A',itm)">Accept</ion-button>
+											<!-- <ion-button size="small" color="primary" *ngIf="itm.IsApprovedByONM == 2">Approved</ion-button> -->
+											<ion-button size="small" color="danger" *ngIf="itm.IsApprovedByMO==0"
+												(click)="UpdateJumpReadingStatusByRole('R',itm)">Reject</ion-button>
+										</td>
+										<td>{{itm.ApprovedDate}}</td>
+										<td>{{itm.StationName}}</td>
+										<td>{{itm.DispenserName}}</td>
+										<td>{{itm.Arms}}</td>
+										<td>{{itm.ReadingBeforeJump}}</td>
+										<td>{{itm.ReadingAfterJump}}</td>
+										<td>{{itm.TotalJump}}</td>
+										<td class="text_center">
+											<ion-icon name="checkmark" class="mycheck" *ngIf="itm.ApprovedByStation == 1"></ion-icon>
+											<ion-icon name="close" class="myclose" *ngIf="itm.ApprovedByStation == 2"></ion-icon>
+											<ion-icon name="remove" *ngIf="itm.ApprovedByStation == 0"></ion-icon>
+										</td>
+										<td>
+											<ion-icon name="checkmark" class="mycheck" *ngIf="itm.IsApprovedByONM == 1">
+											</ion-icon>
+											<ion-icon name="close" class="myclose" *ngIf="itm.IsApprovedByONM==2">
+											</ion-icon>
+											<ion-icon name="remove" *ngIf="itm.IsApprovedByONM == 0"></ion-icon>
+										</td>
+										<td>
+											<ion-icon name="checkmark" class="mycheck" *ngIf="itm.IsApprovedByMO == 1">
+											</ion-icon>
+											<ion-icon name="close" class="myclose" *ngIf="itm.IsApprovedByMO==2">
+											</ion-icon>
+											<ion-icon name="remove" *ngIf="itm.IsApprovedByMO == 0"></ion-icon>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+
+			<!--Instrumental Remark  -->
+			<div *ngIf="DepartmentCode == 'HO'">
+				<form *ngIf="showRemark == true">
+					<ion-grid>
+						<ion-row>
+							<ion-col size="12" class="inp_group">
+								<ion-input class="inp_control" placeholder="Total Jump" [(ngModel)]="TotalJump"
+									name="TotalJump"></ion-input>
+							</ion-col>
+							<ion-col size="12" class="inp_group">
+								<ion-textarea type="text" class="inp_control" placeholder="Remark" rows="5"
+									[value]="Remark" (input)="Remark=$event.target.value"></ion-textarea>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="button_container">
+									<ion-button color="dark_green_clr" type="submit"
+										(click)="InsertRemarkByInstrumental();">Save</ion-button>
+								</div>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+				</form>
+			</div>
+		</div>
+	</div>
+</ion-content>

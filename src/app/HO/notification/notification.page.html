@@ -1,0 +1,260 @@
+<ion-header>
+	<ion-row class="ion-align-items-center search_parent for_color">
+		<ion-col size="2" class="pt_0 pb_0">
+			<ion-back-button class="text_white"></ion-back-button>
+		</ion-col>
+		<ion-col size="8" class="text_white ion-text-center">Notification Details</ion-col>
+		<ion-col size="2">
+			<ion-button size="small" color="light" (click)="searchCollapse()">
+				<ion-icon name="search" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col size="12" class="searchbar_container" *ngIf="searchShow">
+			<ion-searchbar type="text" debounce="500" (ionInput)="getItems($event)" showCancelButton="always"
+				(ionCancel)="hideSearchBar()"></ion-searchbar>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<!---Ho-->
+		<ion-row *ngFor="let item of NotificationDetails; let i=index">
+			<ion-col>
+				<ion-card class="noti_card">
+					<ion-label>
+						<ion-text class="ion-float-left"> {{i+1}}.</ion-text>
+						<ion-button size="small" color="light" class="ion-float-right"
+							(click)="presentModal(item.NotificationId)">
+							<ion-icon name="create"></ion-icon>
+						</ion-button>
+					</ion-label>
+
+					<ion-label>Staion Code</ion-label>
+					<ion-text>{{item.StationCode}}</ion-text>
+
+					<ion-label>Staion Name</ion-label>
+					<ion-text>{{item.StationName}}</ion-text>
+
+					<ion-label>Region Name</ion-label>
+					<ion-text>{{item.RegionName}}</ion-text>
+
+					<ion-label>Company Name</ion-label>
+					<ion-text> {{item.CompanyName}}</ion-text>
+
+					<ion-label>Station Type</ion-label>
+					<ion-text>{{item.StationTypeName}}</ion-text>
+
+				</ion-card>
+			</ion-col>
+		</ion-row>
+		<!---Mo-->
+		<!-- <ion-row *ngFor="let item of NotificationDetailsMO; let i=index">
+			<ion-col>
+				<ion-card class="noti_card">
+					<ion-label >
+						<ion-text class="ion-float-left"> {{i+1}}.</ion-text>
+						
+					</ion-label>
+				  
+					<ion-label>Staion Code</ion-label>
+					<ion-text>{{item.StationCode}}</ion-text>
+
+					<ion-label>Staion Name</ion-label>
+					<ion-text>{{item.StationName}}</ion-text>
+
+					<ion-label>Shift</ion-label>
+					<ion-text> {{item.ShiftName}}</ion-text>
+
+					<ion-label>Manager</ion-label>
+					<ion-text>{{item.Manager}}</ion-text>
+					
+					<ion-label>ContactNo</ion-label>
+					<ion-text>{{item.ContactNo}}</ion-text>
+
+					<ion-label>Entry Date</ion-label>
+					<ion-text>{{item.EntryDate}}</ion-text>
+					
+					<ion-label>Remark</ion-label>
+					<ion-text>{{item.Remark}}</ion-text>
+				</ion-card>
+			</ion-col>
+		</ion-row> -->
+		<div *ngIf="DepartmentCode=='MO' ">
+			<ion-row>
+				<ion-segment color="dark" (ionChange)="notifiChange($event)" value="PendingEntry">
+					<ion-segment-button value="PendingEntry">
+						<ion-label>Pending Entry</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="JumpEntry">
+						<ion-label>Jump Entry</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-row>
+			<div *ngIf="pendingEntry">
+				<ion-row>
+					<ion-col>
+						<ion-card class="noti_card" *ngFor="let item of NotificationDetailsMOPending; let i=index ">
+							<ion-label>
+								<ion-text class="ion-float-left">{{i+1}}</ion-text>
+							</ion-label>
+
+							<ion-label>Staion Code</ion-label>
+							<ion-text>{{item.StationCode}}</ion-text>
+							<ion-label>Staion Name</ion-label>
+							<ion-text>{{item.StationName}}</ion-text>
+							<ion-label>Shift</ion-label>
+							<ion-text>{{item.ShiftName}}</ion-text>
+							<ion-label>Manager</ion-label>
+							<ion-text>{{item.Manager}}</ion-text>
+							<ion-label>Contact No</ion-label>
+							<ion-text> {{item.ContactNo}}</ion-text>
+							<ion-label>Entry Date </ion-label>
+							<ion-text>{{item.EntryDate}}</ion-text>
+							<ion-label>Remark</ion-label>
+							<ion-text>{{item.Remark}}</ion-text>
+						</ion-card>
+					</ion-col>
+				</ion-row>
+			</div>
+			<div *ngIf="jumpEntry">
+				<ion-row>
+					<ion-col>
+						<ion-card class="noti_card" *ngFor="let item of NotificationDetailsMOJump; let i=index">
+							<ion-label>
+								<ion-text class="ion-float-left">{{i+1}}.</ion-text>
+							</ion-label>
+
+							<ion-label>Staion Code</ion-label>
+							<ion-text>{{item.StationCode}}</ion-text>
+
+							<ion-label>Staion Name</ion-label>
+							<ion-text>{{item.StationName}}</ion-text>
+
+							<ion-label>DispenserName </ion-label>
+							<ion-text>{{item.DispenserName}}</ion-text>
+
+							<ion-label>DispanserBeforeJump</ion-label>
+							<ion-text>{{item.DispanserBeforeJump}}</ion-text>
+
+							<ion-label>DispanserAfterJump</ion-label>
+							<ion-text>{{item.DispanserAfterJump}}</ion-text>
+
+							<ion-label>DispenserCode</ion-label>
+							<ion-text>{{item.DispenserCode}}</ion-text>
+
+							<ion-label>DispanserSide</ion-label>
+							<ion-text>{{item.DispanserSide}}</ion-text>
+						</ion-card>
+					</ion-col>
+				</ion-row>
+			</div>
+		</div>
+		<!---Co-->
+		<div *ngIf="DepartmentCode=='CO' ">
+			<ion-row>
+				<ion-segment color="dark" (ionChange)="notifiChange($event)" value="PendingEntry">
+					<ion-segment-button value="PendingEntry">
+						<ion-label>Pending Entry</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="JumpEntry">
+						<ion-label>Jump Entry</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-row>
+			<div *ngIf="pendingEntry">
+				<ion-row>
+					<ion-col>
+						<ion-card class="noti_card" *ngFor="let item of NotificationDetailsCOPending; let i=index ">
+							<ion-label>
+								<ion-text class="ion-float-left">{{i+1}}</ion-text>
+							</ion-label>
+
+							<ion-label>Staion Code</ion-label>
+							<ion-text>{{item.StationCode}}</ion-text>
+
+							<ion-label>Staion Name</ion-label>
+							<ion-text>{{item.StationName}}</ion-text>
+							<ion-label>Shift</ion-label>
+							<ion-text>{{item.ShiftName}}</ion-text>
+							<ion-label>Manager</ion-label>
+							<ion-text>{{item.Manager}}</ion-text>
+
+							<ion-label>Contact No</ion-label>
+							<ion-text> {{item.ContactNo}}</ion-text>
+
+							<ion-label>Remark</ion-label>
+							<ion-text>{{item.Remark}}</ion-text>
+						</ion-card>
+					</ion-col>
+				</ion-row>
+			</div>
+			<div *ngIf="jumpEntry">
+				<ion-row>
+					<ion-col>
+						<ion-card class="noti_card" *ngFor="let item of NotificationDetailsCOJump; let i=index">
+							<ion-label>
+								<ion-text class="ion-float-left">{{i+1}}.</ion-text>
+							</ion-label>
+
+							<ion-label>Staion Code</ion-label>
+							<ion-text>{{item.StationCode}}</ion-text>
+
+							<ion-label>Staion Name</ion-label>
+							<ion-text>{{item.StationName}}</ion-text>
+
+							<ion-label>Equipment </ion-label>
+							<ion-text>{{item.Equipment}}</ion-text>
+
+							<ion-label>Type</ion-label>
+							<ion-text>{{item.Type}}</ion-text>
+
+							<ion-label>Manager</ion-label>
+							<ion-text>{{item.Manager}}</ion-text>
+
+							<ion-label>ContactNo</ion-label>
+							<ion-text>{{item.ContactNo}}</ion-text>
+
+							<ion-label>Remark</ion-label>
+							<ion-text>{{item.Remark}}</ion-text>
+						</ion-card>
+					</ion-col>
+				</ion-row>
+			</div>
+		</div>
+		<!---SOP-->
+		<ion-row *ngFor="let item of NotificationDetailsSOP; let i=index">
+			<ion-col>
+				<ion-card class="noti_card">
+					<ion-label>
+						<ion-text class="ion-float-left"> {{i+1}}.</ion-text>
+						<!-- <ion-button size="small" color="light" class="ion-float-right" (click)="presentModal(item.NotificationId)">
+								<ion-icon name="create"></ion-icon>
+							</ion-button> -->
+					</ion-label>
+
+					<ion-label>Staion Code</ion-label>
+					<ion-text>{{item.StationCode}}</ion-text>
+
+					<ion-label>Staion Name</ion-label>
+					<ion-text>{{item.StationName}}</ion-text>
+
+					<ion-label>Shift</ion-label>
+					<ion-text> {{item.ShiftName}}</ion-text>
+
+					<ion-label>Manager</ion-label>
+					<ion-text>{{item.Manager}}</ion-text>
+
+					<ion-label>ContactNo</ion-label>
+					<ion-text>{{item.ContactNo}}</ion-text>
+
+					<ion-label>Entry Date</ion-label>
+					<ion-text>{{item.EntryDate}}</ion-text>
+
+					<ion-label>Remark</ion-label>
+					<ion-text>{{item.Remark}}</ion-text>
+				</ion-card>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

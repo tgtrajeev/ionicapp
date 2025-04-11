@@ -1,0 +1,25 @@
+.card_header
+{
+    width: 100%;
+    padding: 8px 9px;
+    border-bottom: 1px solid #d6d6d6;
+}
+.card_content
+{
+    width:100%;
+    padding: 8px 9px;
+}
+.inp_control
+{
+    height:34px;
+}
+
+.showDisabled{
+    background-color: #eee;
+    opacity: 1;
+}
+
+.hideDisabled{
+    background-color: #fff;
+    opacity: 1;
+}

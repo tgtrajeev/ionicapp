@@ -1,0 +1,142 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/admin-home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<h1 class="text_white text_center title">Rate Management</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent">
+		<ion-col size="2">
+			<ion-back-button defaultHref="admin-home"></ion-back-button>
+		</ion-col>
+		<ion-col size="2" offset="8">
+			<ion-button size="small" color="light" (click)="searchCollapse()">
+				<ion-icon name="search" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<!-- <ion-col size="2">
+			<ion-button size="small" color="light" (click)="goToadd()"><ion-icon name="add" class="font22"></ion-icon></ion-button>
+		</ion-col> -->
+		<ion-col size="12" class="searchbar_container" *ngIf="searchShow">
+			<ion-searchbar type="text" debounce="500" (ionInput)="getItems($event)" showCancelButton="always"
+				(ionCancel)="hideSearchBar()"></ion-searchbar>
+			<ion-row *ngIf="isItemAvailable">
+				<ion-col>
+					<div class="my_table_container">
+						<table class="my_table">
+							<tbody>
+								<!-- (click)="goToUpdate(item.RateId)" -->
+								<tr *ngFor="let item of items; let i = index">
+									<td>{{i+1}}</td>
+									<td>{{item.RegionName}}</td>
+									<td>{{item.NormalRate.toFixed(2)}}</td>
+									<td>{{item.DisountedRate.toFixed(2)}}</td>
+									<td>{{item.EffectiveDate}}</td>
+									<td>{{item.DisplayTime}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col class="ion-text-right">
+				<ion-button size="small" color="light" (click)="showPrevRedirect()">Show Previous</ion-button>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Region</th>
+								<th>Normal Rate ₹/Kg</th>
+								<th>Discounted Rate ₹/Kg</th>
+								<th>Effective Date</th>
+								<th>Effective Time</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- (click)="goToUpdate(ritem.RateId)" -->
+							<tr *ngFor="let ritem of Ratelist; let i= index">
+								<td>{{i+1}}</td>
+								<td>
+								<ion-input type="text" class="inp_control" [ngClass]="ritem.IsDisable ? 'showDisabled' : 'hideDisabled'" readonly="true">
+										{{ritem.RegionName}}</ion-input>
+								</td>
+								<td>
+									<!-- {{ritem.NormalRate.toFixed(2)}} -->
+									<ion-input type="text" placeholder="Normal Rate" class="inp_control"
+										name="NormalRate" [value]="ritem.NormalRate.toFixed(2)"
+										[ngClass]="ritem.IsDisable ? 'showDisabled' : 'hideDisabled'"
+										(ionInput)="NormalRate = $event.target.value" [readonly]="ritem.IsDisable">
+									</ion-input>
+								</td>
+								<td>
+									<!-- {{ritem.DisountedRate.toFixed(2)}} -->
+									<ion-input type="text" placeholder="Discounted Rate" class="inp_control"
+										name="DisountedRate" [value]="ritem.DisountedRate.toFixed(2)"
+										[ngClass]="ritem.IsDisable ? 'showDisabled' : 'hideDisabled'"
+										(input)="DisountedRate = $event.target.value" [readonly]="ritem.IsDisable">
+									</ion-input>
+
+								</td>
+								<td>
+									<ion-datetime #selcteddate class="datepick inp_control" displayFormat="DD-MMM-YYYY"
+										pickerFormat="DD MMM YYYY" (ionChange)="OnDateChnage($event)"
+										[ngClass]="ritem.IsDisable ? 'showDisabled' : 'hideDisabled'"
+										[(ngModel)]="ritem.EffectiveDate" [min]="minDateRate" [max]="maxDaterate"
+										name="EffectiveDate" [disabled]="ritem.IsDisable"></ion-datetime>
+									<!-- (ngModelChange)="OnDateChnage($event)" -->
+								</td>
+								<td>
+									<!-- {{ritem.DisplayTime}} -->
+									<div class="divTableCell">
+										<ion-select name="optRegion" class="inp_control"
+											(ionChange)="onTimeSelect($event)"
+											[ngClass]="ritem.IsDisable ? 'showDisabled' : 'hideDisabled'"
+											[value]="ritem.DisplayTime ? ritem.DisplayTime : ''"
+											[disabled]="ritem.IsDisable">
+											<ion-select-option value="12:01 AM">12:01 AM</ion-select-option>
+											<ion-select-option value="06:00 AM">06:00 AM</ion-select-option>
+										</ion-select>
+									</div>
+								</td>
+								<td>
+									<ion-button size="small" color="primary" (click)="editmodefun(ritem)">
+										<ion-icon name="create"></ion-icon>
+									</ion-button>
+									<ion-button size="small" color="dark" [disabled]="ritem.IsDisable"
+										(click)="saveRate(ritem.RateId,ritem.RegionId,ritem.EffectiveDate,ritem.NormalRate,ritem.DisountedRate,ritem.DisplayTime)">
+										<ion-icon name="save"></ion-icon>
+									</ion-button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

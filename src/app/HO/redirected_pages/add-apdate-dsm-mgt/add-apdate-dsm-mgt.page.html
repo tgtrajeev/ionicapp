@@ -1,0 +1,54 @@
+<ion-header>
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left"><ion-back-button defaultHref="dsm-management" class="text_white"></ion-back-button></ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text *ngIf="pageFlag=='adddm'" class="text_white">Add DSM</ion-text>
+				<ion-text *ngIf="pageFlag=='updatedm'" class="text_white">Update DSM</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+<ion-content>	
+	<form [formGroup]="addupdateForm" (ngSubmit)="insertUpdateDm()">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Emp Code <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="DSMCode"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Name <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="DSMName"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Station <span class="star">*</span></ion-label>
+					<ion-item class="inp_control">						
+						<ion-select class="inp_control" [compareWith]="compareWith" formControlName="StationId">
+							<ion-select-option *ngFor="let itm of StationList" [value]="itm.StationId">{{itm.StationName}}</ion-select-option>
+						  </ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row class="align_center">
+				<ion-col>
+					Status
+				</ion-col>
+				<ion-col class="d_flex ion-justify-content-end">
+					<ion-toggle [(ngModel)]="status" [ngModelOptions]="{standalone: true}"></ion-toggle>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container" >
+						<ion-button color="dark_green_clr" type="submit">Save</ion-button>
+					</div>	
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>

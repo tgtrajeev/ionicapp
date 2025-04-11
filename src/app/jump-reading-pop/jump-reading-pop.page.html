@@ -1,0 +1,110 @@
+<ion-header>
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="dpr-dispenser-entry" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Jump Reading</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+<ion-content style="position:relative;">
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-segment color="dark" (ionChange)="ArmSelection($event.detail.value)" value="ArmA"
+					[(ngModel)]="armSide">
+					<ion-segment-button value="ArmA">
+						<ion-label>Arm A</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="ArmB">
+						<ion-label>Arm B</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Jump/Reset/Change/Gas Testing</ion-label>
+				<ion-select placeholder="Select One" class="inp_control" [(ngModel)]="FlagJumpType"
+					name="FlagJumpSelect" (ionChange)="ChangeJumpType($event.detail.value)">
+					<ion-select-option value="Jump">Jump</ion-select-option>
+					<ion-select-option value="Reset">Reset</ion-select-option>
+					<ion-select-option value="Change">Change</ion-select-option>
+					<ion-select-option value="GasTesting">Gas Testing</ion-select-option>
+				</ion-select>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Before</ion-label>
+				<ion-input class="inp_control" placeholder="Before" [(ngModel)]="before" name="before"></ion-input>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>After</ion-label>
+				<ion-input class="inp_control" placeholder="After" [(ngModel)]="after" name="after"></ion-input>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Attachment</ion-label>
+				<ion-input #inputFile type="file" class="inp_control" placeholder="After" id="fileInput"
+					name="fileInput" (change)="onChangeImage($event.target.files, $event)"></ion-input>
+				<span *ngIf="!IsFileSelected" class="temp_file_name" style="right:-6px;">{{FileName}}</span>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Remark</ion-label>
+				<ion-textarea class="inp_control" placeholder="Remark" [(ngModel)]="remark"></ion-textarea>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12">
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Before</th>
+								<th>After</th>
+								<th>Jumped</th>
+								<th>Jump Side</th>
+								<th>Remark</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let itm of listJumpedReading, let i = index">
+								<td>{{i+1}}</td>
+								<td>{{itm.DispanserBeforeJump}}</td>
+								<td>{{itm.DispanserAfterJump}}</td>
+								<td>{{itm.DispanserJump}}</td>
+								<td>{{itm.DispanserSide}}</td>
+								<td>{{itm.DispanserJumpRemark}}</td>
+								<td>
+									<ion-button size="small" color="dark"
+										(click)="UpdateJumpReading(itm.DispanserJumpId, itm)">
+										<ion-icon name="create"></ion-icon>
+									</ion-button>
+									<ion-button size="small" color="danger"
+										(click)="DeleteJumpReading(itm.DispanserJumpId,itm)">
+										<ion-icon name="trash"></ion-icon>
+									</ion-button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<div class="button_container">
+		<ion-button expand="block" color="dark_green_clr" (click)="saveJumpReading();">Save All
+		</ion-button>
+	</div>
+</ion-content>

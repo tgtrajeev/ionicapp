@@ -1,0 +1,1318 @@
+<ion-header *ngIf="hidepackage">
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="dpr-entry"></ion-back-button>
+		</div>
+		<div>
+			<h1>Package</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+
+<ion-content *ngIf="hidepackage">
+	<div class="content_area ">
+		<div class="mycard">
+			<div class="main_form_container">
+				<form class="myform">
+					<ion-grid>
+						<ion-row>
+							<ion-col>
+								<div class="sap_no_div">
+									<span>
+										<strong>SAP Equipment Number : </strong>
+										<span>{{PackageCode}}</span>
+									</span>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<label>Date <span class="star">*</span></label>
+									</div>
+									<div class="input_container">
+										<ion-item>
+											<ion-label>Select Date:</ion-label>
+											<!-- <ion-datetime displayFormat="DD/MM/YYYY" value="2012-12-15T13:47:20.789"></ion-datetime> -->
+											<ion-datetime #selcteddate class="datepick"
+												[(ngModel)]="geteDate.selcteddate" displayFormat="DD-MMM-YYYY"
+												pickerFormat="DD MMM YYYY" name="selcteddate" [max]="secondMaxDate"
+												(ngModelChange)="getSelectedDate(selcteddate.value)"></ion-datetime>
+											<!-- form="DispenserDate.selcteddate" -->
+										</ion-item>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<label>Package Name</label>
+									</div>
+									<div class="input_container">
+										<ion-select placeholder="Select One"
+											style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+											(ionChange)="GetPackageDetail($event.detail.value)">
+											<ion-select-option *ngFor="let itm of TablesPkgs" [value]="itm.PackageId">
+												{{itm.PackageName}}</ion-select-option>
+										</ion-select>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container mb10">
+									<div class="label_container">
+										<label>Suction Flow Meter Reading (kg) <span class="star">*</span></label>
+									</div>
+									<div class="input_container d_flex justify_space_beetween">
+										<ion-input placeholder="Flow Meter Totaliser" id="txtSuctionFlowMeterReadingSFM"
+											name="txtSuctionFlowMeterReadingSFM"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].SuctionFlowMeterReading">
+										</ion-input>
+										<span class="font13 mr5">Prev
+											:{{(PackageDetailJson.length == 0) ? '0.00' : PackageDetailJson[0].SuctionFlowMeterReadingPrv}}</span>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container ion-text-right">
+									<ion-button size="small" (click)="showhidechangereset('1')"
+										class="change_reset_btn">Jump/Change/Reset</ion-button>
+								</div>
+							</ion-col>
+						</ion-row>
+						<!-- New Comment -->
+						<!-- <ion-row>
+							<ion-col size="12">
+								<div class="form_inp_container">
+									<div class="input_container">
+										<ion-item>
+											<ion-checkbox (ionChange)="showFields_sfs()"></ion-checkbox>&nbsp;&nbsp;Jump
+											SFS
+										</ion-item>
+									</div>
+								</div>
+							</ion-col>
+							<ion-col size="12" *ngIf="varSfs">
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Jump Reading</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input id="JumpReadingSFM" name="JumpReadingSFM"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].JumpReadingSFM">
+										</ion-input>
+									</div>
+								</div>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Choose File</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input type="file" id="JumpCertificateSFM" name="JumpCertificateSFM"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].JumpCertificateSFM"
+											(change)="uploadJumpReadingImgSFM($event)"
+											[disabled]="(PackageDetailJson[0].JumpReadingSFM == '' || PackageDetailJson[0].JumpReadingSFM == 0)">
+										</ion-input>
+									</div>
+								</div>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Jump Reading Count</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input name="JumpReadingSFMCount"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].JumpReadingSFMCount">
+										</ion-input>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row> -->
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<label>Discharge Flow Meter Reading (kg) <span class="star">*</span></label>
+									</div>
+									<div class="input_container d_flex justify_space_beetween">
+										<ion-input name="DischargeFlowMeterReading" id="DischargeFlowMeterReading"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : 
+											PackageDetailJson[0].DischargeFlowMeterReading">
+										</ion-input>
+										<span class="font13 mr5">Prev
+											:{{PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].DischargeFlowMeterReadingPrv}}</span>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container ion-text-right">
+									<ion-button size="small" (click)="showhidechangereset('2')"
+										class="change_reset_btn">Jump/Change/Reset
+									</ion-button>
+								</div>
+							</ion-col>
+						</ion-row>
+						<!-- <ion-row>
+							<ion-col size="12">
+								<div class="form_inp_container">
+									<div class="input_container">
+										<ion-item>
+											<ion-checkbox (ionChange)="showFields_dfs()"></ion-checkbox>&nbsp;&nbsp;Jump
+											DFS
+										</ion-item>
+									</div>
+								</div>
+							</ion-col>
+							<ion-col size="12" *ngIf="varDfs">
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Jump Reading</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input name="JumpReadingDFM" id="JumpReadingDFM"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].JumpReadingDFM">
+										</ion-input>
+									</div>
+								</div>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Choose File</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input type="file" name="JumpCertificateDFM" id="JumpCertificateDFM"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].JumpCertificateDFM"
+											(change)="uploadJumpReadingImgDFM($event)"
+											[disabled]="(PackageDetailJson[0].JumpReadingDFM == '' || PackageDetailJson[0].JumpReadingDFM == 0)">
+										</ion-input>
+									</div>
+								</div>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Jump Reading Count</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input name="JumpReadingDFMCount"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].JumpReadingDFMCount">
+										</ion-input>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row> -->
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container" *ngIf="this.ShowEngineMeter">
+										<label>Engine Flow Meter Reading (SCMH) <span class="star">*</span></label>
+									</div>
+									<div class="label_container" *ngIf="!this.ShowEngineMeter">
+										<label>Motor Flow Meter Reading (KWH) <span class="star">*</span></label>
+									</div>
+									
+									
+									<div class="input_container d_flex justify_space_beetween">
+										<ion-input name="txtEngineFlowMeterReading" id="EngineFlowMeterReading"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0' : PackageDetailJson[0].EngineFlowMeterReading">
+										</ion-input>
+										<span class="font13 mr5">Prev
+											:{{PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].EngineFlowMeterReadingPrv}}</span>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container ion-text-right">
+									<ion-button size="small" (click)="showhidechangereset('3')"
+										class="change_reset_btn">Jump/Change/Reset
+									</ion-button>
+								</div>
+							</ion-col>
+						</ion-row>
+						<!-- <ion-row>
+							<ion-col size="12">
+								<div class="form_inp_container">
+									<div class="input_container">
+										<ion-item>
+											<ion-checkbox (ionChange)="showFields_efs()"></ion-checkbox>
+											&nbsp;&nbsp;Jump EFS
+										</ion-item>
+									</div>
+								</div>
+							</ion-col>
+							<ion-col size="12" *ngIf="varEfs">
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Jump Reading</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input id="JumpReadingEFS" name="JumpReadingEFM"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].JumpReadingEFM">
+										</ion-input>
+									</div>
+								</div>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Choose File</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input multiple type="file" id="JumpCertificateEFM"
+											name="JumpCertificateEFM"
+											[(ngModel)]="PackageDetailJson[0].JumpCertificateEFM"
+											(change)="uploadJumpReadingImgEFM($event)"
+											[disabled]="(PackageDetailJson[0].JumpReadingEFM == '' || PackageDetailJson[0].JumpReadingEFM == 0)">
+										</ion-input>
+									</div>
+								</div>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-label>Jump Reading Count</ion-label>
+									</div>
+									<div class="input_container">
+										<ion-input name="JumpReadingEFMCount"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].JumpReadingEFMCount"
+											pl></ion-input>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row> -->
+						<!-- <ion-row>
+							<ion-col size="12">
+								<div class="form_inp_container">
+									<div class="input_container">
+										<ion-item>
+											<ion-checkbox (ionChange)="showFields_ventFlow()"
+												[ngModelOptions]="{standalone: true}" [(ngModel)]="IsVentFlow">
+											</ion-checkbox>
+											&nbsp;&nbsp;Vent Flow
+										</ion-item>
+									</div>
+								</div>
+							</ion-col>
+							<ion-col *ngIf="IsVentFlow">
+								<ion-row>
+									<ion-col>
+										<div class="label_container">
+											<label>Vent Flow Meter Reading</label>
+										</div>
+									</ion-col>
+								</ion-row>
+								<div class="form_inp_container">
+									<div class="input_container">
+										<ion-input name="VentFlowMeterReading" placeholder="0.000"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].VentFlowMeterReading">
+										</ion-input>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row> -->
+						<ion-row *ngIf="IsVentFlow">
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<label>Vent Flow Meter Reading (SCMH) <span class="star">*</span></label>
+									</div>
+									<div class="input_container d_flex justify_space_beetween">
+										<ion-input name="VentFlowMeterReading" id="VentFlowMeterReading"
+											placeholder="Vent Flow Meter Reading"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].VentFlowMeterReading">
+										</ion-input>
+										<span class="font13 mr5">
+											Prev:{{PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].VentFlowMeterReadingPrv}}
+										</span>
+
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row *ngIf=(!this.ShowEngineMeter)>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<label>Motor Frequency<span class="star">*</span></label>
+									</div>
+									<div class="input_container d_flex justify_space_beetween">
+										<ion-input name="MotorFrequency" id="MotorFrequency"
+											placeholder="Motor Frequency"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].MotorFrequency">
+										</ion-input>
+										<!-- <span class="font13 mr5">
+											Prev:{{PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].MotorFrequency}}
+										</span> -->
+									</div>
+								</div>	
+							</ion-col>
+						</ion-row>
+						<ion-row *ngIf="IsVentFlow">
+							<ion-col>
+								<div class="form_inp_container ion-text-right">
+									<ion-button size="small" (click)="showhidechangereset('4')"
+										class="change_reset_btn">Jump/Change/Reset
+									</ion-button>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<ion-row>
+										<ion-col>
+											<div class="label_container">
+												<label>Running Hours </label>
+											</div>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col>
+											<div class="input_container">
+												<ion-item>
+													<ion-label>HH</ion-label>
+													<ion-select placeholder="Select One"
+														style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+														[(ngModel)]='selectedRhHr' [ngModelOptions]="{standalone:
+													true}">
+														<ion-select-option *ngFor="let itm of RunHrs" [value]="itm.hrs">
+															{{itm.hrs}}</ion-select-option>
+													</ion-select>
+												</ion-item>
+											</div>
+										</ion-col>
+										<ion-col>
+											<div class="input_container">
+												<ion-item>
+													<ion-label>MM</ion-label>
+													<ion-select placeholder="Select One"
+														style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+														[(ngModel)]='selectedRhMin' [ngModelOptions]="{standalone:
+													true}">
+														<ion-select-option *ngFor="let itm of RunMin" [value]="itm.min">
+															{{itm.min}}</ion-select-option>
+													</ion-select>
+												</ion-item>
+											</div>
+										</ion-col>
+									</ion-row>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<ion-row>
+										<ion-col>
+											<div class="label_container">
+												<label>Schedule Shutdown Hours </label>
+											</div>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col>
+											<div class="input_container">
+												<ion-item>
+													<ion-label>HH</ion-label>
+													<ion-select placeholder="Select One"
+														style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+														[(ngModel)]='selectedSHr' [ngModelOptions]="{standalone:
+													true}">
+														<ion-select-option *ngFor="let itm of SHrs" [value]="itm.hrs">
+															{{itm.hrs}}</ion-select-option>
+													</ion-select>
+												</ion-item>
+											</div>
+										</ion-col>
+										<ion-col>
+											<div class="input_container">
+												<ion-item>
+													<ion-label>MM</ion-label>
+													<ion-select placeholder="Select One"
+														style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+														[(ngModel)]='selectedSMin' [ngModelOptions]="{standalone:
+													true}">
+														<ion-select-option *ngFor="let itm of SMin" [value]="itm.min">
+															{{itm.min}}</ion-select-option>
+													</ion-select>
+												</ion-item>
+											</div>
+										</ion-col>
+									</ion-row>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<ion-row>
+										<ion-col>
+											<div class="label_container">
+												<label>Unscheduled Shutdown Hours </label>
+											</div>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col>
+											<div class="input_container">
+												<ion-item>
+													<ion-label>HH</ion-label>
+													<ion-select placeholder="Select One"
+														style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+														[(ngModel)]='selectedUsHr' [ngModelOptions]="{standalone:
+													true}">
+														<ion-select-option *ngFor="let itm of UsHrs" [value]="itm.hrs">
+															{{itm.hrs}}</ion-select-option>
+													</ion-select>
+												</ion-item>
+											</div>
+										</ion-col>
+										<ion-col>
+											<div class="input_container">
+												<ion-item>
+													<ion-label>MM</ion-label>
+													<ion-select placeholder="Select One"
+														style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+														[(ngModel)]='selectedUsMin' [ngModelOptions]="{standalone:
+													true}">
+														<ion-select-option *ngFor="let itm of UsMin" [value]="itm.min">
+															{{itm.min}}</ion-select-option>
+													</ion-select>
+												</ion-item>
+											</div>
+										</ion-col>
+									</ion-row>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<ion-row>
+										<ion-col>
+											<div class="label_container">
+												<label>Breakdown Hours </label>
+											</div>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col>
+											<div class="input_container">
+												<ion-item>
+													<ion-label>HH</ion-label>
+													<ion-select placeholder="Select One"
+														style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+														[(ngModel)]='selectedBdHr' [ngModelOptions]="{standalone:
+													true}">
+														<ion-select-option *ngFor="let itm of BdHrs" [value]="itm.hrs">
+															{{itm.hrs}}</ion-select-option>
+													</ion-select>
+												</ion-item>
+											</div>
+										</ion-col>
+										<ion-col>
+											<div class="input_container">
+												<ion-item>
+													<ion-label>MM</ion-label>
+													<ion-select placeholder="Select One"
+														style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+														[(ngModel)]='selectedBdMin'
+														[ngModelOptions]="{standalone: true}">
+														<ion-select-option *ngFor="let itm of BdMin" [value]="itm.min">
+															{{itm.min}}</ion-select-option>
+													</ion-select>
+												</ion-item>
+											</div>
+										</ion-col>
+									</ion-row>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<label>Suction Pressure <span class="star">*</span></label>
+									</div>
+									<div class="input_container">
+										<ion-input name="SuctionPressure" id="SuctionPressure"
+											placeholder="Suction Pressure"
+											[(ngModel)]="PackageDetailJson.length == 0 ? '0.00' : PackageDetailJson[0].SuctionPressure">
+										</ion-input>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<label>Remark</label>
+									</div>
+									<div class="input_container">
+										<ion-select placeholder="Select One"
+											style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;"
+											[(ngModel)]="mdlSelectedRemark" [ngModelOptions]="{standalone:
+										true}" (ionChange)="showHideRemark()">
+											<ion-select-option *ngFor="let itm of jsonRemarks" [value]="itm.value">
+												{{itm.value}}</ion-select-option>
+										</ion-select>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col size="12" class="inp_group">
+								<textarea class="inp_control" style="border: solid 1px;"  [hidden]="mdlRemarkTextShow == true" class="form-control" rows="4" name="mdlRemark"  [(ngModel)]="mdlRemark" id="Remarks" placeholder="Remarks"></textarea>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<div class="button_container" [hidden]="IsPackagehide">
+									<ion-button color="dark_green_clr" type="submit"
+										[hidden]="PKisStationSubmitted > 0  || PKisCRSentToHo > 0"
+										(click)="InsertPackageInfo()">Save</ion-button>
+								</div>
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+					<div class="msg">
+						<span class="data_submit_msg" [hidden]="PKisStationSubmitted == 0 ">
+							* Data is submitted for the date {{geteDate.selcteddate}} by Station.</span><br>
+						<span class="data_submit_msg" [hidden]="PKisCRSentToHo == 0 ">
+							* Submission is closed for date {{geteDate.selcteddate}} by Control Room.</span>
+					</div>
+					<div class="msg" *ngIf="IsPackagehide" style="margin-left: 15px;">
+						<span class="data_submit_msg">* Equipment not available for this Station.</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</ion-content>
+
+<!-------------------------------------------------------- Start Suction Meter-------------------------------------------------------->
+
+<ion-header *ngIf="showhideflag1">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<!-- <ion-button  class="text_white"> -->
+				<ion-icon name="arrow-back" class="font22 iconBackPopup" (click)="packageOpen()"></ion-icon>
+				<!-- </ion-button> -->
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Jump/Change/Reset Suction Flow Meter</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="showhideflag1">
+	<div class="content_area">
+		<form>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Action</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Action</ion-label>
+									<ion-select placeholder="Select One" [(ngModel)]="ActionTypeSFM"
+										name="resetTypeJsonSelectedSFM" [value]="ActionTypeSFM"
+										(ionChange)="resetchange($event.target.value, 'SFM')">
+										<ion-select-option value='J'>Jump</ion-select-option>
+										<ion-select-option value='C'>Change</ion-select-option>
+										<ion-select-option value='R'>Reset</ion-select-option>
+									</ion-select>
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Before</ion-label>
+						<ion-input class="inp_control" [value]="OldMeterReading"
+							(input)="OldMeterReading=$event.target.value" placeholder="Before Meter Reading"
+							name="Before"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>After</ion-label>
+						<ion-input class="inp_control" [value]="NewMeterReading"
+							(input)="mdlResetJumpReadingSFM=$event.target.value"
+							(input)="NewMeterReading=$event.target.value" placeholder="After Meter Reading"
+							name="after"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Attachment</ion-label>
+						<ion-input type="file" class="inp_control" id="jcMeterResetSFM" name="file"
+							(change)="uploadJumpReadingImgSFMPopUp($event.target.files, $event)"
+							[disabled]="(mdlResetJumpReadingSFM == '' || mdlResetJumpReadingSFM == '0')"></ion-input>
+						<!-- <span *ngIf="!IsFileSelected" class="temp_file_name" style="right:-6px;">{{FileName}}</span> -->
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Remark</ion-label>
+						<ion-textarea class="inp_control" [value]="MeterJumpRemark"
+							(input)="MeterJumpRemark=$event.target.value" placeholder="Remark"></ion-textarea>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12">
+						<div class="my_table_container">
+							<table class="my_table">
+								<thead>
+									<tr>
+										<th>Sr No</th>
+										<th>Before</th>
+										<th>After</th>
+										<th>Jumped</th>
+										<th>Action Type</th>
+										<th>Remark</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of SFMJumpListHistory, let i = index">
+										<td>{{i+1}}</td>
+										<td>{{itm.BeforeJumpReading}}</td>
+										<td>{{itm.AfterJumpReading}}</td>
+										<td>{{itm.JumpReading}}</td>
+										<td>{{itm.Action}}</td>
+										<td>{{itm.Remark}}</td>
+										<!-- <td>{{itm.DispanserJumpRemark}}</td> -->
+										<td>
+											<!-- <span (click)="UpdateSFMJumpHistory(itm.id, itm)">
+												 Edit</span>
+											<span class="closeicon"
+												(click)="DeleteSFMJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon ios="ios-close" md="md-close"></ion-icon>
+											</span> -->
+
+											<ion-button size="small" color="dark"
+												(click)="UpdateSFMJumpHistory(itm.id, itm)">
+												<ion-icon name="create"></ion-icon>
+											</ion-button>
+
+											<ion-button size="small" color="danger"
+												(click)="DeleteSFMJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon name="trash"></ion-icon>
+											</ion-button>
+										</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+				<!-- <ion-row>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<ion-label>Old Meter Reading <span class="star">*</span></ion-label>
+								</div>
+								<div class="input_container">
+									<ion-input type="text" [(ngModel)]="mdlReadingOnSwitchSFM" name="mdlReadingOnSwitchSFM" placeholder="Old Meter Reading"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<ion-label>Jump Reading(If any)</ion-label>
+								</div>
+								<div class="input_container">
+									<ion-input type="text" name="mdlResetJumpReadingSFM" [(ngModel)]="mdlResetJumpReadingSFM" placeholder="Jump Reading"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<ion-label>Choose File</ion-label>
+								</div>
+								<div class="col-2" style="width: 26px;height: 34px;padding-left: 5px;padding-right: 5px;text-align: center;">
+									<div (click)="showCertificatesReset('SFM');"><img ng-src="assets/images/attachment.gif"></div>
+									</div>
+								<div class="input_container">
+									<ion-input type="file" id="jcMeterResetSFM" name="file" (change)="uploadJumpReadingImgSFMPopUp($event)" [disabled]="(mdlResetJumpReadingSFM == '' || mdlResetJumpReadingSFM == '0')"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row> -->
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr" [hidden]="PackageDetailJson.length == 0 ? 
+								0 : PackageDetailJson.PKisStationSubmitted > 0" (click)="HoldResetReading('SFM')">Save</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>
+
+
+
+<!-------------------------------------------------------- End Suction Meter-------------------------------------------------------->
+
+
+<!-------------------------------------------------------- Start  Discharge flow Popup-------------------------------------------------------->
+
+<ion-header *ngIf="showhideflag2">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-icon name="arrow-back" class="font22 iconBackPopup" (click)="packageOpen()"></ion-icon>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Jump/Change/Reset Discharge FLow Meter</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="showhideflag2">
+	<div class="content_area">
+		<form>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Action</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Action</ion-label>
+									<ion-select placeholder="Select One" [(ngModel)]="ActionTypeDFM"
+										name="resetTypeJsonSelectedDFM" [value]="ActionTypeDFM"
+										(ionChange)="resetchange($event.target.value, 'DFM')">
+										<ion-select-option value='J'>Jump</ion-select-option>
+										<ion-select-option value='C'>Change</ion-select-option>
+										<ion-select-option value='R'>Reset</ion-select-option>
+									</ion-select>
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<!-- <ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Old Meter Reading <span class="star">*</span></ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" [(ngModel)]="mdlReadingOnSwitchDFM" name="mdlReadingOnSwitchDFM" placeholder="Old Meter Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading(If any)</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" name="mdlResetJumpReadingDFM" [(ngModel)]="mdlResetJumpReadingDFM"  placeholder="Jump Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+							<div class="col-2" style="width: 26px;height: 34px;padding-left: 5px;padding-right: 5px;text-align: center;">
+								<div (click)="showCertificatesReset('SFM');"><img ng-src="assets/images/attachment.gif"></div>
+								</div>
+							<div class="input_container">
+								<ion-input type="file" name="fileInputreset" (change)="uploadJumpReadingImgDFMPopUp($event)" [disabled]="(mdlResetJumpReadingDFM == '' || mdlResetJumpReadingDFM == '0')"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Before</ion-label>
+						<ion-input class="inp_control" [value]="mdlReadingOnSwitchDFM"
+							(input)="mdlReadingOnSwitchDFM=$event.target.value" placeholder="Before Meter Reading"
+							name="Before"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>After</ion-label>
+						<ion-input class="inp_control" [value]="NewMeterReading"
+							(input)="mdlResetJumpReadingDFM=$event.target.value"
+							(input)="NewMeterReading=$event.target.value" placeholder="After Meter Reading"
+							name="after"></ion-input>
+						<!-- (input)="mdlResetJumpReadingDFM($event.target.value)" -->
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Attachment</ion-label>
+						<ion-input type="file" class="inp_control" name="fileInputreset"
+							(change)="uploadJumpReadingImgDFMPopUp($event.target.files, $event)"
+							[disabled]="(mdlResetJumpReadingDFM == '' || mdlResetJumpReadingDFM == '0')"></ion-input>
+						<!-- <span *ngIf="!IsFileSelected" class="temp_file_name" style="right:-6px;">{{FileName}}</span> -->
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Remark</ion-label>
+						<ion-textarea class="inp_control" [value]="MeterJumpRemark"
+							(input)="MeterJumpRemark=$event.target.value" placeholder="Remark"></ion-textarea>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12">
+						<div class="my_table_container">
+							<table class="my_table">
+								<thead>
+									<tr>
+										<th>Sr No</th>
+										<th>Before</th>
+										<th>After</th>
+										<th>Jumped</th>
+										<th>Action Type</th>
+										<th>Remark</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of DFMJumpListHistory, let i = index">
+										<td>{{i+1}}</td>
+										<td>{{itm.BeforeJumpReading}}</td>
+										<td>{{itm.AfterJumpReading}}</td>
+										<td>{{itm.JumpReading}}</td>
+										<td>{{itm.Action}}</td>
+										<td>{{itm.Remark}}</td>
+										<!-- <td>{{itm.DispanserJumpRemark}}</td> -->
+										<td>
+											<!-- <span (click)="UpdateDFMJumpHistory(itm.id, itm)">Edit</span>
+											<span class="closeicon"
+												(click)="DeleteDFMJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon ios="ios-close" md="md-close"></ion-icon>
+											</span> -->
+											<ion-button size="small" color="dark"
+												(click)="UpdateDFMJumpHistory(itm.id, itm)">
+												<ion-icon name="create"></ion-icon>
+											</ion-button>
+											<ion-button size="small" color="danger"
+												(click)="DeleteDFMJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon name="trash"></ion-icon>
+											</ion-button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr"
+								[hidden]="PackageDetailJson.length == 0 ? 0 : PackageDetailJson.isStationSubmitted > 0"
+								(click)="HoldResetReading('DFM')">Save</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>
+
+<!-------------------------------------------------------- End  Discharge flow Popup-------------------------------------------------------->
+
+
+<!-------------------------------------------------------- Start  EFM Popup-------------------------------------------------------->
+
+<ion-header *ngIf="showhideflag3">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-icon name="arrow-back" class="font22 iconBackPopup" (click)="packageOpen()"></ion-icon>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Jump/Change/Reset Engine Flow Meter</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="showhideflag3">
+	<div class="content_area">
+		<form>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Action</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Action</ion-label>
+									<ion-select placeholder="Select One" [(ngModel)]="ActionTypeEFM"
+										name="resetTypeJsonSelectedEFM" [value]="ActionTypeEFM"
+										(ionChange)="resetchange($event.target.value, 'EFM')">
+										<ion-select-option value='J'>Jump</ion-select-option>
+										<ion-select-option value='C'>Change</ion-select-option>
+										<ion-select-option value='R'>Reset</ion-select-option>
+									</ion-select>
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<!-- <ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Old Meter Reading <span class="star">*</span></ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" [(ngModel)]="mdlReadingOnSwitchEFM" name="mdlReadingOnSwitchEFM" placeholder="Old Meter Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading(If any)</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" name="mdlResetJumpReadingEFM" [(ngModel)]="mdlResetJumpReadingEFM"  placeholder="Jump Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+							<div [hidden]="mdlShowResetImageEFM==false"  class="col-2" style="width: 26px;height: 34px;padding-left: 5px;padding-right: 5px;text-align: center;">
+								<div (click)="showCertificatesReset('EFM');"><img ng-src="assets/images/attachment.gif"></div>
+								</div>
+							<div class="input_container">
+								<ion-input type="file" id="jcMeterResetEFM" name="jcMeterResetEFM" (change)="uploadJumpReadingImgEFMPopUp($event)" [disabled]="(mdlResetJumpReadingEFM == '' || mdlResetJumpReadingEFM == '0')"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Before</ion-label>
+						<ion-input class="inp_control" [value]="mdlReadingOnSwitchEFM"
+							(input)="mdlReadingOnSwitchEFM=$event.target.value" placeholder="Before Meter Reading"
+							name="Before"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>After</ion-label>
+						<ion-input class="inp_control" [value]="NewMeterReading"
+							(input)="mdlResetJumpReadingEFM=$event.target.value"
+							(input)="NewMeterReading=$event.target.value" placeholder="After Meter Reading"
+							name="after"></ion-input>
+					</ion-col>
+					<!-- (input)="mdlResetJumpReadingEFM($event.target.value)" -->
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Attachment</ion-label>
+						<ion-input type="file" class="inp_control" id="jcMeterResetEFM" name="jcMeterResetEFM"
+							(change)="uploadJumpReadingImgEFMPopUp($event.target.files, $event)"
+							[disabled]="(mdlResetJumpReadingEFM == '' || mdlResetJumpReadingEFM == '0')"></ion-input>
+						<!-- <span *ngIf="!IsFileSelected" class="temp_file_name" style="right:-6px;">{{FileName}}</span> -->
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Remark</ion-label>
+						<ion-textarea class="inp_control" [value]="MeterJumpRemark"
+							(input)="MeterJumpRemark=$event.target.value" placeholder="Remark"></ion-textarea>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12">
+						<div class="my_table_container">
+							<table class="my_table">
+								<thead>
+									<tr>
+										<th>Sr No</th>
+										<th>Before</th>
+										<th>After</th>
+										<th>Jumped</th>
+										<th>Action Type</th>
+										<th>Remark</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of EFMJumpListHistory, let i = index">
+										<td>{{i+1}}</td>
+										<td>{{itm.BeforeJumpReading}}</td>
+										<td>{{itm.AfterJumpReading}}</td>
+										<td>{{itm.JumpReading}}</td>
+										<td>{{itm.Action}}</td>
+										<td>{{itm.Remark}}</td>
+										<!-- <td>{{itm.DispanserJumpRemark}}</td> -->
+										<td>
+											<!-- <span (click)="UpdateEFMJumpHistory(itm.id, itm)">Edit</span>
+											<span class="closeicon"
+												(click)="DeleteEFMJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon ios="ios-close" md="md-close"></ion-icon>
+											</span> -->
+											<ion-button size="small" color="dark"
+												(click)="UpdateEFMJumpHistory(itm.id, itm)">
+												<ion-icon name="create"></ion-icon>
+											</ion-button>
+
+											<ion-button size="small" color="danger"
+												(click)="DeleteEFMJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon name="trash"></ion-icon>
+											</ion-button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr"
+								[hidden]="PackageDetailJson.length == 0 ? 0 : PackageDetailJson.isStationSubmitted > 0"
+								(click)="HoldResetReading('EFM')">Save</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>
+
+<!-------------------------------------------------------- End  EFM Popup-------------------------------------------------------->
+
+<!-------------------------------------------------------- Start Vent Flow Popup-------------------------------------------------------->
+
+<ion-header *ngIf="showhideflag4">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-icon name="arrow-back" class="font22 iconBackPopup" (click)="packageOpen()"></ion-icon>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Jump/Change/Reset Vent Flow Meter</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="showhideflag4">
+	<div class="content_area">
+		<form>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Action</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Action</ion-label>
+									<ion-select placeholder="Select One" [(ngModel)]="ActionTypeVFM"
+										name="resetTypeJsonSelectedVFM" [value]="ActionTypeVFM"
+										(ionChange)="resetchange($event.target.value, 'VFM')">
+										<ion-select-option value='J'>Jump</ion-select-option>
+										<ion-select-option value='C'>Change</ion-select-option>
+										<ion-select-option value='R'>Reset</ion-select-option>
+									</ion-select>
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<!-- <ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Old Meter Reading <span class="star">*</span></ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" [(ngModel)]="mdlReadingOnSwitchEFM" name="mdlReadingOnSwitchEFM" placeholder="Old Meter Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading(If any)</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" name="mdlResetJumpReadingEFM" [(ngModel)]="mdlResetJumpReadingEFM"  placeholder="Jump Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+							<div [hidden]="mdlShowResetImageEFM==false"  class="col-2" style="width: 26px;height: 34px;padding-left: 5px;padding-right: 5px;text-align: center;">
+								<div (click)="showCertificatesReset('EFM');"><img ng-src="assets/images/attachment.gif"></div>
+								</div>
+							<div class="input_container">
+								<ion-input type="file" id="jcMeterResetEFM" name="jcMeterResetEFM" (change)="uploadJumpReadingImgEFMPopUp($event)" [disabled]="(mdlResetJumpReadingEFM == '' || mdlResetJumpReadingEFM == '0')"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Before</ion-label>
+						<ion-input class="inp_control" [value]="mdlReadingOnSwitchVFM"
+							(input)="mdlReadingOnSwitchVFM=$event.target.value" placeholder="Before Meter Reading"
+							name="Before"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>After</ion-label>
+						<ion-input class="inp_control" [value]="NewMeterReading"
+							(input)="NewMeterReading=$event.target.value" placeholder="After Meter Reading"
+							name="after"></ion-input>
+					</ion-col>
+					<!-- (input)="mdlResetJumpReadingVFM($event.target.value)" -->
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Attachment</ion-label>
+						<ion-input type="file" class="inp_control" id="jcMeterResetVFM" name="jcMeterResetVFM"
+							(change)="uploadJumpReadingImgVFMPopUp($event.target.files, $event)"
+							[disabled]="(mdlResetJumpReadingVFM == '' || mdlResetJumpReadingVFM == '0')"></ion-input>
+						<!-- <span *ngIf="!IsFileSelected" class="temp_file_name" style="right:-6px;">{{FileName}}</span> -->
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Remark</ion-label>
+						<ion-textarea class="inp_control" [value]="MeterJumpRemark"
+							(input)="MeterJumpRemark=$event.target.value" placeholder="Remark"></ion-textarea>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12">
+						<div class="my_table_container">
+							<table class="my_table">
+								<thead>
+									<tr>
+										<th>Sr No</th>
+										<th>Before</th>
+										<th>After</th>
+										<th>Jumped</th>
+										<th>Action Type</th>
+										<th>Remark</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of VFMJumpListHistory, let i = index">
+										<td>{{i+1}}</td>
+										<td>{{itm.BeforeJumpReading}}</td>
+										<td>{{itm.AfterJumpReading}}</td>
+										<td>{{itm.JumpReading}}</td>
+										<td>{{itm.Action}}</td>
+										<td>{{itm.Remark}}</td>
+										<!-- <td>{{itm.DispanserJumpRemark}}</td> -->
+										<td>
+											<!-- <span (click)="UpdateVFMJumpHistory(itm.id, itm)">Edit</span>
+											<span class="closeicon"
+												(click)="DeleteVFMJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon ios="ios-close" md="md-close"></ion-icon>
+											</span> -->
+											<ion-button size="small" color="dark"
+												(click)="UpdateVFMJumpHistory(itm.id, itm)">
+												<ion-icon name="create"></ion-icon>
+											</ion-button>
+
+											<ion-button size="small" color="danger"
+												(click)="DeleteVFMJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon name="trash"></ion-icon>
+											</ion-button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr" [hidden]="PackageDetailJson.length == 0 ? 0 : 
+								PackageDetailJson.isStationSubmitted > 0" (click)="HoldResetReading('VFM')">Save</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>
+
+<!-------------------------------------------------------- End Vent Flow Popup-------------------------------------------------------->

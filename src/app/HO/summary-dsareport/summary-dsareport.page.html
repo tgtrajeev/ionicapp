@@ -1,0 +1,139 @@
+<ion-header>
+  <header>
+    <div class="header">
+      <div class="logo_div" routerLink="/admin-home">
+        <img src="../../assets/images/logo.png" />
+      </div>
+      <h1 class="text_white text_center title">DSA Summary I</h1>
+      <span class="logout_div">
+        <div class="toggle_div">
+          <button (click)="openFirst()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </span>
+    </div>
+  </header>
+
+  <div class="main_heading1">
+    <!-- <div *ngIf="pageFlag !='dsaStationSummary'">
+			<ion-back-button defaultHref="dsa-entry-menu"></ion-back-button>
+		</div>
+		<div *ngIf="pageFlag =='dsaStationSummary'">
+			<ion-back-button defaultHref="so-dashboard"></ion-back-button>
+		</div> -->
+    <div>
+      <ion-back-button defaultHref="admin-home"></ion-back-button>
+    </div>
+    <div>
+      <h1>DSA Summary (DSA REPORT)</h1>
+    </div>
+    <div class="text_center">
+      <ion-button size="small" color="light" (click)="ExportToPdf()"><ion-icon name="arrow-down"></ion-icon></ion-button>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="12" class="inp_group">
+      <ion-label>Date From</ion-label>
+      <ion-item class="inp_control">
+        <ion-label>Select Date:</ion-label>
+        <ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY" placeholder="Select Date"
+          [max]="secondMaxDate" [(ngModel)]="dateFrom" (ngModelChange)="OnDateChnagefrom($event)"></ion-datetime>
+      </ion-item>
+    </ion-col>
+    <ion-col size="12" class="inp_group">
+      <ion-label>Date To</ion-label>
+      <ion-item class="inp_control">
+        <ion-label>Select Date:</ion-label>
+        <ion-datetime [(ngModel)]="dateTo" displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY" [min]="DateFromMy"
+          [max]="secondMaxDate" placeholder="Select Date" (ngModelChange)="OnDateChnageTo($event)"></ion-datetime>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12" class="inp_group">
+      <ion-label>Station Name <span class="star">*</span></ion-label>
+      <div class="custom_dropdown">
+        <ion-input class="inp_control" name="stCodeMy" [(ngModel)]="stCodeMy" (click)="filterBoxShow(0)" readonly>
+        </ion-input>
+      </div>
+      <div class="filter_box" *ngIf=(fiterBox)>
+        <ion-searchbar (ionChange)="onSearchTerm($event)" placeholder="Search an item"></ion-searchbar>
+        <div class="stn_list_container">
+          <ion-list>
+            <div *ngIf="items.length > 0; else noItems">
+              <ion-item *ngFor="let item of items" (click)="filterBoxShow(item)">
+                {{item.StationName}}
+              </ion-item>
+            </div>
+            <ng-template #noItems>
+              <ion-item>
+                No items found.
+              </ion-item>
+            </ng-template>
+          </ion-list>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <div class="button_container">
+        <ion-button color="dark_green_clr" (click)="stationViewData()">
+          Submit</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-grid *ngFor="let mainItm of DispenserTableRes, let i = index">
+
+    <ion-row>
+      <ion-col side="12">
+        <div class="dsa_smry_container">
+          <table class="dsa_stn_smry_table">
+            <tr>
+              <td colspan="4" class="text_center" class="head_col">
+                <h5>DSA REPORT</h5>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" class="text_center left_col">
+                <h6>Name of Station - {{stCodeMyDummy}}</h6><br/>
+                <h6>Date : {{mainItm.SummeryDates | date:'dd-MMM-yyyy'}}</h6>
+              </td>
+              <!-- <td colspan="4" class="text_center left_col">
+                <h6>Date : {{mainItm.SummeryDates | date:'dd-MMM-yyyy'}}</h6>
+              </td> -->
+            </tr>
+            <tr class="head_tr">
+              <td class="text_center">SL.NO</td>
+              <td class="text_center">PARTICULARS</td>
+              <td class="text_center">TOTAL QUANTITY</td>
+              <td class="text_center">TOTAL AMOUNT</td>
+            </tr>
+            <tr *ngFor="let itm of mainItm.DispenserEntryRes, let i = index">
+              <td>{{i+1}}</td>
+              <td
+                [ngClass]="itm.Particulars == 'NET CASH SALE' || itm.Particulars == 'CASH COLLECTION FOR THE DAY (RS.)' || itm.Particulars == 'OPENING CASH BALANCE (RS.)' || itm.Particulars == 'CLOSING BALANCE (RS.)' || itm.Particulars == 'CASH DEPOSITED WITH BANK (RS.)' ? 'text_bold' : ''">
+                {{itm.Particulars}}</td>
+              <td class="text_right">{{itm.TotalQuntity}}</td>
+              <td class="text_right">{{itm.TotalAmount}}</td>
+            </tr>
+            <tr class="remark_tr">
+              <td></td>
+              <td>REMARKS:</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

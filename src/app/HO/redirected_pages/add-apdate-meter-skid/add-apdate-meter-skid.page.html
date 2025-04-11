@@ -1,0 +1,80 @@
+<ion-header>
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="meter-skid1" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white" *ngIf="pageFlag=='addsmkid'">Add Meter Skid</ion-text>
+				<ion-text class="text_white" *ngIf="pageFlag=='updatemkid'">Update Meter Skid</ion-text>
+			</ion-col>
+			<ion-col size="2" class="ion-text-center">
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<form [formGroup]="addupdateForm" (ngSubmit)="insertUpdateMeterSkid()">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Station Name <span class="star">*</span></ion-label>
+					<div class="custom_dropdown">
+						<ion-input class="inp_control" name="stCodeMy" formControlName="stCodeMy"
+							(click)="filterBoxShow(0)" readonly></ion-input>
+					</div>
+					<div class="filter_box" *ngIf=(fiterBox)>
+						<ion-searchbar (ionChange)="onSearchTerm($event)" placeholder="Search an item"></ion-searchbar>
+						<div class="stn_list_container">
+							<ion-list>
+								<div *ngIf="items.length > 0; else noItems">
+									<ion-item *ngFor="let item of items" (click)="filterBoxShow(item)">
+										{{item.StationName}}
+									</ion-item>
+								</div>
+								<ng-template #noItems>
+									<ion-item>
+										No items found.
+									</ion-item>
+								</ng-template>
+							</ion-list>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Meter Skid Code <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="MeterSkidCode"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Meter Skid Name <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="MeterSkidName"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Description </ion-label>
+					<ion-textarea class="inp_control txtarea_h" formControlName="Description"></ion-textarea>
+				</ion-col>
+			</ion-row>
+			<ion-row class="align_center">
+				<ion-col>
+					Status
+				</ion-col>
+				<ion-col class="d_flex ion-justify-content-end">
+					<ion-toggle [(ngModel)]="status" [ngModelOptions]="{standalone: true}"></ion-toggle>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container">
+						<ion-button color="dark_green_clr" type="submit">Save</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>

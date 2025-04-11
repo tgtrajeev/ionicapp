@@ -1,0 +1,158 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="home"></ion-back-button>
+		</div>
+		<div>
+			<h1>Station Credential</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<ion-grid>
+			<form>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Document Name
+									<span class="star">*</span>
+								</label>
+							</div>
+							<div class="input_container">
+								<div class="input_container">
+									<ion-input type="text" [value]="DocumentName"
+										(ionChange)="Readingvalue($event.target.value)"
+										(input)="DocumentName=$event.target.value" class="form-control"
+										placeholder="Document Name"></ion-input>
+								</div>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Attachment
+									<span class="star">*</span>
+								</label>
+							</div>
+							<div class="input_container">
+								<div class="input_container">
+									<ion-input #inputFile type="file" id="StationAttachmentInput"
+										name="StationAttachmentInput" (change)="fileuploadreset( $event)"
+										[disabled]="filevisible"></ion-input>
+								</div>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Expiry Date
+									<span class="star">*</span>
+								</label>
+							</div>
+							<div class="input_container">
+								<div class="input_container">
+									<ion-datetime class="form-control" displayFormat="DD-MMM-YYYY" [max]="secondMaxDate"
+										pickerFormat="DD MMM YYYY" [(ngModel)]="ExpiryDate" name="ExpiryDate"
+										(ngModelChange)="OnDateChnage($event)"></ion-datetime>
+								</div>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Remark
+									<!-- <span class="star">*</span> -->
+								</label>
+							</div>
+							<div class="input_container">
+								<div class="input_container">
+									<ion-input type="text" [value]="Remark" (input)="Remark=$event.target.value"
+										class="form-control" placeholder="Remark"></ion-input>
+									<!-- (ionChange)="Readingvalue($event.target.value)" -->
+								</div>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr" type="submit" (click)="OnSubmit();">Save</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</form>
+			<ion-row>
+				<ion-col>
+					<div class="my_table_container">
+						<table class="my_table">
+							<thead>
+								<tr>
+									<th>Sr No</th>
+									<th>Document Name</th>
+									<th>Image</th>
+									<th>Expiry Date</th>
+									<th>Remark</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let itm of StationAttachmentList, let i = index">
+									<td>{{i+1}}</td>
+									<td>{{itm.DocumentName}}</td>
+									<td> {{CheckExtn(itm.Path)}} <img style="height: 30px !important"
+											src={{ListImagePath}} /></td>
+									<th>{{itm.ExpiryDate}}</th>
+									<th>{{itm.Remark}}</th>
+									<td>
+										<ion-button size="small" color="dark"
+											(click)="UpdateStationAttachment(itm.id, itm)">
+											<ion-icon name="create"></ion-icon>
+										</ion-button>
+										<ion-button size="small" color="dark"
+											(click)="ViewStationAttachment(itm.Path, itm)">
+											<ion-icon name="eye"></ion-icon>
+										</ion-button>
+										<ion-button size="small" color="danger"
+											(click)="DeleteStationAttachment(itm.id, itm)">
+											<ion-icon name="trash"></ion-icon>
+										</ion-button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+</ion-content>

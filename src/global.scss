@@ -1,0 +1,1487 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+
+.ion-color-dark_green 
+{
+    --ion-color-base: var(--ion-color-dark_green) !important;
+}
+.ion-color-yellow
+{
+    --ion-color-base: var(--ion-color-yellow) !important;
+}
+$white:white;
+
+*
+{
+    font-family: 'Nunito', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,p,ul,ol,form
+{
+    margin:0px;
+    padding:0px;
+}
+// .container
+// {
+//     width: 100%;
+//     padding:0px 8px;
+// }
+// .welcome_container
+// {
+//     width:100vw;
+//     height:100vh;
+//     background-color:#004326;
+// }
+// .border_cont
+// {
+//     height:10px;
+// }
+// .border_cont .border1,.border_cont .border2
+// {
+//     width:100%;
+//     height:4px;
+// }
+// .border1
+// {
+//     background-color:black;
+// }
+// .border2
+// {
+//     background-color:var(--yellow_clr);
+// }
+// .wel_logo
+// {
+//     width:44vw;
+// }
+// .wel_content_area
+// {
+//     height: calc(100vh - 20px);
+//     text-align: center;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     padding-bottom: 100px;
+// }
+// .welcome_head
+// {
+//     color: white;
+//     font-size: 7.5vw;
+//     text-shadow: 1px 1px 1px black;
+// }
+.item-native
+{
+    padding: 0px !important;
+}
+
+
+.modal-wrapper.sc-ion-modal-md{
+    box-shadow: none !important;
+   }
+
+/*------------------- start rishabh css ------------------*/
+// .sc-ion-modal-md-h
+// {
+//  --background: rgba(96, 108, 199, 0);
+// }
+
+
+.data_submit_msg
+{
+    font-size: 14px;
+    color:red;
+}
+
+.msg span
+{
+	color: var(--red_clr);
+    font-size: 15px;
+}
+/*------------------- end rishabh css ------------------*/
+
+
+
+/*------------------- start global css ------------------*/
+
+
+
+/*------------- start fonts-----------------*/
+@font-face 
+{
+  font-family: mukta;
+  src: url("../src/assets/font/Mukta-Regular.ttf");
+}
+/*--------------- end fonts --------------*/
+
+*
+{
+    font-family: mukta;
+}
+:root 
+{
+    --yellow_clr: #ffd525;
+	--green_clr:#047943;
+	--dark_green_clr:#045a33;
+	--red_clr:#d80303;
+	--black_clr:#2d2d2d;
+	--light_black_clr:rgba(45, 45, 45, .8);
+	--gray_clr:#e6e6e6;
+    --light_gray_clr:#f7f7f7;
+
+    --theme_shadow:2px 2px 2px rgba(0, 0, 0, 0.15);
+    
+    --global_border_radius:2px;
+    --mygradient:linear-gradient(45deg, #bebebe, #eeeeee,#b4b4b4);
+    --font13: 13px;
+    --font14: 14px;
+    
+    --chng_btn_clr:#e7e7e7;
+    --black40:rgba(0,0,0,.4);
+    --black50:rgba(0,0,0,.5);
+    --black60:rgba(0,0,0,.6);
+    --black70:rgba(0,0,0,.7);
+    --black80:rgba(0,0,0,.8);
+    --black90:rgba(0,0,0,.9);
+}
+
+/*--------- start placeholder ----------*/
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--black40);
+    font-size: var(--font14);
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--black40);
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--black40);
+  }
+/*--------- end placeholder ----------*/
+
+ion-input
+{
+    height: 48px;
+}
+span.star
+{
+    color:red;
+}
+
+.ion-textarea
+{
+    height:100px;
+}
+.wrapper
+{
+    width: 100vw;
+    height: 100vh;
+    background-color: #ddd;
+}
+
+.content_area
+{
+    width:100%;
+    height:auto;
+    padding:7px;
+    background-color: white;
+}
+
+ion-toggle
+{
+    --background-checked: #71ff71;
+    --handle-background-checked: #00bf00;
+}
+
+/*------------------ start My Framework ---------------------*/
+.text_left
+{
+    text-align: left;
+}
+.text_center
+{
+    text-align: center;
+}
+.text_right
+{
+    text-align: right;
+}
+.text_white
+{
+    color:white!important;
+}
+.d_block
+{
+    display: block;
+}
+.d_flex
+{
+    display: flex;
+}
+.align_center
+{
+    align-items: center;
+}
+.justify_space_beetween
+{
+    align-items: center;
+}
+
+.font10
+{
+    font-size: 10px!important;
+}
+.font11
+{
+    font-size: 11px!important;
+}
+.font12
+{
+    font-size: 12px!important;
+}
+.font13
+{
+    font-size: 13px!important;
+}
+.font14
+{
+    font-size: 14px!important;
+}
+.font15
+{
+    font-size: 15px!important;
+}
+.font22
+{
+    font-size: 22px!important;
+}
+
+.border_none
+{
+    border:none!important;
+}
+
+.p0
+{
+    padding:0px!important;
+}
+
+.pt0
+{
+    padding-top:0px!important;
+}
+.pl0
+{
+    padding-left:0px!important;
+}
+.pr0
+{
+    padding-right:0px!important;
+}
+.pr10
+{
+    padding-right:10px!important;
+}
+.mb0
+{
+    margin-bottom: 0px!important;
+}
+.mb5
+{
+    margin-bottom: 5px!important;
+}
+.mb10
+{
+    margin-bottom: 10px!important;
+}
+.mt0
+{
+    margin-top: 0px!important;
+}
+.mt5
+{
+    margin-top: 5px!important;
+}
+.mt10
+{
+    margin-top: 10px!important;
+}
+.mr0
+{
+    margin-right:0px!important;
+}
+.mr5
+{
+    margin-right:5px!important;
+}
+.mr10
+{
+    margin-right:10px!important;
+}
+.ml-5
+{
+    margin-left: -5px!important;
+}
+.ml0
+{
+    margin-right:0px!important;
+}
+.ml5
+{
+    margin-right:5px!important;
+}
+.ml10
+{
+    margin-right:10px!important;
+}
+
+.text_left
+{
+    text-align: left!important;
+}
+.text_right
+{
+    text-align: right!important;
+}
+.text_center
+{
+    text-align: center!important;
+}
+.bn
+{
+    border:none!important;
+}
+.bb
+{
+    border-bottom: 1px solid #e6e6e6;
+}
+.b_all
+{
+    border: 1px solid #e6e6e6;
+}
+.over_y_auto
+{
+    overflow-y: auto!important;
+    overflow-x: hidden;
+}
+.shadow_none
+{
+    box-shadow: none!important;
+}
+.back_trans
+{
+    background-color:transparent!important;
+}
+.txtarea_h
+{
+    height:80px!important;
+}
+/*------------------ end My Framework ---------------------*/
+
+
+input[type="text"],input[type="number"],input[type="email"],input[type="tel"],input[type="password"],textarea
+{
+    width:100%;
+    padding:10px 8px;
+    border:none;
+}
+textarea
+{
+    height:75px;
+}
+/*------------------- end global css ------------------*/
+
+
+
+
+/*------------------- start header ------------------*/
+header
+{
+    width:100%;
+    height:60px;
+    // background-color:var(--dark_green_clr);
+    background-image: linear-gradient(45deg,#045a33, #01884b, #045a33);
+    box-shadow: inset 0px 0px 33px rgba(0, 0, 0, 0.4);
+}
+header .header
+{
+    display: flex;
+    width:100%;
+    padding-right:5px;
+    height:100%;
+    border-bottom: 3px solid var(--yellow_clr);
+    align-items: center;
+
+    h1
+    {
+        font-size: 17px;
+        margin-left: auto;
+    }
+}
+.home_btn
+{
+    background: transparent;
+    font-size: 35px;
+    color: white;
+    padding: 0px;
+    padding-left: 5px;
+    padding-right: 9px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    opacity: .95;
+}
+.home_btn img
+{
+    width:35px!important;
+    height:36px!important;
+    margin-left: 5px; 
+}
+.logo_div
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo_div img
+{
+    width:52px!important;
+    margin-left: 5px;
+}
+.logout_div
+{
+    margin-left: auto;
+    ion-buttons
+    {
+        justify-content: flex-end;
+    }
+    .log-out
+    {
+        color:white;
+        font-size: 28px;
+    }
+}
+.logout_div ion-icon
+{
+    color: white!important;
+    font-size: 28px;
+    border-radius: 3px;
+    padding: 3px;
+    opacity: .95;
+    border: 1.5px solid white;
+}
+
+ion-header .search_parent
+{
+    position: relative;
+    padding-right:10px;
+    background-color:white;
+
+    ion-col
+    {
+        padding-top:0px;
+        padding-bottom: 0px;
+    }
+    ion-col.searchbar_container
+    {
+        height:100%;
+        position: absolute;
+        top:0px;
+        left:0px;
+        // padding:0px;
+        z-index: 10;
+        //background-color: white;
+    }
+    ion-col.searchbar_container ion-searchbar
+    {
+        padding:0px;
+        height:100%;
+
+        input
+        {
+            box-shadow: none;
+            padding-left: 75px;
+        }
+    }
+}
+
+/*------------------- end header ------------------*/
+
+
+/*--------------- start toggle menu ----------------*/
+
+.toggle_div>button
+{
+	width: 42px;
+    display: inline-block;
+    /* height: 50px; */
+    background: transparent;
+    border: none;
+    position: relative;
+    outline: none;
+    transform:rotateY(180deg);
+}
+.toggle_div>button span
+{
+	display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--yellow_clr);
+    margin-bottom: 6px;
+    margin-top: 5px;
+}
+.toggle_div>button span:nth-child(even)
+{
+	width:80%;
+}
+.menu_header
+{
+    background-image: linear-gradient(45deg, #045a33, #01884b, #045a33);
+    align-items: center;
+}
+.menu_header ion-col:last-child div h4
+{
+    color:var(--yellow_clr);
+}
+.menu_header ion-col:last-child div h4
+{
+
+}
+.menu_img_cont
+{
+    width:100%;
+    text-align: center;
+}
+.menu_img_cont img
+{
+    width:54px;
+}
+.head_info_div
+{
+    width:100%;
+    padding: 5px 7px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+.head_info_div h5
+{
+    font-size: 17px;;
+}
+.head_info_div ion-text
+{
+    font-size: 16px;
+    color:#9b9b9b;
+}
+.logout_h5 ion-icon
+{
+    color:red;
+    font-size: 23px;
+}
+/*--------------- end toggle menu ----------------*/
+
+
+
+
+/* -------------- start status bar ------------*/
+.status_bar
+{
+    padding:0px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+.status_bar>ion-segment-button
+{
+    min-height:20px;
+    min-width:50px;
+    border: none;
+    
+    ion-label
+    {
+        margin:0px;
+        padding:0px;
+    }   
+}
+.status_bar>ion-segment-button.segment-button-checked
+{
+    color:black;
+    position: relative;
+    z-index: 0;
+}
+.status_bar>ion-segment-button.segment-button-checked::before
+{
+    position: absolute;
+    content:"";
+    width:100%;
+    height:2px;
+    background-color:rgb(122, 117, 117);
+    bottom:0px;
+    left:0px;
+    z-index: 1;
+    color:var(--yellow_clr);
+}
+
+
+/* -------------- end status bar ------------*/
+
+
+
+/*------------------- start toggle button ------------------*/
+.toggle_button
+{
+	display: inline-block;
+    width: 30px;
+    height: 40px;
+    border: none;
+    background: #ddd0;
+    padding: 0px;
+    margin-right: 0px;
+}
+.toggle_button>span
+{
+	display:block;
+	width:100%;
+	height:1px;
+	background-color:white;
+	margin-bottom:5px;
+}
+.toggle_button>span:nth-child(2),.toggle_button>span:nth-child(4)
+{
+	width:22px;
+}
+.toggle_button>span:last-child
+{
+	margin-bottom:0px;
+}
+
+/*------------------- end toggle button ------------------*/
+
+
+
+/*------------------- start main head ------------------*/
+.main_head
+{
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 12px;
+    margin-top: 5px;
+}
+.main_head h3
+{
+    font-size: 20px;
+    text-align: center;
+}
+.main_head h3 span
+{
+    padding: 0px 15px 5px 15px;
+    border-bottom: 2px solid var(--black50);
+    position: relative;
+}
+.main_head h3 span::after
+{
+    position: absolute;
+    content: "";
+    width: 11px;
+    height: 11px;
+    background-color: var(--dark_green_clr);
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: -7px;
+    border-radius: 50%;
+    border: 2px solid var(--gray_clr);
+}
+
+/*------------------- end main head ------------------*/
+
+
+
+/*------------------- start main heading ------------------*/
+.main_heading
+{
+    width:100%;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    justify-content: center;
+    justify-content: space-between;
+    padding-right:15px;
+    background: #ffd525;
+    box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 7px;
+}
+.main_heading h1
+{
+    font-size: 17px;
+}
+.form_affix
+{
+    background-color: var(--light_gray_clr);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding: 5px 15px;
+}
+.main_heading1
+{
+    display: flex;
+    align-items:center;
+    background-color:white;
+}
+.main_heading1>div
+{
+    width:50px;
+    height:100%;
+}
+.main_heading1>div:nth-last-of-type(2)
+{
+    flex: 1;
+    text-align:center;
+    h1
+    {
+        font-size: 20px;
+    }
+}
+
+
+/*------------------- end main heading ------------------*/
+
+
+
+
+/*------------------- start my card ------------------*/
+.mycard
+{
+    width:100%;
+    background-color:white;
+}
+/*------------------- end my card ------------------*/
+
+
+
+
+
+/*------------------- start table ------------------*/
+.my_table_container
+{
+    width: 100%;
+    overflow-x: auto;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.my_table
+{
+    width:100%;
+}
+.my_table thead tr,.my_table tbody tr
+{
+    border-bottom: 1px solid var(--gray_clr);
+}
+.my_table thead th,.my_table tbody td
+{
+    white-space: nowrap;
+    padding: 6px 5px;
+}
+.my_table thead th
+{
+    background-color: var(--gray_clr);
+    color: var(--black90);
+    padding: 9px 7px;
+}
+.my_table tbody td
+{
+    font-size: 16px;
+    padding: 9px 7px;
+    color: var(--black80);
+    text-align: center;
+}
+.my_table tbody td:last-child 
+{
+    text-align: center;
+}
+.my_table tbody td:last-child a
+{
+    color: gray;
+    font-size: 20px;
+    line-height: normal;
+    display: inline-block;
+    border: 1px solid gray;
+    width: 38px;
+    height: 30px;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: var(--theme_shadow);
+}
+
+/*------------------- end table ------------------*/
+
+
+
+/*------------------- start my form ------------------*/
+.myform
+{
+    
+}
+.form_inp_container
+{
+    margin-bottom: 16px;
+}
+.label_container
+{
+    margin-bottom: 8px;
+}
+.label_container label
+{
+    font-size:16px;
+    color:var(--black90);
+}
+.input_container
+{   
+    border:1px solid var(--black50);
+    border-radius: var(--global_border_radius);
+}
+.input_container ion-input:hover
+{   
+    border-bottom: 1px solid green;
+}
+.label_container span.star
+{
+    color: red;
+}
+.button_container
+{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.button_container>ion-button
+{
+    width: 100%;
+    height: 40px;
+    background-color: var(--dark_green_clr);
+    color: white;
+    font-size: 15px;
+    border-radius: var(--global_border_radius);
+}
+
+
+.inp_group
+{
+    margin-bottom: 5px;
+
+    ion-label
+    {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 17px;;
+    }
+}
+.inp_control
+{
+    border:1px solid var(--black50);
+    height:45px;
+    border-radius: var(--global_border_radius);
+}
+.inp_control:focus
+{
+    border-bottom-color:var(--dark_green_clr);
+}
+/*------------------ start checkbox  ----------------------*/
+.check_label
+{
+    display: flex;
+    align-items: center;
+    padding: 11px;
+}
+.check_label input[type="checkbox"]
+{
+    margin-right:10px;
+    width:18px;
+    height:18px;
+}
+/*------------------ end checkbox  ----------------------*/
+
+/*------------------- end my form ------------------*/
+
+
+
+
+
+/*------------------ start sap no div --------------*/
+.sap_no_div
+{
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.sap_no_div strong
+{
+    font-size: 14px;
+}
+.sap_no_div span
+{
+    font-size: 13px;
+}
+/*------------------ end sap no div --------------*/
+
+
+/*------------------ start change/reset button ----------------------*/
+.cng_reset_btn_div
+{
+    text-align: right;
+}
+.cng_reset_btn_div>button
+{
+    padding: 6px;
+    color: #1a91ca;
+    background: var(--chng_btn_clr);
+    color:var(--black80);
+}
+/*------------------ end change/reset button ----------------------*/
+
+
+
+
+/*------------------ end change/reset button ----------------------*/
+.card_box
+{
+    width:100%;
+    background-color:white;
+    margin-bottom: 10px;
+    border: 1px solid #dddddd;
+    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.card_box>h4
+{
+    background-color: var(--light_gray_clr);
+    font-size: 16px;
+    padding: 13px 15px;
+    border-bottom: 1px solid lightgrey;
+}
+.card_content
+{
+    
+}
+/*------------------ end change/reset button ----------------------*/
+
+
+
+
+
+/*------------------ start file  ----------------------*/
+.file_cont
+{
+    padding:8px 9px;
+}
+/*------------------ end file  ----------------------*/
+
+
+
+
+
+
+/*-------------------- start station summary page ------------------------*/
+.smry_row
+{
+    border-bottom: 1px solid var(--gray_clr);
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+.smry_row .smry_label
+{
+    color:black;
+    font-size: 15px;
+    padding-left: 9px;
+    display: block;
+}
+.smry_row .smry_val
+{
+    color:var(--black70);
+    font-size: 14px;
+    float:right;
+    margin-right:14px;
+}
+/*-------------------- end station summary page ------------------------*/
+
+
+
+
+
+/*-------------------- start menu list page ------------------------*/
+.menu_ul
+{
+    li
+    {
+        padding: 16px 15px;
+        background: var(--light_gray_clr);
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        margin-bottom: 2px;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.15);
+        font-size: 17px;
+        border-left: 3px solid var(--dark_green_clr);
+
+        ion-icon:first-of-type
+        {
+            color:var(--dark_green_clr);
+            font-size: 27px;
+            margin-right:12px;
+            margin-bottom: 2px;
+        }
+        ion-icon:last-of-type
+        {        
+            color: var(--light_black_clr);
+            font-size: 22px;
+            margin-bottom: 2px;
+            margin-left: auto;
+        }
+    }
+}
+.ripple-parent 
+{
+    position: relative;
+    overflow: hidden;
+}
+/*-------------------- end menu list page ------------------------*/
+
+
+
+/*-------------------- start popup ------------------------*/
+
+.mypopup
+{
+
+}
+.mypopup .popup_container
+{
+}
+.mypopup .popup_container .trigger_div
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 13px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+.mypopup .popup_container .trigger_div ion-icon
+{
+    font-weight: bold;
+    color: red;
+    font-size: 22px;
+    margin-top: -8px;
+}
+.mypopup .popup_container .content_div
+{
+    width:100%;
+    min-height:280px;
+    box-shadow: var(--theme_shadow);
+    padding: 10px 14px;
+}
+.pop_head_span h3
+{
+    font-size: 16px;
+}
+
+/*-------------------- end popup ------------------------*/
+
+
+
+.prog_row
+{
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+    padding: 7px 10px 32px 10px;
+}
+.prog_row:nth-child(even)
+{
+    background-color: rgba(255, 213, 37, 0.08);
+}
+.prog_heading
+{
+    width:100%;
+    display: flex;
+    margin-bottom: 5px;
+}
+.prog_heading>div
+{
+    display: flex;
+    align-items: center;
+}
+.prog_heading>div:first-child
+{
+    width:calc(100% - 50px);
+}
+.prog_heading>div:last-child
+{
+    width:50px;
+    justify-content: flex-end;
+}
+.prog_heading>div:first-child h5
+{
+    color:var(--black80);
+}
+.prog_heading>div:last-child span
+{
+    color:#00ab00;
+    font-size: 20px;
+}
+.prog_heading>div:last-child span ion-icon.red
+{
+    color:red;
+}
+
+/* ---------------------------- start myprogress bar --------------------- */
+
+.myprogress
+{
+    width:100%;
+    height:17px;
+    background-color:#f5f5f5;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    margin-top:7px;
+    /* margin-bottom:50px; */
+    border-radius: 15px;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.35);
+}
+  
+  .myprog_inner
+  {
+    height: 100%;
+    background-color: #5fad56;
+    position: relative;
+    border-radius: 15px;
+    background-image: linear-gradient(45deg, #f04141, #ff6c28, #f04141);
+  }
+  .myprogress span:not(.progress_content)
+  {
+ 	display: inline-block;
+    width: 47px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    position: absolute;
+    top: -32px;
+    right: -15px;
+    background-color: #5d5d5d;
+    /* color: rgb(23,44,66); */
+    color:white;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px #000000e8;
+  }
+  .myprogress .progress_content
+  {
+	position: absolute;
+    z-index: 5;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    width: 106px;
+    display: inline;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px #0000008f;
+    font-size: 13px;
+  }
+  .myprogress span:not(.progress_content)::before
+  {
+  	content: "";
+    position: absolute;
+    border: 8px solid transparent;
+    border-top: 8px solid #5d5d5d;
+    top: 22px;
+    left: 12px;
+  }
+  span.status
+{
+    display: inline-block;
+    padding: 5px;
+	border-radius: 17px;
+	font-size: 14px;
+    width: 100px;
+    text-align: center;
+    color: #5fad56;
+    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.19);
+}
+span.progress_city
+{
+	font-size: 14px;
+	color:black;
+}
+/* ---------------------------- end myprogress bar --------------------- */
+
+
+/*------------- start admin-home -----------*/
+.menu_container
+{
+    width:100%;
+    text-align: center;
+}
+.menu_container .men_inner
+{
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: auto;
+    margin-right:auto;
+}
+.menu_container .men_inner .item
+{
+    width: calc(100%/2);
+    padding: 5px;
+}
+.item div.item_div
+{
+    width: 100%;
+    height: 100%;
+    min-height:70px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    // background-image: linear-gradient(30deg,#e6e6e6,#fafafa,#e6e6e6);
+    padding: 15px 10px;
+    // border: 2px solid rgb(176 30 30 / 22%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i
+    {
+        font-size: 32px;
+        color: #b01e1e;
+        margin-top: 10px;
+        display: none;
+    }
+}
+
+
+.item_div ion-icon
+{
+    font-size: 32px;
+    color: #b01e1e;
+    margin-top: 10px;
+    display: none;
+}
+.item_div h5
+{
+    // color: #b01e1e;
+    // color:#045a33;
+    color:#3f3f3f;
+    font-weight: 600;
+}
+/*------------- end admin-home -----------*/
+
+
+.my-custom-class1
+{
+    padding: 20px 15px 15px 15px;
+
+    .modal-wrapper
+    {
+        background-color:transparent!important;
+    }
+}
+.my-custom-class1
+{
+    padding: 40px 15px 15px 15px;
+}
+
+
+
+
+
+/* ---------------------------------Pradeep----------------------------*/
+
+ion-header{
+    ion-row{
+        ion-icon{
+            // font-size: 2rem;
+        }
+        ion-buttons{
+            display: inline-block;
+            line-height: 100%;
+            position: absolute;
+            top: 19px;
+        }
+        .searchbar_container{
+            .my_table_container{
+                background-color: #fff;
+            }
+        }
+    }
+    
+}
+
+.modal_container
+{
+    padding: 10px;
+    .modal-wrapper.sc-ion-modal-md
+    {
+        background-color:transparent;
+    }
+}
+
+
+.custom_dropdown
+{
+    position: relative;
+}
+.custom_dropdown::before 
+{
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f0d7";
+    width: 15px;
+    height: 100%;
+    right: 19px;
+    top: 0px;
+    z-index: 100;
+    text-align: center;
+    display: -webkit-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a9a9a9;
+}
+.filter_box 
+{
+    position: absolute;
+    z-index: 100;
+    top: 82px;
+    background: white;
+    width: calc(100% - 10px);
+    border:1px solid #b9b9b9;
+
+    .stn_list_container
+    {
+        height:400px;
+        overflow-x: hidden;
+        overflow-y:auto;
+    }
+}
+
+.filer_container {
+    width: 100%; 
+}
+
+.inp_control.seaechselect{overflow: inherit;}
+
+.filtersearch{
+    width: 100%;
+    margin-bottom: 3%;
+    padding-left: 3%;
+}
+.inp_control.seaechselect ion-searchbar{padding-left: 0; padding-right: 0;}
+
+.inp_control.seaechselect::after{
+    content: "";
+    --background: none;
+    background-image: url('/assets/images/dropdown-arrow.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 13px;
+    top: 9px;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    font-size: 30px;
+    z-index: 0;
+}
+
+
+/*------------ start media query ---------*/
+@media (max-width:470px)
+{
+    .menu_container .men_inner .item
+    {
+        width: calc(100%/2);
+        padding: 5px;
+    }
+}
+@media (min-width:472px) and  (max-width:700px)
+{
+    .menu_container .men_inner .item
+    {
+        width: calc(100%/3);
+        padding: 5px;
+    }
+}
+@media (min-width:701px) and (max-width:1500px)
+{
+    .menu_container .men_inner .item
+    {
+        width: calc(100%/3);
+        padding: 5px;
+    }
+
+    .menu_container 
+    {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.change_reset_btn
+{
+    --background:var(--yellow_clr);
+    --background-hover:#ffc107;
+    --color:black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

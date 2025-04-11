@@ -1,0 +1,99 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/mo-dashboard">
+				<img src="../../assets/images/logo.png" />
+			</div>
+		  	<h1 class="text_white text_center title">Station Details</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent">
+		<ion-col size="2">
+			<ion-back-button defaultHref="co-dashboard"></ion-back-button>
+		</ion-col>
+		<ion-col size="2" offset="6" >
+			<ion-button size="small" color="light" (click)="searchCollapse()">
+				<ion-icon name="search" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col size="2"  >
+			<ion-button color="light" size="small" (click)="exportFile()">
+				<ion-icon name="arrow-down"></ion-icon>
+			</ion-button>
+		</ion-col>
+		
+		<ion-col size="12" *ngIf="searchShow" class="searchbar_container">
+			<ion-searchbar type="text" showCancelButton="always" (ionCancel)="hideSearchBar()" debounce="500" (ionInput)="getItems($event)"></ion-searchbar>
+			<ion-row *ngIf="isItemAvailable">
+				<ion-col>
+					<div class="my_table_container">
+						<table class="my_table">
+							<tbody>
+								<tr *ngFor="let item of items; let i= index">
+									<td>{{i+1}}</td>
+									<td>{{item.StationCode}}</td>
+									<td>{{item.StationName}}</td>
+									<!-- <td>{{item.StationAddress}}</td> -->
+									<td>{{item.RegionName}}</td>
+									<td>{{item.CompanyName}}</td>
+									<td>{{item.StationTypeName}}</td>
+									<td><ion-toggle name = "Status" [checked]="item.Status" (ionChange)="updateStatus(item.StationId,$event)"></ion-toggle></td>
+									<td><ion-button color="dark" size="small" (click)="stnStatusRedirect(item.StationId)">View Status</ion-button></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Station Code</th>
+								<th>Station Name</th>
+								<!-- <th>Station Address</th> -->
+								<th>Region Name</th>
+								<th>Company Name</th>
+								<th>Station Type</th>
+								<th>Status</th>
+								<th>Dispenser Details</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of stattionData; let i= index">
+								<td>{{i+1}}</td>
+								<td>{{item.StationCode}}</td>
+								<td>{{item.StationName}}</td>
+								<!-- <td>{{item.StationAddress}}</td> -->
+								<td>{{item.RegionName}}</td>
+								<td>{{item.CompanyName}}</td>
+								<td>{{item.StationTypeName}}</td>
+								<td><ion-toggle name = "Status" [checked]="item.Status" (ionChange)="updateStatus(i,item.StationId,$event)"></ion-toggle></td>
+								<td><ion-button color="dark" size="small" (click)="stnStatusRedirect(item.StationId)">View Status</ion-button></td>
+							</tr>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

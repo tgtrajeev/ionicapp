@@ -1,0 +1,82 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<div class="main_head">
+			<h3>
+				<span>Menu</span>
+			</h3>
+		</div>
+		<div class="menu_container">
+			<div class="men_inner">
+				<div class="item" (click)="dashboardDSARedirect()">
+					<div class="item_div">
+						<ion-icon name="desktop"></ion-icon>
+						<!-- <h5>Dashboard MO</h5> -->
+						<h5>Dashboard AMO</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="stnDetailRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Station Details</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="dsmMgtRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>DSM Management</h5>
+					</div>
+				</div>
+				<!-- <div class="item">
+					<div class="item_div" (click)="attachmentRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Summary</h5>
+					</div>
+				</div> -->
+				<!-- <div class="item">
+					<div class="item_div" (click)="activityLogDSARedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Activity Log DSA</h5>
+					</div>
+				</div> -->
+				<div class="item">
+					<div class="item_div" (click)="reportDSARedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Report DSA</h5>
+					</div>
+				</div>
+				<!-- <div class="item">
+					<div class="item_div" (click)="attachDsaRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Dispenser Jump</h5>
+					</div>
+				</div> -->
+				<div class="item">
+					<div class="item_div" (click)="jumpReadingRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Jump Reading System</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>

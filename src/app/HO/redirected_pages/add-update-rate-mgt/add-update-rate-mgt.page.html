@@ -1,0 +1,85 @@
+<ion-header *ngIf="pageFlag=='addpage'">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="rate-management" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Add Rate</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+<ion-header>
+	<ion-toolbar color="dark_green" *ngIf="pageFlag=='updatepage'">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="rate-management" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Update Rate</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<form [formGroup]="addupdateForm" (ngSubmit)="insertUpdateData()">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Region <span class="star">*</span></ion-label>
+					<ion-item class="inp_control">
+						<ion-select class="inp_control" [compareWith]="compareWith" formControlName="RegionId">
+							<ion-select-option *ngFor="let itm of dataRegionMaster" [value]="itm.RegionId">
+								{{itm.RegionName}}</ion-select-option>
+						</ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Normal Rate ₹ / K.G <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="NormalRate"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Discounted Rate ₹ / K.G <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="DisountedRate"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Effective Date <span class="star">*</span></ion-label>
+					<!-- <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc" class="inp_control" formControlName="EffectiveDate"></ion-datetime> -->
+					<ion-datetime #selcteddate class="datepick inp_control" displayFormat="DD-MMM-YYYY"
+						pickerFormat="DD MMM YYYY" [min]="minDateRate" [max]="maxDaterate"
+						formControlName="EffectiveDate" name="selcteddate"
+						(ionChange)="getSelectedDate(selcteddate.value)"></ion-datetime>
+
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Effective Time <span class="star">*</span></ion-label>
+					<ion-item class="inp_control">
+						<ion-select formControlName="EffectiveTime">
+							<!-- [compareWith]="compareWith" -->
+							<ion-select-option value="12:01 AM">12:01 AM</ion-select-option>
+							<ion-select-option value="06:00 AM">06:00 AM</ion-select-option>
+						</ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container">
+						<ion-button color="dark_green_clr" type="submit">Save</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+
+</ion-content>

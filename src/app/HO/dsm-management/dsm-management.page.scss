@@ -1,0 +1,16 @@
+.status_bar
+{
+    padding:0px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+.status_bar>ion-segment-button
+{
+    min-height:20px;
+    min-width:50px;
+}
+.status_bar>ion-segment-button ion-label
+{
+    margin:0px;
+    padding:0px;
+}

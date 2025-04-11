@@ -1,0 +1,134 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/co-dashboard">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<h1 class="text_white text_center title">Reviews</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent">
+		<ion-col size="2">
+			<ion-back-button defaultHref="co-dashboard"></ion-back-button>
+		</ion-col>
+		<ion-col size="2" offset="6" *ngIf="outerCheck != 1">
+			<ion-button size="small" color="light" (click)="makeFinalApprove()">
+				<ion-icon name="checkmark" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col size="2" *ngIf="outerCheck != 1">
+			<ion-button color="light" size="small" (click)="openModal()">
+				<ion-icon name="paper-plane" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<!-- <ion-col size="2" *ngIf="outerCheck != 1">
+			<ion-button size="small" color="light">
+				<ion-icon name="arrow-down" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col> -->
+		<ion-col size="10">
+			<span class="switch_span" *ngIf="outerCheck == 1">
+				<strong class="send_ho">Already sent to HO for the
+					day!</strong>
+			</span>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<div *ngIf="isShown" class="stcode tooltiptext">
+		{{stationCode}}
+	</div>
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Date <span class="star">*</span></ion-label>
+				<ion-item class="inp_control">
+					<ion-label>Select Date:</ion-label>
+					<ion-datetime #selcteddate displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY"
+						[ngModel]="geteDate.selcteddate" name="selcteddate"
+						(ngModelChange)="getSelectedDate(selcteddate.value)" [max]="secondMaxDate">
+					</ion-datetime>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Action</th>
+								<th>Region</th>
+								<th>Company Name</th>
+								<th>Station Name</th>
+								<th>Control Room Code</th>
+								<th>Package Capacity(SCMH)</th>
+								<th>Station Capacity(SCMH)</th>
+								<th>Previous Month Average Sale</th>
+								<th>Total Gas Filled LCV</th>
+								<th>Total Sale KG</th>
+								<th>Total Bus Gas Sale</th>
+								<th>No OF LCV</th>
+								<th>No OF BUS</th>
+								<th>Utilization</th>
+								<th>Package Make</th>
+								<th>Sap Equipment No</th>
+								<th>Prime Mover</th>
+								<th>Running Hours</th>
+								<th>Schedule Shutdown Hours</th>
+								<th>UnSchedule Shutdown Hours</th>
+								<th>Breakdown Hours</th>
+								<th>Remark</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let itm of arrReviewData">
+								<td *ngIf="itm.SubmitStatus == 0" class="red"><span>Pending</span></td>
+								<td *ngIf="itm.SubmitStatus == 2" class="green"><span>Approved</span></td>
+								<td>{{itm.Region}}</td>
+								<td>{{itm.CompanyName}}</td>
+								<td (click)="showStationCode(itm.StationName)">{{itm.StationName}}</td>
+								<td>{{itm.ControlRoomCode}}</td>
+								<td>{{itm.PackageCapacity}}</td>
+								<td>{{itm.StationCapacity}}</td>
+								<td>{{itm.PreviousMonthAverageSale}}</td>
+								<td>{{itm.TotalGasFilledLCV}}</td>
+								<td>{{itm.TotalSaleKG}}</td>
+								<td>{{itm.TotalBusGasSale}}</td>
+								<td>{{itm.NumberOfLcv}}</td>
+								<td>{{itm.NumberOfBusses}}</td>
+								<td>{{itm.UTILIZATION}}</td>
+								<td>{{itm.PackageMake}}</td>
+								<td>{{itm.SAPEQUIPMENTNO}}</td>
+								<td>{{itm.Prime_Mover}}</td>
+								<td>{{itm.RunningHours}}</td>
+								<td>{{itm.ScheduleShutdownHours}}</td>
+								<td>{{itm.UnscheduledShutdownHours}}</td>
+								<td>{{itm.BreakdownHours}}</td>
+								<td>{{itm.Remark}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="button_container downloadfile">
+					<ion-button color="dark_green_clr" (click)="exportToExcel()">Download File</ion-button>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

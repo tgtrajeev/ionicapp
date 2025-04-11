@@ -1,0 +1,70 @@
+<ion-header>
+	<ion-row class="align_center pr10 search_parent for_color">
+		<ion-col size="2">
+			<ion-back-button defaultHref="rate-management" class="text_white"></ion-back-button>
+		</ion-col>
+		<ion-col size="2" offset="8">
+			<ion-button size="small" color="light" (click)="searchCollapse()">
+				<ion-icon name="search" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col size="2" class="ion-text-center"></ion-col>
+		<ion-col size="12" class="searchbar_container" *ngIf="searchShow">
+			<ion-searchbar type="text" debounce="500" (ionInput)="getItems($event)" showCancelButton="always" (ionCancel)="hideSearchBar()"></ion-searchbar>
+			<ion-row *ngIf="isItemAvailable">
+				<ion-col>
+					<div class="my_table_container">
+						<table class="my_table">
+							<tbody>
+								<tr (click)="showMessage()" *ngFor="let item of items; let i = index">
+									<td >{{i+1}}</td>
+									<td>{{item.RegionName}}</td>
+									<td>{{item.NormalRate.toFixed(2)}}</td>
+									<td>{{item.DisountedRate.toFixed(2)}}</td>
+									<td>{{item.EffectiveDate}}</td>
+									<td>{{item.DisplayTime}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12" class="ion-text-center"><h4 class="mt10 mb5">Previous Rate</h4></ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Region</th>
+								<th>Normal Rate ₹/Kg</th>
+								<th>Discounted Rate ₹/Kg</th>
+								<th>Effective Date</th>
+								<th>Effective Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr (click)="showMessage()" *ngFor="let ritem of Ratelist; let i= index">
+								<td>{{i+1}}</td>
+								<td>{{ritem.RegionName}}</td>
+								<td>{{ritem.NormalRate.toFixed(2)}}</td>
+								<td>{{ritem.DisountedRate.toFixed(2)}}</td>
+								<td>{{ritem.EffectiveDate}}</td>
+								<td>{{ritem.DisplayTime}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

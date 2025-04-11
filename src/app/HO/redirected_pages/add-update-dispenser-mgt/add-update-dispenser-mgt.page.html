@@ -1,0 +1,138 @@
+<ion-header>
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="dispenser-management" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white" *ngIf="pageFlag =='addds'">Add Dispenser</ion-text>
+				<ion-text class="text_white" *ngIf="pageFlag =='updateds'">Update Dispenser</ion-text>
+			</ion-col>
+			<ion-col size="2" class="ion-text-center">
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<form [formGroup]="addForm" (ngSubmit)="Insertstation()">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Dispenser Name <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="DispenserName"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Dispenser Type Code A <span class="star">*</span></ion-label>
+					<ion-item class="inp_control">
+						<ion-select formControlName="DispenserTypeIdA">
+							<ion-select-option *ngFor="let dsitem of dataDispTypesA" [value]="dsitem.DispanserTypeId">
+								{{dsitem.DispanserTypeCode}}</ion-select-option>
+						</ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Dispenser Code A <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="DispenserCodeA"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Current Reading A</ion-label>
+					<ion-input class="inp_control" formControlName="CurrentReadingA" disabled></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Dispenser Type Code B <span class="star">*</span></ion-label>
+					<ion-item class="inp_control">
+						<ion-select formControlName="DispenserTypeIdB">
+							<ion-select-option *ngFor="let dsitem of FinalDispTypesB" [value]="dsitem.DispanserTypeId">
+								{{dsitem.DispanserTypeCode}}</ion-select-option>
+
+						</ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Dispenser Code B <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="DispenserCodeB"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Current Reading B</ion-label>
+					<ion-input disabled class="inp_control" formControlName="CurrentReadingB" disabled></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Station <span class="star">*</span></ion-label>
+					<div class="custom_dropdown">
+						<ion-input class="inp_control" name="stCodeMy" formControlName="stCodeMy"
+							(click)="filterBoxShow(0)" readonly></ion-input>
+					</div>
+					<div class="filter_box" *ngIf=(fiterBox)>
+						<ion-searchbar (ionChange)="onSearchTerm($event)" placeholder="Search an item"></ion-searchbar>
+						<div class="stn_list_container">
+							<ion-list>
+								<div *ngIf="items.length > 0; else noItems">
+									<ion-item *ngFor="let item of items" (click)="filterBoxShow(item)">
+										{{item.StationCode}}
+									</ion-item>
+								</div>
+								<ng-template #noItems>
+									<ion-item>
+										No items found.
+									</ion-item>
+								</ng-template>
+							</ion-list>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Effective Date <span class="star">*</span></ion-label>
+					<!-- <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"
+					 class="inp_control" formControlName="DispenserName" [(ngModel)]="disData.selcteddate" 
+					 name="selcteddate" (ionChange)="getSelectedDate(selcteddate.value)"></ion-datetime>  -->
+					<ion-datetime #selcteddate class="datepick" displayFormat="DD-MMM-YYYY" 
+					pickerFormat="DD MMM YYYY"
+						formControlName="EffectiveDate" class="inp_control" max="2099-12-31"></ion-datetime>
+					<ion-datetime></ion-datetime>
+				</ion-col>
+			</ion-row>
+			<!-- <ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Order By <span class="star">*</span></ion-label>
+				<ion-item class="inp_control"> -->
+			<!-- <ion-label>Order By</ion-label> -->
+			<!-- <ion-select formControlName="OrderBy">
+						<ion-select-option *ngFor="let dsitem of jsonOrder" [value]="dsitem.value">{{dsitem.value}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+		</ion-row> -->
+			<ion-row class="align_center">
+				<ion-col>
+					Status
+				</ion-col>
+				<ion-col class="d_flex ion-justify-content-end">
+					<ion-toggle [(ngModel)]="status" [ngModelOptions]="{standalone: true}"></ion-toggle>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container">
+						<ion-button type="submit" color="dark_green_clr">Save</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>

@@ -1,0 +1,90 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/admin-home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+		  	<h1 class="text_white text_center title">View History</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent">
+		<ion-col size="2">
+			<ion-back-button defaultHref="dispenser-management"></ion-back-button>
+		</ion-col>
+		<ion-col size="2" offset="8">
+			<ion-button size="small" color="light" (click)="searchCollapse()">
+				<ion-icon name="search" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col size="12" *ngIf="searchShow" class="searchbar_container">
+			<!-- <ion-searchbar type="text" showCancelButton="always" (ionCancel)="hideSearchBar()" debounce="500"></ion-searchbar> -->
+			<ion-searchbar type="text" showCancelButton="always" (ionCancel)="hideSearchBar()" debounce="500" (ionInput)="getItems($event)"></ion-searchbar>
+
+			<ion-row *ngIf="isItemAvailable">
+				<ion-col>
+					<div class="my_table_container">
+						<table class="my_table">
+							<tbody>
+								<tr *ngFor="let item of items; let i= index">
+                  <td>{{i+1}}</td>
+                  <td>{{item.DispenserName}}</td>
+                  <td>{{item.FromStation}}</td>
+                  <td>{{item.ToStation}}</td>
+                  <td>{{item.DispanserTransferArmReadingA}}</td>
+                  <td>{{item.DispanserTransferArmReadingB}}</td>
+                  <td>{{item.EntryDate}}</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Dispenser Name</th>
+								<th>Transfer From</th>
+								<th>Transfer To</th>
+								<th>Transfer Arm Reading A</th>
+								<th>Transfer Arm Reading B </th>
+								<th>Entry Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of listDispHistory; let i= index">
+								<td>{{i+1}}</td>
+								<td>{{item.DispenserName}}</td>
+								<td>{{item.FromStation}}</td>
+								<td>{{item.ToStation}}</td>
+								<td>{{item.DispanserTransferArmReadingA}}</td>
+								<td>{{item.DispanserTransferArmReadingB}}</td>
+								<td>{{item.EntryDate}}</td>
+							</tr>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
+

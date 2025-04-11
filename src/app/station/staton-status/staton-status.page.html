@@ -1,0 +1,146 @@
+<ion-header>
+  <header>
+    <div class="header">
+      <div class="logo_div" routerLink="/home">
+        <img src="../../assets/images/logo.png" />
+      </div>
+      <span class="logout_div">
+        <div class="toggle_div">
+          <button (click)="openFirst()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </span>
+    </div>
+  </header>
+  <div class="main_heading1">
+    <div>
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </div>
+    <div>
+      <h1>Station Status</h1>
+    </div>
+    <div></div>
+  </div>
+</ion-header>
+<ion-content>
+  <div class="content_area">
+    <div class="mycard">
+      <form>
+        <div class="form_inp_container">
+          <div class="label_container">
+            <label>Date From</label>
+          </div>
+          <div class="input_container">
+            <ion-item>
+              <ion-label>Select Date:</ion-label>
+              <ion-datetime #selcteddateFrom class="inp_control date" displayFormat="DD-MMM-YYYY"
+                pickerFormat="DD MMM YYYY" [ngModel]="DateFrom" name="selcteddateForm" [max]="secondMaxDate"
+                (ngModelChange)="OnDateChnageFrom(selcteddateFrom.value)"></ion-datetime>
+            </ion-item>
+          </div>
+        </div>
+        <div class="form_inp_container">
+          <div class="label_container">
+            <label>Date To</label>
+          </div>
+          <div class="input_container">
+            <ion-item>
+              <ion-label>Select Date:</ion-label>
+              <ion-datetime #selcteddateTo class="inp_control date" displayFormat="DD-MMM-YYYY"
+                pickerFormat="DD MMM YYYY" [ngModel]="DateTo" name="selcteddateTo" [max]="secondMaxDate"
+                [min]="DateFromMy" (ngModelChange)="OnDateChnageTo(selcteddateTo.value)"></ion-datetime>
+            </ion-item>
+          </div>
+        </div>
+        <div class="form_inp_container">
+          <div class="label_container">
+            <label>Status</label>
+          </div>
+          <div class="input_container">
+            <ion-list>
+              <ion-radio-group name="StatusFlag" (ionChange)="statusChange($event)" [(ngModel)]="StatusFlag">
+                <ion-item>
+                  <ion-label>Operational</ion-label>
+                  <ion-radio slot="start" value="Active" checked></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Non Operational</ion-label>
+                  <ion-radio slot="start" value="InActive"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+          </div>
+        </div>
+        <div class="form_inp_container">
+          <div class="label_container">
+            <label>Shift (From)</label>
+          </div>
+          <div class="input_container">
+            <ion-select placeholder="Select One" name="optShiftId" [(ngModel)]='SelectedShiftId'
+              (ionChange)="onShiftSelect($event.detail.value)"
+              style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+              <ion-select-option *ngFor="let itm of ShiftList" [value]="itm.ShiftId">{{itm.ShiftDetails}}
+              </ion-select-option>
+            </ion-select>
+          </div>
+        </div>
+        <div class="form_inp_container">
+          <div class="label_container">
+            <label>Sub Shift (From)</label>
+          </div>
+          <div class="input_container">
+            <ion-select placeholder="Select One" name="optSubShiftId" [(ngModel)]='SubShiftId'
+              style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+              <ion-select-option *ngFor="let itm of SubShiftList" [value]="itm.SubShiftId">{{itm.SubShiftDetails}}
+              </ion-select-option>
+            </ion-select>
+          </div>
+        </div>
+        <div class="form_inp_container">
+          <div class="label_container">
+            <label>Shift (To)</label>
+          </div>
+          <div class="input_container">
+            <ion-select placeholder="Select One" name="optShiftId" [(ngModel)]='SelectedShiftId_To'
+              (ionChange)="onShiftSelect_To($event.detail.value)"
+              style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+              <ion-select-option *ngFor="let itm of ShiftList" [value]="itm.ShiftId">{{itm.ShiftDetails}}
+              </ion-select-option>
+            </ion-select>
+          </div>
+        </div>
+        <div class="form_inp_container">
+          <div class="label_container">
+            <label>Sub Shift (To)</label>
+          </div>
+          <div class="input_container">
+            <ion-select placeholder="Select One" name="optSubShiftId" [(ngModel)]='SubShiftId_To'
+              style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+              <ion-select-option *ngFor="let itm of SubShiftList_To" [value]="itm.SubShiftId">{{itm.SubShiftDetails}}
+              </ion-select-option>
+            </ion-select>
+          </div>
+        </div>
+        <div class="form_inp_container">
+          <div class="label_container">
+            <label>Remark</label>
+          </div>
+          <div class="input_container">
+            <ion-textarea name="remark" [value]="Remark" (ionInput)="Remark=$event.target.value"></ion-textarea>
+          </div>
+        </div>
+        <ion-row>
+          <ion-col>
+            <div class="button_container">
+              <ion-button color="dark_green_clr" (click)="insertRecord();">Save</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </div>
+</ion-content>

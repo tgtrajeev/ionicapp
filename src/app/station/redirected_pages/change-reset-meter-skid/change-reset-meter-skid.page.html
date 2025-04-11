@@ -1,0 +1,162 @@
+<ion-header>
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="meter-skid" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Jump/Change/Reset Meter</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<form [formGroup]="addForm" (ngSubmit)="MSchangeresetpopup()">
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Action</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Action</ion-label>
+									<ion-select placeholder="Select One" [value]="MSFlagJumpType"
+										(ionChange)="resetchange($event.target.value, 'MS')">
+										<ion-select-option value='J'>Jump</ion-select-option>
+										<ion-select-option value="R">Reset</ion-select-option>
+										<ion-select-option value="C">Change</ion-select-option>
+									</ion-select>
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Before</ion-label>
+						<ion-input class="inp_control" placeholder="Before Meter Reading" [value]="OldMeterReading"
+							(input)="OldMeterReading=$event.target.value" name="Before"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>After</ion-label>
+						<ion-input class="inp_control" placeholder="After Meter Reading" [value]="NewMeterReading"
+							(input)="MSJReadingvalue($event.detail.value)" (input)="NewMeterReading=$event.target.value"
+							name="after"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Attachment</ion-label>
+						<ion-input #inputFile type="file" class="inp_control" id="MSfileInputreset"
+							name="MSfileInputreset" (change)="fileuploadreset($event.target.files, $event)"
+							[disabled]="MSpopupfilevisible"></ion-input>
+						<!-- <span *ngIf="!IsFileSelected" class="temp_file_name" style="right:-6px;">{{FileName}}</span> -->
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Remark</ion-label>
+						<ion-textarea class="inp_control" [value]="MeterJumpRemark"
+							(input)="MeterJumpRemark=$event.target.value" placeholder="Remark" placeholder="Remark">
+						</ion-textarea>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12">
+						<div class="my_table_container">
+							<table class="my_table">
+								<thead>
+									<tr>
+										<th>Sr No</th>
+										<th>Before</th>
+										<th>After</th>
+										<th>Jumped</th>
+										<th>Action Type</th>
+										<th>Remark</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of MSJumpListHistory, let i = index">
+										<td>{{i+1}}</td>
+										<td>{{itm.BeforeJumpReading}}</td>
+										<td>{{itm.AfterJumpReading}}</td>
+										<td>{{itm.JumpReading}}</td>
+										<td>{{itm.Action}}</td>
+										<td>{{itm.Remark}}</td>
+										<!-- <td>{{itm.DispanserJumpRemark}}</td> -->
+										<td> 
+											<!-- <span (click)="UpdateMSJumpHistory(itm.id, itm)">Edit</span>
+											<span class="closeicon"
+												(click)="DeleteMSJumpHistory(itm.id, itm.Action,itm)">
+												<ion-icon ios="ios-close" md="md-close"></ion-icon>
+											</span> -->
+											<ion-button size="small" color="dark"
+											(click)="UpdateMSJumpHistory(itm.id, itm)">
+											<ion-icon name="create"></ion-icon>
+										</ion-button>
+									
+										<ion-button size="small" color="danger"
+											(click)="DeleteMSJumpHistory(itm.id, itm.Action,itm)">
+											<ion-icon name="trash"></ion-icon>
+										</ion-button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+				<!--old c0de-->
+				<!-- <ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Old Meter Reading <span class="star">*</span></ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" formControlName="OldMeterReading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading(If any)</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" formControlName="JReading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="file" id="MSfileInputreset" name="MSfileInputreset"  (change)="upload($event)"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr" type="submit">Save</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>

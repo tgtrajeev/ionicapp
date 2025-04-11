@@ -1,0 +1,65 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<ion-row class="ion-align-items-center mb5">
+			<ion-col size="2" size-sm>
+				<ion-back-button defaultHref="home"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" size-sm class="text_center">
+				<div class="main_head">
+					<h3><span>Entry DPR</span></h3>
+				</div>
+			</ion-col>
+			<ion-col size="2" size-sm></ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ul class="menu_ul">
+					<li class="ion-activatable ripple-parent" (click)="meterSkidRedirect()">
+						<ion-icon name="speedometer"></ion-icon> Meter Skid <ion-icon name="arrow-forward"></ion-icon>
+						<ion-ripple-effect></ion-ripple-effect>
+					</li>
+					<li class="ion-activatable ripple-parent" (click)="packageRedirect()">
+						<ion-icon name="logo-dropbox"></ion-icon>Compressor Package <ion-icon name="arrow-forward">
+						</ion-icon>
+						<ion-ripple-effect></ion-ripple-effect>
+					</li>
+					<li class="ion-activatable ripple-parent" (click)="lcvRedirect()">
+						<ion-icon name="car"></ion-icon> LCV <ion-icon name="arrow-forward"></ion-icon>
+						<ion-ripple-effect></ion-ripple-effect>
+					</li>
+					<li class="ion-activatable ripple-parent" (click)="gasGensetRedirect()">
+						<ion-icon name="apps"></ion-icon> Gas Genset <ion-icon name="arrow-forward"></ion-icon>
+						<ion-ripple-effect></ion-ripple-effect>
+					</li>
+					<li class="ion-activatable ripple-parent" (click)="genralEntryRedirect()">
+						<ion-icon name="laptop"></ion-icon> Genral Entry <ion-icon name="arrow-forward"></ion-icon>
+						<ion-ripple-effect></ion-ripple-effect>
+					</li>
+					<li class="ion-activatable ripple-parent" (click)="dprSummaryRedirect()">
+						<ion-icon name="laptop"></ion-icon>DPR Summary <ion-icon name="arrow-forward"></ion-icon>
+						<ion-ripple-effect></ion-ripple-effect>
+					</li>
+				</ul>
+			</ion-col>
+		</ion-row>
+	</div>
+</ion-content>

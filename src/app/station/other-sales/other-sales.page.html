@@ -1,0 +1,178 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<h1 class="text_white text_center title">{{SummeryDate}}</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="dsa-entry-detail"></ion-back-button>
+		</div>
+		<div>
+			<h1>Other Sales</h1>
+		</div>
+		<div class="text_center"></div>
+	</div>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<!-- <form> -->
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<ion-label>Shift</ion-label>
+						</div>
+						<div class="input_container">
+							<ion-select placeholder="Select One" (ionChange)="onSelectShift($event.target.value)"
+								name="optShift" [(ngModel)]="selectedShiftId">
+								<ion-select-option *ngFor="let itm of cmbShiftData" [value]="itm.ShiftId">
+									{{itm.ShiftDetails}}</ion-select-option>
+							</ion-select>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row *ngFor="let pm of AddPaymentMode">
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<ion-label for="{{pm.PaymentMode}">{{pm.PaymentMode}} ((₹)</ion-label>>
+						</div>
+						<div class=" input_container">
+							<ion-input type="number" (input)="onPayemntEntry($event.target,pm.PaymentModeId)"
+								value="{{pm.PaymentAmount}}" value="0.0000" min="0" (blur)="checkout()">
+							</ion-input>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<!-- <ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<ion-label>Prepaid Card Activations (₹)</ion-label>>
+						</div>
+						<div class="input_container">
+							<ion-input></ion-input>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<ion-label>Other Sale/Lube Sale (₹)</ion-label>>
+						</div>
+						<div class="input_container">
+							<ion-input></ion-input>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row> -->
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<ion-label>Cluster Sale</ion-label>
+						</div>
+						<div class="input_container">
+							<ion-select [interfaceOptions]="customAlertOptions" 
+								[compareWith]="compareWith" multiple="true" placeholder="Select One"
+								[value]="selectedItems" (ionChange)="ONClusterChange($event)">
+								<ion-select-option *ngFor="let pm of CompanyClusterList" [value]="pm">{{pm.name}}
+								</ion-select-option>
+								<!-- <ion-select-option value="olives">Black Olives</ion-select-option>
+								<ion-select-option value="xcheese">Extra Cheese</ion-select-option>
+								<ion-select-option value="peppers">Green Peppers</ion-select-option>
+								<ion-select-option value="mushrooms">Mushrooms</ion-select-option>
+								<ion-select-option value="onions">Onions</ion-select-option>
+								<ion-select-option value="pepperoni">Pepperoni</ion-select-option>
+								<ion-select-option value="pineapple">Pineapple</ion-select-option>
+								<ion-select-option value="sausage">Sausage</ion-select-option>
+								<ion-select-option value="Spinach">Spinach</ion-select-option> -->
+							</ion-select>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<ion-label>No. of Cluster Bus</ion-label>
+						</div>
+						<div class="input_container">
+							<ion-input [value]="NoOfClusterBus" (input)="NoOfClusterBus=$event.target.value">
+							</ion-input>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<ion-label>Sale Quantity</ion-label>
+						</div>
+						<div class="input_container">
+							<ion-input [value]="SaleQty" (input)="SaleQty=$event.target.value"></ion-input>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<ion-label>Voucher Image</ion-label>
+						</div>
+						<div class="input_container">
+							<!-- <ion-label>Attachment <span class="star">*</span></ion-label> -->
+							<ion-input #myInput type="file" class="inp_control" name="VoucherImageInput"
+								id="VoucherImageInput" (change)="fileupload($event)" multiple></ion-input>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<!-- <ion-row *ngIf="imageTextName !=''">
+				<ion-col>
+					
+							<ion-label>{{imageTextName}}</ion-label>
+						
+				</ion-col>
+			</ion-row> -->
+			<ion-row>
+				<ion-button size="small" color="light" (click)="presentModal()">
+					<ion-icon name="eye"></ion-icon>
+				</ion-button>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="inp_form_control">
+						<div class="button_container">
+							<ion-button color="dark_green_clr" type="submit" (click)="savePayment();">Save</ion-button>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<!-- </form> -->
+	</div>
+</ion-content>

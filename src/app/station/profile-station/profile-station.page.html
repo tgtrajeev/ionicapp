@@ -1,0 +1,94 @@
+<ion-header>
+	<ion-row class="ion-align-items-center search_parent for_color">
+		<ion-col size="2" class="pt_0 pb_0">
+			<ion-back-button class="text_white"></ion-back-button>
+		</ion-col>
+		<ion-col size="8" class="text_white ion-text-center">Profile</ion-col>
+	</ion-row>
+</ion-header>
+<ion-content>
+	<ion-grid>
+		<ion-card *ngIf="SMList !=''" class="stn_card">
+			<div class="stn_details">
+				<ion-label>Station Name:</ion-label>
+				<ion-text>{{SMList[0].StationName === 'undefined' ? '' : SMList[0].StationName}}</ion-text>
+
+				<ion-label>Address:</ion-label>
+				<ion-text>{{SMList[0].StationAddress === 'undefined' ? '' : SMList[0].StationAddress}}</ion-text>
+
+				<ion-label>Contact:</ion-label>
+				<ion-text>{{SMList[0].ContactNo === 'undefined' ? '' : SMList[0].ContactNo}}</ion-text>
+			</div>
+			<div class="stn_details_cont">
+				<ion-row>
+					<ion-col>
+						<ion-label>Station Operator Name</ion-label>
+						<ion-text>{{SMList[0].Name === 'undefined' ? '' : SMList[0].Name}}</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label>Contact No.</ion-label>
+						<ion-text>{{SMList[0].ContactNo === 'undefined' ? '' : SMList[0].ContactNo}}</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label>Station Manager 1</ion-label>
+						<ion-text>{{SMList[0].ShiftAManager === 'undefined' ? '' : SMList[0].ShiftAManager}}</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label>Contact No.</ion-label>
+						<ion-text>
+							{{SMList[0].ShiftAManagerContact === 'undefined' ? '' : SMList[0].ShiftAManagerContact}}
+						</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label>Station Manager 2</ion-label>
+						<ion-text>{{SMList[0].ShiftBManager === 'undefined' ? '' : SMList[0].ShiftBManager}}</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label> Contact No.</ion-label>
+						<ion-text>
+							{{SMList[0].ShiftBManagerContact === 'undefined' ? '' : SMList[0].ShiftBManagerContact}}
+						</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label>Station Manager 3</ion-label>
+						<ion-text>{{SMList[0].ShiftCManager === 'undefined' ? '' : SMList[0].ShiftCManager}}</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label>Contact No.</ion-label>
+						<ion-text>
+							{{SMList[0].ShiftCManagerContact === 'undefined' ? '' : SMList[0].ShiftCManagerContact}}
+						</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label>Station Manager 4</ion-label>
+						<ion-text>{{SMList[0].ShiftDManager === 'undefined' ? '' : SMList[0].ShiftDManager}}</ion-text>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<ion-label>Contact No.</ion-label>
+						<ion-text>
+							{{SMList[0].ShiftDManagerContact === 'undefined' ? '' : SMList[0].ShiftDManagerContact}}
+						</ion-text>
+					</ion-col>
+				</ion-row>
+			</div>
+		</ion-card>
+	</ion-grid>
+</ion-content>

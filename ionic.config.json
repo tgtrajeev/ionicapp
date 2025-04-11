@@ -1,0 +1,7 @@
+{
+  "name": "IGL-SRS",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

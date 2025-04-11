@@ -1,0 +1,63 @@
+<ion-header>
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white" *ngIf="pageFlag =='addcontroloffice'">Add Control Office</ion-text>
+				<ion-text class="text_white" *ngIf="pageFlag =='updatecontroloffice'">Update Control Office</ion-text>
+			</ion-col>
+			<ion-col size="2" class="ion-text-center">
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+<ion-content *ngIf="pageFlag =='addcontroloffice'">
+	<form [formGroup]="addForm" (ngSubmit)="InsertControlRoom()">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Control Office Code <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="controlroomcode"></ion-input>
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Control Office Name <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="controlroomname"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container">
+						<ion-button color="dark_green_clr" type="submit">Submit </ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>
+
+<ion-content *ngIf="pageFlag =='updatecontroloffice'">
+	<form [formGroup]="updateForm" (ngSubmit)="UpdateControlRoom()">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Control Office Code <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" formControlName="controlroomcode"></ion-input>
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Control Office Name <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" placeholder="Control Office Name" formControlName="controlroomname">
+					</ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container">
+						<ion-button color="dark_green_clr" type="submit">Submit </ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>

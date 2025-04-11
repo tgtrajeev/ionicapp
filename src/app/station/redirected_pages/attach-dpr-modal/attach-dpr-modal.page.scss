@@ -1,0 +1,98 @@
+
+
+.attch_container
+{
+    background: white;
+    width: 90%;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+    margin-top:25px;
+}
+.attch_container .trigger_div 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #f1f1f1;
+    margin-bottom: 17px;
+}
+.attc_head
+{
+    font-size: 18px;
+    text-align: center;
+}
+.attachment_cont
+{
+    text-align: center;
+    margin-top: 4px;
+    width: 80px;
+    height: 70px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+}
+.attachment_cont input[type="file"]
+{
+    display: block;
+    width: 80px;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    z-index: 5;
+    cursor: pointer;
+}
+.attachment_cont ion-icon
+{
+    color: #e6e6e6;
+    font-size: 50px;
+}
+.attachment_cont:hover
+{
+    background-color:#f9f9f9;
+}
+
+.camera_btn
+{
+    height:70px;
+    width:80px;
+    margin-left:auto;
+    margin-right:auto;
+    --background:white;
+    --background-hover:#f9f9f9;
+    --border-radius:10px;
+    --box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
+    ion-icon
+    {
+        color: #e6e6e6;
+        font-size: 65px;
+    }
+}
+
+.upload_btn
+{
+    width:100px;
+    height:35px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    --background:var(--green_clr);
+    --background-hover:var(--dark_green_clr);
+
+    ion-icon
+    {
+        font-size: 40px;
+    }
+}
+

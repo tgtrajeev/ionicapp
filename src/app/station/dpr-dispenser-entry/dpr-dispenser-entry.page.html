@@ -1,0 +1,200 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<!-- <button class="home_btn" routerLink="/home">
+				<img src="../../assets/images/home.png" />
+			</button> -->
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="home"></ion-back-button>
+		</div>
+		<div>
+			<h1>Dispenser Entry</h1>
+		</div>
+		<div>
+		</div>
+	</div>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<div class="mycard over_y_auto">
+			<form [formGroup]="addupdateform">
+				<ion-row>
+					<ion-col class="ion-text-right">
+						<ion-label><strong>Current Rate:</strong>{{CurrentRate}}</ion-label>
+					</ion-col>
+				</ion-row>
+				<div class="form_inp_container">
+					<div class="label_container">
+						<label>Date</label>
+					</div>
+					<div class="input_container">
+						<ion-datetime #selcteddate class="datepick" formControlName="EntryDate" [max]="secondMaxDate"
+							displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY" name="selcteddate"
+							(ionChange)="getSelectedDate(selcteddate.value)">
+						</ion-datetime>
+					</div>
+				</div>
+				
+				<!-- <div class="form_inp_container">
+					<div class="label_container">
+						<label>Shift</label>
+					</div>
+					<div class="input_container">
+						<ion-select placeholder="Select One" (ionChange)="onSelectShift($event.detail.value)" 
+							formControlName="selectedShiftId" [(ngModel)]="selectedShiftId" [disabled]="shiftsubshift"> 
+							<ion-select-option *ngFor="let itm1 of cmbShiftData;" [value]="itm1.ShiftId" >
+								{{itm1.ShiftDetails}}</ion-select-option>
+						</ion-select>
+					</div>
+				</div>
+				<div class="form_inp_container">
+					<div class="label_container">
+						<label>Sub Shift</label>
+					</div>
+					<div class="input_container">
+						
+						<ion-select placeholder="Select One" (ionChange)="onSelectSubShift($event.detail.value)"
+							interface="alert" formControlName="selectedSubShiftId" [(ngModel)]="selectedSubShiftId"  [disabled]="shiftsubshift">
+							<ion-select-option *ngFor="let itm of cmbSubShiftData;" [value]="itm.SubShiftId">
+								{{itm.SubShiftDetails}}</ion-select-option>
+						</ion-select>
+					</div>
+				</div>  -->
+			</form>
+			<ion-row>
+				<div class="form_inp_container" style="width: 100%;">
+					<div class="label_container">
+						<label>Shift</label>
+					</div>
+					<div class="container">
+						<select interface="alert" (change)="onSelectShift($event.target.value)" name="optShift" class="form-control" [(ngModel)]="selectedShiftId" [disabled]="shiftsubshift">
+							<option value="-1" selected>--Select Shift--</option>
+							<option *ngFor="let itm1 of cmbShiftData;" [value]="itm1.ShiftId">{{itm1.ShiftDetails}}</option>
+						</select>
+					</div>
+				</div>
+			</ion-row>
+			<ion-row>
+				<div class="form_inp_container" style="width: 100%;">
+					<div class="label_container">
+						<label>Sub Shift</label>
+					</div>
+					<div class="input_container">
+						<select (change)="onSelectSubShift($event.target.value)" name="optSubShift"  class="form-control"  [(ngModel)]="selectedSubShiftId" [disabled]="shiftsubshift">
+							<option value="-1" selected>--Select Sub Shift--</option>
+							<option *ngFor="let itm of cmbSubShiftData;" [value]="itm.SubShiftId">{{itm.SubShiftDetails}}</option>
+						</select>
+					</div>
+				</div>
+			</ion-row>
+			<div *ngFor="let itm of allDispenserData;let i=index">
+				<div class="card_box">
+					<div class="card_heading">
+						<h5>
+							<span class="span1">
+								<span>{{i+1}} </span>{{itm.DispenserName}}
+							</span>
+							<span class="span2">
+								<ion-icon name="apps" (click)="getvalues(itm)" [hidden]="jumppopup"></ion-icon>
+							</span>
+						</h5>
+					</div>
+					<div class="card_content">
+						<ion-row>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-row>
+											<ion-col>
+												<label>Prev A</label>
+											</ion-col>
+											<ion-col class="text_right">
+												<label>{{itm.PreArmReadingA}}</label>
+											</ion-col>
+										</ion-row>
+									</div>
+									<div class="input_container">
+										<ion-input type="text" placeholder="Arm A" min="0" [disabled]="jumppopup"
+											[(ngModel)]="itm.ArmReadingA" (keypress)="numberOnly($event)"
+											(ionChange)="OnchangeA(itm)"
+											(change)="validation1(itm.ArmReadingA,itm.PreArmReadingA)" required>
+										</ion-input>
+										<!-- (focusout)="onChangeRishabh(itm)" -->
+										<!-- (ionInput)="OnchangeA(itm)" -->
+										<!-- (keypress)="numberOnly($event)"  -->
+										<!-- (change)="validation1(itm.ArmReadingA,itm.PreArmReadingA)"  -->
+									</div>
+								</div>
+							</ion-col>
+							<ion-col>
+								<div class="form_inp_container">
+									<div class="label_container">
+										<ion-row>
+											<ion-col>
+												<label>Prev B</label>
+											</ion-col>
+											<ion-col class="text_right">
+												<label>{{itm.PreArmReadingB}}</label>
+											</ion-col>
+										</ion-row>
+									</div>
+									<div class="input_container">
+										<ion-input type="text" placeholder="Arm B" min="0" name="ArmB"
+											[disabled]="jumppopup" [(ngModel)]="itm.ArmReadingB"
+											(keypress)="numberOnly($event)" (ionChange)="OnchangeB(itm)"
+											(change)="validation2(itm.ArmReadingB,itm.PreArmReadingB)" required>
+										</ion-input>
+									</div>
+								</div>
+							</ion-col>
+						</ion-row>
+						<ion-row class="bottom_label_row">
+							<ion-col>
+								<div class="bottom_label_cont">
+									<label>Arm A Sale</label>
+									<span>{{itm.TotA}}</span>
+								</div>
+							</ion-col>
+							<ion-col>
+								<div class="bottom_label_cont">
+									<label>Arm B Sale</label>
+									<span>{{itm.TotB}}</span>
+								</div>
+							</ion-col>
+							<ion-col>
+								<div class="bottom_label_cont">
+									<label>Total Sale</label>
+									<span>{{itm.FinalTot}}</span>
+								</div>
+							</ion-col>
+						</ion-row>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="isDispencerLocked" class="button_container">
+				<ion-button expand="block" color="dark_green_clr" (click)="saveAll()">Save All
+				</ion-button>
+			</div>
+			<div *ngIf="!isDispencerLocked">
+				<h1  style="color: red; text-align: center; ">{{DispLockMsg}}</h1>
+			</div>
+		</div>
+	</div>
+</ion-content>

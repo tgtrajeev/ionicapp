@@ -1,0 +1,24 @@
+.img_cont
+{
+    width:100%;
+    position:relative;
+
+    img
+    {
+        width:100%;
+        margin-top: 9%;
+    }
+    ion-icon
+    {
+        color:#291f1f;
+        position: absolute;
+        top: 3px;
+        right: 4px;
+        display: inline-block;
+        width:30px;
+        height:30px;
+    }
+    
+}
+
+.attch_container{background: #fff; border-radius: 4px;}

@@ -1,0 +1,42 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<div class="main_head">
+			<h3><span>Menu</span></h3>
+		</div>
+		<div class="menu_container">
+			<div class="men_inner">
+				<div class="item">
+					<div class="item_div" (click)="gotoredirectEntryDsa()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Entry DSA</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="gotoredirectDsaSummary()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>DSA Station Summary</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>

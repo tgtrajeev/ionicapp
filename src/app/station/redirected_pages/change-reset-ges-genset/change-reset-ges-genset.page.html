@@ -1,0 +1,78 @@
+<ion-header>
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left"><ion-back-button defaultHref="gas-genset" class="text_white"></ion-back-button></ion-col>
+			<ion-col size="8" class="ion-text-center"><ion-text class="text_white">Change/Reset Meter</ion-text></ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<form>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Action</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Action</ion-label>
+									<ion-select placeholder="Select One">
+										<ion-select-option value="f">Reset</ion-select-option>
+										<ion-select-option value="m">Change</ion-select-option>
+									</ion-select>
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Old Meter Reading <span class="star">*</span></ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading(If any)</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="file"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="button_container" >
+							<ion-button color="dark_green_clr">Save</ion-button>
+						</div>	
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>

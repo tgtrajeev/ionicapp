@@ -1,0 +1,29 @@
+
+.option_box .icon
+{
+    text-align: center;
+    margin-top:10px;
+    ion-icon
+    {
+        font-size: 45px;
+        color:#cacaca;
+    }
+}
+.option_box .txt
+{
+    text-align: center;
+    margin-bottom:10px;
+
+    ion-text
+    {
+        font-size: 16px;
+        color:black;
+    }
+}
+.opt
+{
+    .option_box
+    {
+        height:85%;
+    }
+}

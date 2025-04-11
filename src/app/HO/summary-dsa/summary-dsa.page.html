@@ -1,0 +1,124 @@
+<ion-header>
+	<header>
+		<div class="header">
+			
+			<div class="logo_div" routerLink="/admin-home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div>
+		<div class="main_heading1">
+			<div>
+				<ion-back-button defaultHref="admin-home"></ion-back-button>
+			</div>
+			<div><h1>Summary DSA</h1></div>
+			<div class="text_center">
+				<ion-button color="light" size="small" ><ion-icon name="arrow-down"></ion-icon></ion-button>
+			</div>
+		</div>
+	</div>
+</ion-header>	
+
+<!-- ------- START TOGGEL MENU--- -->
+<ion-menu side="end" menuId="menuDsaSmry" contentId="menuDsaSmry">
+	<ion-header >
+	  <ion-toolbar>
+		<ion-row class="menu_header">
+			<ion-col size="3">
+				<div class="menu_img_cont">
+					<img src="../../assets/images/logo.png" />
+				</div>
+			</ion-col>
+			<ion-col size="9">
+				<div class="text_white">
+					<h4>Indraprastha</h4>
+					<p>Gas LImited</p>
+				</div>
+			</ion-col>
+		</ion-row>
+	  </ion-toolbar>
+	</ion-header>
+	<ion-content>
+		<ion-list>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Head Office User</h5>
+					<ion-text>Administration</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Current Date</h5>
+					<ion-text>15-06-2020</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>DSA Date</h5>
+					<ion-text>15-06-2020</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Password Notification <ion-badge color="success" class="ion-float-end">44</ion-badge></h5>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Help <ion-icon name="help-circle" class="ion-float-end font22"></ion-icon></h5>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5 class="logout_h5">Logout <ion-icon name="power" class="ion-float-end"></ion-icon></h5>
+				</div>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-menu>
+<ion-router-outlet id="menuDsaSmry"></ion-router-outlet>	
+<!-- ------- START TOGGEL MENU--- -->
+
+<ion-content>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Region</ion-label>
+				<ion-input type="text" class="inp_control" value="Delhi" disabled></ion-input>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Station</ion-label>
+				<ion-input type="text" class="inp_control" value="Ananad Prabat" disabled></ion-input>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>SAP Code</ion-label>
+				<ion-input type="text" class="inp_control" value="81" disabled></ion-input>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Summary Date</ion-label>
+				<ion-item class="inp_control">
+					<ion-label>MM DD YY</ion-label>
+					<ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

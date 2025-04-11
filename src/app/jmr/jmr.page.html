@@ -1,0 +1,152 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+  <div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="home"></ion-back-button>
+		</div>
+		<div>
+			<h1>JMR - Report Management</h1>
+		</div>
+		<div>
+			<ion-button color="light" size="small" (click)="GetExportJMRreports()">
+				<i class="fas fa-file-excel"></i>
+			</ion-button>
+			<ion-button color="light" size="small" (click)="GetPDF()">
+				<i class="fa-solid fa-file-pdf"></i>
+			</ion-button>
+		</div>
+	</div>
+</ion-header>
+
+
+<ion-content>
+	<ion-segment color="success" [value]="selectedSegment" (ionChange)="segmentChanged($event)" *ngIf="Buttondisp">
+		<ion-segment-button value="jmrtotal">
+		  <ion-label>Total Sale</ion-label>
+		</ion-segment-button>
+		<ion-segment-button value="diswise">
+		  <ion-label>E-Detail</ion-label>
+		</ion-segment-button>
+	</ion-segment>
+
+	<div class="content_area">
+		<div class="mycard">
+		  <!-- Year Selector -->
+		  <div class="form_inp_container">
+			<div class="label_container">
+			  <label>Select Year</label>
+			</div>
+			<div class="input_container">
+			  <ion-item>
+				<ion-label>Select Year:</ion-label>
+				<ion-datetime
+				  displayFormat="YYYY"
+				  pickerFormat="YYYY"
+				  [ngModel]="selectedYear"
+				  (ngModelChange)="onYearChange($event)"
+				  [min]="minYear"
+				  [max]="secondMaxDate">
+				  
+				</ion-datetime>
+			  </ion-item>
+			</div>
+		  </div>
+	
+		  <div class="form_inp_container" >
+			<div class="label_container">
+			  <label>Select Month</label>
+			</div>
+			<div class="input_container">
+				<ion-select name="selectedMonth" (ionChange)="onMonthChange($event)" >
+				  <ion-select-option value="" selected>--Select--</ion-select-option>
+				  <ion-select-option value="Jan">January</ion-select-option>
+				  <ion-select-option value="Feb">February</ion-select-option>
+				  <ion-select-option value="Mar">March</ion-select-option>
+				  <ion-select-option value="Apr">April</ion-select-option>
+				  <ion-select-option value="May">May</ion-select-option>
+				  <ion-select-option value="Jun">June</ion-select-option>
+				  <ion-select-option value="Jul">July</ion-select-option>
+				  <ion-select-option value="Aug">August</ion-select-option>
+				  <ion-select-option value="Sep">September</ion-select-option>
+				  <ion-select-option value="Oct">October</ion-select-option>
+				  <ion-select-option value="Nov">November</ion-select-option>
+				  <ion-select-option value="Dec">December</ion-select-option>
+				</ion-select>
+				</div>
+		  </div>
+	
+		  <!-- Fortnight Selector -->
+		  <div class="form_inp_container">
+			<div class="label_container">
+			  <label>Select Fortnight</label>
+			</div>
+			<div class="input_container">
+				<ion-select name="selectedFortnight" (ionChange)="onFortnightChange($event)">
+					<ion-select-option value="" selected>--Select--</ion-select-option>
+					<ion-select-option value="Fortnight1">Fortnight 1</ion-select-option>
+					<ion-select-option value="Fortnight2">Fortnight 2</ion-select-option>
+				  </ion-select>
+			</div>
+		  </div>
+
+		  <div class="button_container">
+			<ion-button color="dark_green_clr" (click)="OnSubmit()" *ngIf="isStationSubmitted">Submit</ion-button>
+		  </div>
+
+	  <ion-grid *ngIf="columns.length > 0">
+		<ion-row>
+		  <ion-col>
+			<div class="my_table_container">
+			  <table class="my_table" >
+				<thead>
+				  <tr>
+					<th >Sr. No.</th>
+			
+					<th *ngFor="let column of columns ">
+					  {{column}}
+					</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr *ngFor="let row of ResponseList; let i = index" 
+					class="divTableCell">
+					<td>{{i + 1}}</td>
+					<td *ngFor="let column of columns">
+					  {{row[column]}}
+					</td>
+				  </tr>
+				</tbody>
+			  </table>
+			</div>
+		  </ion-col>
+		</ion-row>
+	  </ion-grid>
+
+	  <div >
+		<div *ngIf="!isStationSubmitted" class="save_all_btn_div text-center">
+		  <span style="color:red;font-size:14pt;font-weight:bolder;">{{Msg}}</span>
+		</div>
+	  </div>
+
+	</div>
+</div>
+	  
+	  
+	  
+</ion-content>

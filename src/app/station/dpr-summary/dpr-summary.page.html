@@ -1,0 +1,231 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<!-- <button class="home_btn" routerLink="/home">
+				<img src="../../assets/images/home.png" />
+			</button> -->
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="home"></ion-back-button>
+		</div>
+		<div>
+			<h1>DPR Summary</h1>
+		</div>
+		<div class="text_center">
+			<!--<ion-icon name="arrow-down" class="download_icon"></ion-icon>-->
+		</div>
+	</div>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<div class="mycard shadow_none back_trans">
+			<ion-row style="margin-bottom:7px;">
+				<ion-col size="8" offset="2" class="date_col">
+					<ion-datetime #selcteddate class="inp_control date" displayFormat="DD-MMM-YYYY"
+						pickerFormat="DD MMM YYYY" [(ngModel)]="geteDate.selcteddate" name="selcteddate"
+						(ngModelChange)="getSelectedDate(selcteddate.value)" [max]="secondMaxDate"></ion-datetime>
+					<ion-icon name="calendar"></ion-icon>
+				</ion-col>
+			</ion-row>
+			<div class="card_box" *ngIf="DataTable.length != 0">
+				<h4>Meter Skid</h4>
+				<div class="card_content">
+					<ion-row class="smry_row" *ngFor="let msItem of DataTable">
+						<ion-col>
+							<label class="smry_label">Flow Meter Difference</label>
+						</ion-col>
+						<ion-col>
+							<span
+								class="smry_val">{{msItem.MeterskitdiffAVG == null ? '00.00' : msItem.MeterskitdiffAVG}}</span>
+						</ion-col>
+					</ion-row>
+				</div>
+			</div>
+			<div *ngIf="DataTable1.length!=0">
+				<div class="card_box" *ngFor="let packageItem of stationReportData.Table1">
+					<h4>Package: {{packageItem.PackageName}}</h4>
+					<div class="card_content">
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Suction Flow Meter Difference</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.SuctionFlowMeterReading == null ? '00.00' : packageItem.SuctionFlowMeterReading}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Discharge Flow Meter Difference</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.DischargeFlowMeterReading == null ? '00.00' : packageItem.DischargeFlowMeterReading}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row" *ngIf="packageItem.PrimeMover != 'M'">
+							<ion-col>
+								<label class="smry_label">Engine Flow Meter Difference</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.EngineFlowMeterReading == null ? '00.00' : packageItem.EngineFlowMeterReading}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row" *ngIf="packageItem.PrimeMover == 'M'">
+							<ion-col>
+								<label class="smry_label">Motor Flow Meter Difference</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.EngineFlowMeterReading == null ? '00.00' : packageItem.EngineFlowMeterReading}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row" >
+							<ion-col>
+								<label class="smry_label">Vent Flow Meter Difference</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.VentFlowMeter == null ? '00.00' : packageItem.VentFlowMeter}}</span>
+								</ion-col>
+						</ion-row>
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Running Hours</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.RunningHours == null ? '00:00' : packageItem.RunningHours}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Schedule Shutdown Hours</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.ScheduleShutdownHours == null ? '00:00' : packageItem.ScheduleShutdownHours}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Unscheduled Shutdown Hours</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.UnscheduledShutdownHours == null ? '00:00' : packageItem.UnscheduledShutdownHours}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Breakdown Hours</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.BreakdownHours == null ? '00:00' : packageItem.BreakdownHours}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Suction Pressure</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{packageItem.SuctionPressure == null ? '00.00' : packageItem.SuctionPressure}}</span>
+							</ion-col>
+						</ion-row>
+					</div>
+				</div>
+			</div>
+			<div class="card_box" *ngIf="DataTable3.length!=0">
+				<h4>LCV - LCV-1</h4>
+				<div class="card_content">
+					<ion-row class="smry_row" *ngFor="let gasGensetItem of DataTable3">
+						<ion-col>
+							<label class="smry_label">LCV Meter Difference</label>
+						</ion-col>
+						<ion-col>
+							<span
+								class="smry_val">{{gasGensetItem.LCVMeterTotaliser == null ? '00.00' : gasGensetItem.LCVMeterTotaliser}}</span>
+						</ion-col>
+					</ion-row>
+				</div>
+			</div>
+			<div class="card_box" *ngIf="DataTable2.length!=0">
+				<h4>Gas Genset: GAS GENSET</h4>
+				<div *ngFor="let gasGensetItem of DataTable2">
+					<div class="card_content">
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Running Hours</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{gasGensetItem.RunningHoursgenset == null ? '00:00' : gasGensetItem.RunningHoursgenset}}</span>
+							</ion-col>
+						</ion-row>
+						<ion-row class="smry_row">
+							<ion-col>
+								<label class="smry_label">Meter Difference</label>
+							</ion-col>
+							<ion-col>
+								<span
+									class="smry_val">{{gasGensetItem.FlowMeterReadiGenset == null ? '00.00' : gasGensetItem.FlowMeterReadiGenset}}</span>
+							</ion-col>
+						</ion-row>
+						<!-- <ion-row class="smry_row">
+						<ion-col>
+							<label class="smry_label">Flow Meter Difference</label>
+						</ion-col>
+						<ion-col>
+							<span class="smry_val">00.00</span>
+						</ion-col>
+					</ion-row> -->
+					</div>
+				</div>
+			</div>
+			<div class="card_box" *ngIf="DataTable.length!=0">
+				<h4>Dispenser</h4>
+				<div class="card_content">
+					<ion-row class="smry_row" *ngFor="let dispItem of DataTable">
+						<ion-col>
+							<label class="smry_label">Total Sale</label>
+						</ion-col>
+						<ion-col>
+							<span
+								class="smry_val">{{dispItem.DispenserTotalSale == null ? '00.00' : dispItem.DispenserTotalSale}}</span>
+						</ion-col>
+					</ion-row>
+					<ion-row class="smry_row">
+						<ion-col>
+							<label class="smry_label">Station Gas Loss</label>
+						</ion-col>
+						<ion-col>
+							<span class="smry_val">{{StationGasLoss == 0 ? '00.00' : StationGasLoss}}</span>
+						</ion-col>
+					</ion-row>
+				</div>
+			</div>
+			<div class="button_container">
+				<ion-button color="dark_green" [hidden]="summary.prm_id != 1" (click)="stationSummarySubmit()">Submit
+				</ion-button>
+			</div>
+		</div>
+	</div>
+</ion-content>

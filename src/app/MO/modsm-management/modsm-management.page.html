@@ -1,0 +1,100 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/mo-dashboard">
+				<img src="../../assets/images/logo.png" />
+			</div>
+		  	<h1 class="text_white text_center title">DSM Management</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent">
+		<ion-col size="2">
+			<ion-back-button defaultHref="mo-dashboard"></ion-back-button>
+		</ion-col>
+		<ion-col size="2" offset="6">
+			<ion-button size="small" color="light" (click)="searchCollapse()">
+				<ion-icon name="search" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col size="2">
+			<ion-button size="small" color="light" (click)="goToaddDsm()"><ion-icon name="add" class="font22"></ion-icon></ion-button>
+		</ion-col>
+		<ion-col size="12" class="searchbar_container" *ngIf="searchShow">
+			<ion-searchbar type="text" showCancelButton="always" (ionCancel)="hideSearchBar()" (ionInput)="getItems($event)"></ion-searchbar>
+			
+			<ion-row *ngIf="isItemAvailable">
+				<ion-col>
+					<div class="my_table_container">
+						<table class="my_table">
+							<tbody>
+								<tr (click)="goToupdateDsm(item)" *ngFor="let item of items; let i = index">
+									<td>{{i+1}}</td>
+									<td>{{item.DSMCode}}</td>
+									<td>{{item.DSMName}}</td>
+									<td>{{item.StationName}}</td>
+									<td>{{item.Status}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+		<ion-row>
+			<ion-col size="12">
+				<ion-segment class="status_bar" value="All" (ionChange)="segmentChanged($event)">
+					<ion-segment-button value="Active">
+					  <ion-label>Active</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="All">
+					  <ion-label>All</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="InActive">
+						<ion-label>InActive</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Emp Code</th>
+								<th>Name</th>
+								<th>Station</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr (click)="goToupdateDsm(dsitem)" *ngFor="let dsitem of DsmResList; let i = index">
+								<td>{{i+1}}</td>
+								<td>{{dsitem.DSMCode}}</td>
+								<td>{{dsitem.DSMName}}</td>
+								<td>{{dsitem.StationName}}</td>
+								<td>{{dsitem.Status}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+    </ion-grid>
+</ion-content>

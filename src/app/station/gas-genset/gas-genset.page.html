@@ -1,0 +1,375 @@
+<ion-header *ngIf="hidegenset">
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="dpr-entry"></ion-back-button>
+		</div>
+		<div>
+			<h1>Gas Genset</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+
+<ion-content *ngIf="hidegenset">
+	<div class="content_area">
+		<!-- <form class="myform"> -->
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="sap_no_div">
+						<span>
+							<strong>SAP Equipment Number : </strong>
+							<span>{{GSSAPEquipmentNumber == "" ? '0.000' : GSSAPEquipmentNumber}}</span>
+						</span>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<label>Select Date
+								<span class="star">*</span>
+							</label>
+						</div>
+						<div class="input_container">
+							<ion-item>
+								<ion-label>Select Date:</ion-label>
+								<!-- <ion-datetime displayFormat="DD-MMM-YYYY"  name="DPREntryDate" [max]="maxDate"></ion-datetime> -->
+								<ion-datetime #selcteddate class="datepick" [(ngModel)]="geteDate.selcteddate"
+									displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY" [max]="secondMaxDate"
+									name="selcteddate" (ionChange)="getSelectedDate(selcteddate.value)"></ion-datetime>
+								<!-- form="DispenserDate.selcteddate" -->
+							</ion-item>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<label>Gas Genset Name</label>
+						</div>
+						<div class="input_container">
+							<ion-select [disabled]="IsGenSethide" placeholder="Select One"
+								(ionChange)="GetStationGenSet($event.detail.value)"
+								style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+								<ion-select-option *ngFor="let itm of getGenSetDetails" [value]="itm.GenSetId">
+									{{itm.GenSetName}}</ion-select-option>
+							</ion-select>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<label>Running Hours <span class="star">*</span></label>
+						</div>
+						<div class="input_container">
+							<ion-item>
+								<ion-label>HH</ion-label>
+								<ion-select [disabled]="IsGenSethide" placeholder="Select One"
+									(ionChange)="selecthrsmnts($event.detail.value,'HH')"
+									style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+									<ion-select-option [value]="objhh" *ngFor="let objhh of Hours"
+										[selected]="objhh == GSRunHrs">{{objhh}}</ion-select-option>
+								</ion-select>
+							</ion-item>
+						</div>
+						<div class="input_container">
+							<ion-item>
+								<ion-label>MM</ion-label>
+								<ion-select [disabled]="IsGenSethide" placeholder="Select One"
+									(ionChange)="selecthrsmnts($event.detail.value,'MM')"
+									style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+									<ion-select-option [value]="objmm" *ngFor="let objmm of Minutes"
+										[selected]="objmm == GSRunMins">{{objmm}}</ion-select-option>
+								</ion-select>
+							</ion-item>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container mb10">
+						<div class="label_container">
+							<label>Meter Reading <span class="star">*</span></label>
+						</div>
+						<div class="input_container d_flex justify_space_beetween">
+							<ion-input placeholder="Flow Meter Totaliser" [value]="GSmeterTotaliser"
+								(input)="GSmeterTotaliser = $event.target.value"></ion-input>
+							<span class="font13 mr5">Prev :{{PreviousReading}}</span>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container ion-text-right">
+						<ion-button size="small" class="change_reset_btn" [disabled]="IsGenSethide"
+							(click)="showhidechangereset()">Jump/Change/Reset</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+			<!-- New Comment -->
+			<!-- <ion-row>
+					<ion-col size="12">
+						<div class="form_inp_container">
+							<div class="input_container">
+								<ion-item>
+									<ion-checkbox (ionChange)="showFields_jump()"></ion-checkbox>&nbsp;&nbsp;Jump
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+					<ion-col size="12" *ngIf="varJump">
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input [value]="GSjumpReading" (input)="GensetjumpreadingValue($event.target.value)"></ion-input>
+							</div>
+						</div>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="file" name="GSfileInput" id="GSfileInput" (change)="GensetuploadJumpReadingImg($event)" [disabled]="GSfilevisible"></ion-input>
+							</div>
+						</div>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading Count</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input [value]="GSjumpReadingCount" (input)="GSjumpReadingCount = $event.target.value"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_contaienr">
+						<div class="label_conatiner">
+							<ion-label>Remark</ion-label>
+						</div>
+						<div class="input_container">
+							<ion-input [value]="GSremark" (input)="GSremark = $event.target.value"></ion-input>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container" [hidden]="IsGenSethide">
+						<ion-button color="dark_green_clr" type="submit"
+							[hidden]="GSisStationSubmitted > 0  || GSisCRSentToHo > 0" (click)="InsertGenSetDetails()">
+							Save</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<div class="msg">
+			<span class="data_submit_msg" [hidden]="GSisStationSubmitted == 0 ">
+				* Data is submitted for the date {{geteDate.selcteddate}} by Station.</span><br>
+			<span class="data_submit_msg" [hidden]="GSisCRSentToHo == 0 ">
+				* Submission is closed for date {{geteDate.selcteddate}} by Control Room.</span>
+		</div>
+		<div class="msg" *ngIf="IsGenSethide" style="margin-left: 15px;">
+			<span class="data_submit_msg" >* Equipment not available for this Station.</span>
+		</div>	
+		<!-- </form> -->
+	</div>
+</ion-content>
+
+<!-------------------------------------------------------- Start LCV Arm A Popup-------------------------------------------------------->
+
+<ion-header *ngIf="showhideflag">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="package" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Jump/Change/Reset Gas Genset Meter</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="showhideflag">
+	<div class="content_area">
+		<form>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Action</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Action</ion-label>
+									<ion-select placeholder="Select One" [value]="GSFlagJumpType"
+										(ionChange)="Gensetresetchange($event.detail.value)">
+										<ion-select-option value='J'>Jump</ion-select-option>
+										<ion-select-option value="R">Reset</ion-select-option>
+										<ion-select-option value="C">Change</ion-select-option>
+									</ion-select>
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<!-- <ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Old Meter Reading <span class="star">*</span></ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" [value]="GSOldMeterReading" (input)="GSOldMeterReading=$event.target.value"  placeholder="Old Meter Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading(If any)</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" [value]="GSJReading" (input)="GensetJReadingvalue($event.target.value)"   placeholder="Jump Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+						
+							<div class="input_container">
+								<ion-input type="file" name="GSfileInputreset" id="GSfileInputreset" (change)="Gensetfileuploadreset($event)" [disabled]="GSpopupfilevisible"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Before</ion-label>
+						<ion-input class="inp_control" [value]="GSOldMeterReading"
+							(input)="GSOldMeterReading=$event.target.value" placeholder="Before Meter Reading"
+							name="Before"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>After</ion-label>
+						<ion-input class="inp_control" [value]="NewMeterReading"
+							(input)="GensetJReadingvalue($event.target.value)"
+							(input)="NewMeterReading=$event.target.value" placeholder="After Meter Reading"
+							name="after"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Attachment</ion-label>
+						<ion-input type="file" class="inp_control" id="GSfileInputreset" name="GSfileInputreset"
+							(change)="Gensetfileuploadreset($event.target.files, $event)"
+							[disabled]="GSpopupfilevisible"></ion-input>
+						<!-- <span *ngIf="!IsFileSelected" class="temp_file_name" style="right:-6px;">{{FileName}}</span> -->
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Remark</ion-label>
+						<ion-textarea class="inp_control" [value]="MeterJumpRemark"
+							(input)="MeterJumpRemark=$event.target.value" placeholder="Remark"></ion-textarea>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12">
+						<div class="my_table_container">
+							<table class="my_table">
+								<thead>
+									<tr>
+										<th>Sr No</th>
+										<th>Before</th>
+										<th>After</th>
+										<th>Jumped</th>
+										<th>Action Type</th>
+										<th>Remark</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of GSIJumpListHistory, let i = index">
+										<td>{{i+1}}</td>
+										<td>{{itm.BeforeJumpReading}}</td>
+										<td>{{itm.AfterJumpReading}}</td>
+										<td>{{itm.JumpReading}}</td>
+										<td>{{itm.Action}}</td>
+										<td>{{itm.Remark}}</td>
+										<!-- <td>{{itm.DispanserJumpRemark}}</td> -->
+										<td>
+											<!-- <span (click) = "UpdateGSIJumpHistory(itm.id, itm)">
+												Edit</span>
+											<span class="closeicon" 
+											(click) ="DeleteGSIJumpHistory(itm.id,itm.Action, itm)">
+											<ion-icon ios="ios-close" md="md-close"></ion-icon></span> -->
+
+											<ion-button size="small" color="dark"
+												(click)="UpdateGSIJumpHistory(itm.id, itm)">
+												<ion-icon name="create"></ion-icon>
+											</ion-button>
+
+											<ion-button size="small" color="danger"
+												(click)="DeleteGSIJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon name="trash"></ion-icon>
+											</ion-button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr" (click)="Gensetchangeresetpopup()" type="submit">Save
+							</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>

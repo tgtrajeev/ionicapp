@@ -1,0 +1,88 @@
+<ion-header>
+	<ion-row class="ion-align-items-center search_parent for_color">
+		<ion-col size="2" class="pt_0 pb_0">
+			<ion-back-button class="text_white"></ion-back-button>
+		</ion-col>
+		<ion-col size="8" class="text_white ion-text-center">Issue Log</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<form #f="ngForm" (ngSubmit)="InsertIssueLog(f)">
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Issue <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" [(ngModel)]="heading" name="heading"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Detail <span class="star">*</span></ion-label>
+					<ion-input class="inp_control" [(ngModel)]="details" name="details"></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Attachment <span class="star">*</span></ion-label>
+					<ion-input #inputFile type="file" class="inp_control" name="issuefiles" id="issuefiles" 
+					(change)="fileupload($event)"  multiple></ion-input>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container">
+						<ion-button color="dark_green_clr" type="submit">Submit </ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</form>
+
+		<ion-row>
+			<ion-col>
+				<h4 class="ion-text-center mb10">Issue List</h4>
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Reference No</th>
+								<th>Requester ID</th>
+								<th>Issue Date</th>
+								<th>Issue</th>
+								<th>Detail</th>
+								<th>Remarks By Developer</th>
+								<th>Status</th>
+								<th>Attachment</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let itm of listIssueLog; let i = index">
+								<td>{{i+1}}</td>
+								<td>{{itm.IssueReferenceNo}}</td>
+								<td>{{itm.RequesterID}}</td>
+								<td>{{itm.IssueDate}}</td>
+								<td>{{itm.IssueHeading}}</td>
+								<td>{{itm.IssueDetails}}</td>
+								<td>{{itm.RemarksByDeveloper}}</td>
+								<td>{{itm.CurrentStatus}}</td>
+								<td>
+									<ion-button size="small" color="light" (click)="viewAttachment(itm.IssueReferenceNo)"><ion-icon name="eye"></ion-icon></ion-button>
+								</td>
+								<td>
+									<ion-button size="small" color="danger"
+									(click)="deleteIssuePopup(itm.IssueReferenceNo)">
+									<ion-icon slot="icon-only" name="trash"></ion-icon>
+									</ion-button>
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+</ion-content>

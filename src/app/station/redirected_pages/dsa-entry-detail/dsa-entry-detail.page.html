@@ -1,0 +1,80 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<ion-grid>
+			<ion-row class="mb5 ion-align-items-center">
+				<ion-col size="2">
+					<ion-back-button defaultHref="dsa-entry"></ion-back-button>
+				</ion-col>
+				<ion-col size="8" class="text_center">
+					<div class="main_head">
+						<h3><span>DSA Entry Detail</span></h3>
+					</div>
+				</ion-col>
+				<ion-col size="2" size-sm></ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="6" class="opt">
+					<ion-card class="option_box" (click)="paymentRedirect()">
+						<div class="icon">
+							<ion-icon name="card"></ion-icon>
+						</div>
+						<div class="txt">
+							<ion-text>Payment Collection</ion-text>
+						</div>
+					</ion-card>
+				</ion-col>
+				<ion-col size="6" class="opt">
+					<ion-card class="option_box" (click)="otrSalesRedirect()">
+						<div class="icon">
+							<ion-icon name="cash"></ion-icon>
+						</div>
+						<div class="txt">
+							<ion-text>Other Sales</ion-text>
+						</div>
+					</ion-card>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="6">
+					<ion-card class="option_box" (click)="bankDepositeRedirect()">
+						<div class="icon">
+							<ion-icon name="business"></ion-icon>
+						</div>
+						<div class="txt">
+							<ion-text>Bank Deposit</ion-text>
+						</div>
+					</ion-card>
+				</ion-col>
+				<ion-col size="6">
+					<ion-card class="option_box" (click)="dsaSummaryRedirect()">
+						<div class="icon">
+							<ion-icon name="keypad"></ion-icon>
+						</div>
+						<div class="txt">
+							<ion-text>DSA Summary</ion-text>
+						</div>
+					</ion-card>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+</ion-content>

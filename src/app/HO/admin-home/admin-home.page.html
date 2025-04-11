@@ -1,0 +1,158 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<div class="main_head">
+			<h3><span>Menu</span></h3>
+		</div>
+		<div class="menu_container">
+			<div class="men_inner">
+				<div class="item ion-activatable ripple-parent" (click)=showhidemastermenu();>
+					<div class="item_div">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Master Menu</h5>
+					</div>
+					<ion-ripple-effect></ion-ripple-effect>
+				</div>
+				<div class="item ion-activatable ripple-parent" (click)="dashboradRedirect()">
+					<div class="item_div">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Dashboard</h5>
+					</div>
+					<ion-ripple-effect></ion-ripple-effect>
+				</div>
+
+				<div class="item">
+					<div class="item_div" (click)="packageRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Package</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="summaryDSAReport()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Summary DSA I</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="rateMgtRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Rate Management</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="userMgtRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>User Management</h5>
+					</div>
+				</div>
+
+				<div class="item">
+					<div class="item_div" (click)="dprRejectStnRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>DPR Reject Station</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="paymentManagement()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Payment Management</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="entryThreshold()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Entry Threshold</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="jumpReadingRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Jump Reading System</h5>
+					</div>
+				</div>
+			</div>
+
+			<div class="men_inner master" *ngIf="isShown">
+
+				<div class="item">
+					<div class="item_div" (click)="regionMgtRedirect()">
+
+						<i class="fas fa-map-marker-alt"></i>
+						<h5>Region Management</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="controlOfficeRedirect()">
+
+						<i class="fas fa-building"></i>
+						<h5>Control Office</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="moMgtRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<!-- <h5>MO Management</h5> -->
+						<h5>AMO Management</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="stationMgtRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Station Management</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="dispenserMgtRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Dispenser Management</h5>
+					</div>
+				</div>
+
+				<div class="item">
+					<div class="item_div" (click)="meterSkidRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Meter Skid</h5>
+					</div>
+				</div>
+
+				<div class="item">
+					<div class="item_div" (click)="lcvRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>LCV</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="gasGensetRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Gas Genset</h5>
+					</div>
+				</div>
+				<!-- <div class="item">
+					<div class="item_div" (click)="summaryDSAReport()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Summary DSA I</h5>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</ion-content>

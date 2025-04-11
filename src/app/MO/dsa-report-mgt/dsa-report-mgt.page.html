@@ -1,0 +1,148 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/mo-dashboard">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<h1 class="text_white text_center title">DSA Report</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div style="position:relative;">
+		<div class="main_heading1">
+			<!-- <div>
+				<ion-back-button defaultHref="mo-dashboard"></ion-back-button>
+			</div>
+			<div>
+				<h1></h1>
+			</div>
+			<div>
+				<ion-button color="light" size="small" (click)="onReportSelect()">
+					<ion-icon name="arrow-down"></ion-icon>
+				</ion-button>
+			</div>
+			<div>
+				<ion-button color="light" size="small" (click)="MailSentCashRecon()">
+					<ion-icon name="paper-plane"></ion-icon>
+				</ion-button>
+			</div> -->
+			<ion-col size="2">
+				<ion-back-button defaultHref="co-dashboard"></ion-back-button>
+			</ion-col>
+			<ion-col size="2" offset="8" >
+				<ion-button size="small" color="light" (click)="onReportSelect()">
+					<ion-icon name="arrow-down" class="font22"></ion-icon>
+				</ion-button>
+			</ion-col>
+			<!-- <ion-col size="2"  >
+				<ion-button color="light" size="small" (click)="MailSentCashRecon()">
+					<ion-icon name="paper-plane"></ion-icon>
+				</ion-button>
+			</ion-col> -->
+		</div>
+	</div>
+</ion-header>
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Date From</ion-label>
+				<ion-item class="inp_control">
+					<ion-label>Select Date:</ion-label>
+					<ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY" 
+					placeholder="Select Date" [disabled]="IsDatedisable"
+					[max]="secondMaxDate" [(ngModel)]="dateFrom" (ngModelChange)="OnDateChnagefrom($event)"></ion-datetime>
+				</ion-item>
+			</ion-col>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Date To</ion-label>
+				<ion-item class="inp_control">
+					<ion-label>Select Date:</ion-label>
+					<ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY" 
+					placeholder="Select Date" [disabled]="IsDatedisable"
+					[max]="secondMaxDate" [min]="DateFromMy" [(ngModel)]="dateTo" 
+					(ngModelChange)="OnDateChnageTo($event)"></ion-datetime>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Report</ion-label>
+				<ion-item class="inp_control">
+					<ion-label>Report</ion-label>
+					<ion-select interface="action-sheet" placeholder="Select One" name="selectedReport"
+						(ionChange)="OnReportChnage($event)" [disabled]="dateRange">
+						<!-- <ion-select-option value="DAILY CASH RECON">DAILY CASH RECON</ion-select-option> -->
+						<ion-select-option value="CASH RECON">CASH RECON AMOUNT</ion-select-option>
+						<ion-select-option value="QUANTITY">CASH RECON QUANTITY</ion-select-option>
+						<ion-select-option value="OPENING CLOSING">OPENING CLOSING</ion-select-option>
+						<ion-select-option value="PENDING STATIONS">PENDING STATIONS</ion-select-option>
+						<ion-select-option value="EXCEPTIONAL REPORT">EXCEPTIONAL REPORT</ion-select-option>
+						<ion-select-option value="ZERO SALE">ZERO SALE</ion-select-option>
+						<!-- <ion-select-option value="ZERO SALE">DSA Summary</ion-select-option>   -->
+						<ion-select-option value="GAS TESTING">GAS TESTING</ion-select-option>
+						<ion-select-option value="METER RESET">METER RESET HISTORY</ion-select-option>
+						<ion-select-option value="REMARK HISTORY">REMARK HISTORY</ion-select-option>
+						<ion-select-option value="DATA MODIFICATION">DATA MODIFICATION</ion-select-option>
+						<ion-select-option value="JUMP READING">JUMP READING</ion-select-option>
+						<ion-select-option value="DSA SUBMISSION REPORT">DSA SUBMISSION REPORT</ion-select-option>
+						<ion-select-option value="STATION OPERATOR SUBMISSION REPORT">STATION OPERATOR SUBMISSION REPORT
+						</ion-select-option>
+						<ion-select-option value="GAS SALE (QUANTITY)">SALE QTY. & VALUES</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Region</ion-label>
+				<ion-item class="inp_control">
+					<ion-label>Region</ion-label>
+					<ion-select interface="action-sheet" placeholder="Select One" name="selectRegion"
+						(ionChange)="onRegionSelect($event.detail.value, 'CompanyId')" [disabled]="IsRegionSelected">
+						<ion-select-option value="All">All</ion-select-option>
+						<ion-select-option *ngFor="let itm of RegionList" [value]="itm.RegionId">{{itm.RegionName}}
+						</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Company</ion-label>
+				<ion-item class="inp_control">
+					<ion-label>Company</ion-label>
+					<ion-select interface="action-sheet" placeholder="Select One" name="Station"
+						(ionChange)="onCompanySelect($event.detail.value)" [disabled]="IsStationDisable">
+						<ion-select-option value="" selected>All</ion-select-option>
+						<ion-select-option *ngFor="let itm of CompanyList" [value]="itm.CompanyId">{{itm.CompanyName}}
+						</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row *ngIf=(!IsStationDisabled)>
+			<ion-col size="12" class="inp_group">
+				<ion-label>Station</ion-label>
+				<ion-item class="inp_control">
+					<ion-label>Station</ion-label>
+					<ion-select interface="action-sheet" placeholder="Select One" name="Station"
+						(ionChange)="onStationSelect($event.detail.value)" [disabled]="IsStationDisable">
+						<ion-select-option value="" selected>All</ion-select-option>
+						<ion-select-option *ngFor="let itm of StationList" (click)="filterBoxShow(value)" [value]="itm.StationId">{{itm.StationName}}
+						</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

@@ -1,0 +1,149 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<h1 class="text_white text_center title">{{SummeryDate}}</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="dsa-entry-detail"></ion-back-button>
+		</div>
+		<div>
+			<h1>Bank Deposit</h1>
+		</div>
+		<div class="text_center">
+		</div>
+	</div>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<ion-card>
+			<ion-grid>
+				<ion-row *ngFor="let cp of CashPayment">
+					<ion-col>{{cp.PaymentMode}}</ion-col>
+					<ion-col class="ion-text-right">(₹) {{cp.PaymentAmount}}</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card>
+		<ion-card>
+			<div class="card_header">
+				<h3>Details</h3>
+			</div>
+			<div class="card_content">
+				<ion-grid>
+					<ion-row *ngFor="let pm of AddDenominationsType">
+						<ion-col size="2" *ngIf="(pm.DenominationsName == 'Other Notes')">{{pm.DenominationsName}} (₹) x
+						</ion-col>
+						<ion-col size="2" *ngIf="(pm.DenominationsName == 'Coins')">{{pm.DenominationsName}} (₹) x
+						</ion-col>
+						<ion-col size="2"
+							*ngIf="(pm.DenominationsName != 'Other Notes' && pm.DenominationsName != 'Coins')">
+							{{pm.DenominationsName}} (₹) x</ion-col>
+						<ion-col size="3" offset="1">
+							<ion-input class="inp_control" type="number" placeholder="{{pm.DenominationsName}}"
+								value="{{pm.DenominationsCount}}" min="0"
+								(input)="Onchange($event.target,pm.DenominationsName)" (keypress)="check($event)">
+							</ion-input>
+						</ion-col>
+						<ion-col size="2" class="ion-text-right">(₹) {{pm.DenominationsAmount}}</ion-col>
+					</ion-row>
+				</ion-grid>
+				<ion-grid>
+					<ion-row>
+						<ion-col size="6">Total Bank Deposit</ion-col>
+						<ion-col size="3" offset="3" class="ion-text-right">(₹) {{CashDeposit}}</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<ion-item line="none">
+								<ion-label>Submitted</ion-label>
+								<ion-checkbox id="IsSubmitcheck" (ionChange)="OnCheckboxChange($event)"></ion-checkbox>
+							</ion-item>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="inp_form_control">
+								<div class="label_container">
+									<ion-label>Slip/Reference No.</ion-label>
+								</div>
+								<div class="input_container">
+									<ion-input [value]="SlipNo" (input)="SlipNo = $event.target.value"
+										[ngClass]="!IsBankSubmitted ? 'showDisabled' : 'hideDisabled'"
+										[disabled]="!IsBankSubmitted"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="inp_form_control">
+								<div class="label_container">
+									<ion-label>Date</ion-label>
+								</div>
+								<div class="input_container">
+									<ion-datetime displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY"
+										placeholder="Select Date" [max]="secondMaxDate"
+										[(ngModel)]="SubmissionDate" [disabled]="!IsBankSubmitted" 
+										[ngClass]="!IsBankSubmitted ? 'showDisabled' : 'hideDisabled'"
+										(ngModelChange)="OnDateChnagefrom($event)">
+									</ion-datetime>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="inp_form_control">
+								<div class="label_container">
+									<ion-label>Submit By</ion-label>
+								</div>
+								<div class="input_container">
+									<ion-input [value]="SubmitBy" (input)="SubmitBy=$event.target.value"
+										[ngClass]="!IsBankSubmitted ? 'showDisabled' : 'hideDisabled'"
+										[disabled]="!IsBankSubmitted"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="inp_form_control">
+								<div class="label_container">
+									<ion-label>Remark</ion-label>
+								</div>
+								<div class="input_container">
+									<ion-input id="remark" [value]="remark" (input)="remark=$event.target.value"
+										[disabled]="RemarkIsfalse"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="inp_form_control">
+								<div class="button_container">
+									<ion-button color="dark_green_clr" type="submit" (click)="presentAlerttoConfirm();">
+										Save</ion-button>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</div>
+		</ion-card>
+	</div>
+</ion-content>

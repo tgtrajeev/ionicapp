@@ -1,0 +1,288 @@
+<ion-app>
+	<ion-router-outlet id="main-content"></ion-router-outlet>
+	<!-- ------- START STATION TOGGEL MENU--- -->
+	<ion-menu side="end" menuId="menuStn" contentId="menuStn">
+		<ion-header class="headSideMenu">
+			<!-- <ion-toolbar> -->
+				<ion-row class="menu_header rowSideMenu">
+					<ion-col size="3">
+						<div class="menu_img_cont">
+							<img src="../../assets/images/logo.png" />
+						</div>
+					</ion-col>
+					<ion-col size="9">
+						<div class="text_white">
+							<h4>Indraprastha</h4>
+							<p>Gas Limited</p>
+						</div>
+					</ion-col>
+				</ion-row>
+			<!-- </ion-toolbar> -->
+		</ion-header>
+		<ion-content>
+			<ion-list>
+				<ion-item>
+					<div class="head_info_div">
+						<h5>AMO Name</h5>
+						<ion-text>{{userData.MOName}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div">
+						<h5>Station Name</h5>
+						<ion-text>{{userData.StationName}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div">
+						<h5>Station Code</h5>
+						<ion-text>{{userData.StationCode}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div">
+						<h5>SAP Code</h5>
+						<ion-text>{{userData.SapCode}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div">
+						<h5>Date</h5>
+						<ion-text>{{userData.Cdate}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="resetPassword('reset');">
+						<h5>Reset Password <ion-icon name="refresh"  class="ion-float-end font22"></ion-icon></h5>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="issueLogRedirect()">
+						<h5>Issue Log <ion-icon name="help" class="ion-float-end font22"></ion-icon>
+							<!-- <ion-badge color="danger" class="ion-float-end">
+								5</ion-badge> -->
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="stationProfile()">
+						<h5>View Profile <ion-icon name="person" class="ion-float-end font22"></ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="homeStation()">
+						<h5>Home <ion-icon name="home" class="ion-float-end font22"></ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="helpsection()">
+						<h5>Help 
+							<ion-icon name="information-circle" class="ion-float-end font22"></ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="ConfirmLogout();">
+						<h5 class="logout_h5">Logout <ion-icon name="power" class="ion-float-end"></ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+			</ion-list>
+		</ion-content>
+	</ion-menu>
+	<ion-router-outlet id="menuStn"></ion-router-outlet>
+	<!--------- END TOGGEL MENU----->
+	<!--------- START CO TOGGEL MENU----->
+	<ion-menu side="end" menuId="menuCO" contentId="menuCO">
+		<ion-header class="headSideMenu">
+			<!-- <ion-toolbar> -->
+				<ion-row class="menu_header rowSideMenu">
+					<ion-col size="3">
+						<div class="menu_img_cont">
+							<img src="../../assets/images/logo.png" />
+						</div>
+					</ion-col>
+					<ion-col size="9">
+						<div class="text_white">
+							<h4>Indraprastha</h4>
+							<p>Gas Limited</p>
+						</div>
+					</ion-col>
+				</ion-row>
+			<!-- </ion-toolbar> -->
+		</ion-header>
+		<ion-content>
+			<ion-list>
+				<ion-item *ngIf="userData.DepartmentCode =='CO'">
+					<div class="head_info_div">
+						<h5>Control Office Name</h5>
+						<ion-text>{{userData.COName}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='MO'">
+					<div class="head_info_div">
+						<h5>AMO Name</h5>
+						<ion-text>{{userData.MOName}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='HO'">
+					<div class="head_info_div">
+						<h5>Head Office User</h5>
+						<ion-text>{{userData.HeadOffice}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='SOP'">
+					<div class="head_info_div">
+						<h5>Station Name</h5>
+						<ion-text>{{userData.StationName}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='SOP'">
+					<div class="head_info_div">
+						<h5>Station Operator Name</h5>
+						<ion-text>{{userData.SOPName}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode !='HO'">
+					<div class="head_info_div">
+						<h5>Contact No.</h5>
+						<ion-text>{{userData.ContactNo}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='CO'">
+					<div class="head_info_div">
+						<h5>User</h5>
+						<ion-text>{{userData.COLoginId}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='MO'">
+					<div class="head_info_div">
+						<h5>User</h5>
+						<ion-text>{{userData.MOLoginId}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='SOP'">
+					<div class="head_info_div">
+						<h5>User</h5>
+						<ion-text>{{userData.SOPLoginId}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div">
+						<h5>Date</h5>
+						<ion-text>{{userData.Cdate}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='HO'">
+					<div class="head_info_div">
+						<h5>DSA Date</h5>
+						<ion-text>{{userData.ShiftDate}}</ion-text>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='HO'">
+					<div class="head_info_div" (click)="notificationRedirect()">
+						<h5>Password Notification <ion-badge color="success" class="ion-float-end">
+								{{userData.NotiCount}}</ion-badge>
+								<ion-icon name="notifications" class="ion-float-end font22">
+								</ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+					<!-- Jump Notification -->
+				<!-- <ion-item *ngIf="userData.DepartmentCode =='HO'">
+					<div class="head_info_div" (click)="notificationRedirect()">
+					
+						<h5>Notification
+							<ion-badge color="success" class="ion-float-end">{{userData.NotiCount}}</ion-badge>
+							<ion-icon name="notifications" class="ion-float-end font22">
+							</ion-icon>
+						</h5>
+					</div>
+				</ion-item> -->
+				<ion-item *ngIf="userData.DepartmentCode =='HO'">
+					<div class="head_info_div" (click)="issueLogRedirect()">
+						<h5>Issue Log <ion-icon name="help" class="ion-float-end font22"></ion-icon>
+							<!-- <ion-badge color="danger" class="ion-float-end">
+								5</ion-badge> -->
+						</h5>
+					</div>
+				</ion-item>
+				
+				<ion-item *ngIf="userData.DepartmentCode =='CO'">
+					<div class="head_info_div" (click)="issueLogRedirect()">
+						<h5>Issue Log <ion-icon name="help" class="ion-float-end font22"></ion-icon>
+							<!-- <ion-badge color="danger" class="ion-float-end">
+								5</ion-badge> -->
+						</h5>
+					</div>
+				</ion-item>
+				
+				<ion-item *ngIf="userData.DepartmentCode =='SOP'">
+					<div class="head_info_div" (click)="issueLogRedirect()">
+						<h5>Issue Log <ion-icon name="help" class="ion-float-end font22"></ion-icon>
+							<!-- <ion-badge color="danger" class="ion-float-end">
+								5</ion-badge> -->
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='MO'">
+					<div class="head_info_div" (click)="issueLogRedirect()">
+						<h5>Issue Log <ion-icon name="help" class="ion-float-end font22"></ion-icon>
+							<!-- <ion-badge color="danger" class="ion-float-end">
+								5</ion-badge> -->
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='CO'">
+					<div class="head_info_div" (click)="notificationRedirect()">
+						<h5>Notification
+							<ion-badge color="success" class="ion-float-end">{{userData.NotiCount}}</ion-badge>
+							<ion-icon name="notifications" class="ion-float-end font22">
+							</ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='MO'">
+					<div class="head_info_div" (click)="notificationRedirect()">
+						<h5>Notification
+							<ion-badge color="success" class="ion-float-end">{{userData.NotiCount}}</ion-badge>
+							<ion-icon name="notifications" class="ion-float-end font22">
+							</ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item *ngIf="userData.DepartmentCode =='SOP'">
+					<div class="head_info_div" (click)="notificationRedirect()">
+						<h5>Notification
+							<ion-badge color="success" class="ion-float-end">{{userData.NotiCount}}</ion-badge>
+							<ion-icon name="notifications" class="ion-float-end font22">
+							</ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="homeSection()">
+						<h5>Home <ion-icon name="home" class="ion-float-end font22"></ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="helpsection()">
+						<h5>Help <ion-icon name="information-circle" class="ion-float-end font22"></ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+				<ion-item>
+					<div class="head_info_div" (click)="ConfirmLogout();">
+						<h5 class="logout_h5">Logout <ion-icon name="power" class="ion-float-end"></ion-icon>
+						</h5>
+					</div>
+				</ion-item>
+			</ion-list>
+		</ion-content>
+	</ion-menu>
+	<ion-router-outlet id="menuCO"></ion-router-outlet>
+	<!-- ------- END CO TOGGEL MENU--- -->
+</ion-app>

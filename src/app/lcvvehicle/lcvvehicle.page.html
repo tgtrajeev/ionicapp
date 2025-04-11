@@ -1,0 +1,154 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+  <div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="home"></ion-back-button>
+		</div>
+		<div>
+			<h1>LCV Vehicals</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<div class="mycard">
+			<div class="form_inp_container">
+				<div class="label_container">
+					<label>Date From</label>
+				</div>
+				<div class="input_container">
+					<ion-item>
+						<ion-label>Select Date:</ion-label>
+						<ion-datetime #selcteddateFrom  displayFormat="DD-MMM-YYYY"
+							pickerFormat="DD MMM YYYY" [ngModel]="DateFrom" name="selcteddateForm"
+							(ngModelChange)="OnDateChnageFrom(selcteddateFrom.value)" [max]="secondMaxDate">
+						</ion-datetime>
+					</ion-item>
+				</div>
+			</div>
+      <div class="form_inp_container">
+				<div class="label_container">
+					<label>From Station</label>
+				</div>
+				<div class="input_container">
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="Stationfrom" name="Stationfrom" [disabled]="isstationfrom"></ion-input>
+          </ion-item>
+				</div>
+			</div>
+      <div class="form_inp_container">
+				<div class="label_container">
+					<label>To Station</label>
+				</div>
+				<div class="input_container">
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="stCodeMy" placeholder="--Select Station Name--" (click)="filterBoxShow($event)" readonly></ion-input>
+          </ion-item>
+				</div>
+			</div>
+      <div *ngIf="fiterBox">
+        <ion-searchbar [(ngModel)]="filterItem" (ionInput)="filterStations()" placeholder="Search.." autocomplete="off"></ion-searchbar>
+        <ion-list>
+          <ion-item *ngFor="let itm of filteredListStation" (click)="filterBoxShow(itm)">
+            {{itm.StationName}}
+          </ion-item>
+        </ion-list>
+      </div>
+      
+
+      <div class="form_inp_container">
+        <div class="label_container">
+          <label>LCV KG</label>
+        </div>
+        <div class="input_container">
+          <ion-input type="text" [(ngModel)]="LCVKG" name="LCVKG"></ion-input>
+        </div>
+      </div>
+
+      <div class="form_inp_container">
+        <div class="label_container">
+          <label>NO. OF TRIPS</label>
+        </div>
+        <div class="input_container">
+          <ion-input type="text" [(ngModel)]="Trips" name="Trips"></ion-input>
+        </div>
+      </div>
+
+      <div class="form_inp_container">
+        <div class="label_container">
+          <label>LCV NO</label>
+        </div>
+        <div class="input_container">
+          <ion-input type="text" [(ngModel)]="LCVNO" name="LCVNO"></ion-input>
+        </div>
+      </div>
+
+        <div class="button_container">
+          <ion-button color="dark_green_clr" (click)="InsertLCVVehicl()">SAVE</ion-button>
+        </div>
+      
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div class="my_table_container">
+                <table class="my_table">
+                  <thead>
+                    <tr>
+                      <th>Sr No.</th>
+                      <th>From Station</th>
+                      <th>To Station</th>
+                      <th>LCV KG</th>
+                      <th>No. of Trips</th>
+                      <th>LCV NO</th>
+                      <th style="width:150px; text-align:center;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let itm of lcvlist; let i = index">
+                      <td>{{i + 1}}</td>
+                      <td>{{itm.Fromstation}}</td>
+                      <td>{{itm.Tostation}}</td>
+                      <td>{{itm.LCVKG}}</td>
+                      <td>{{itm.Trips}}</td>
+                      <td>{{itm.LCVNO}}</td>
+                      <td style="text-align: center;">
+                        <ion-button size="small" color="success" (click)="Edit(itm)">
+                          Edit
+                        </ion-button>
+                        <ion-button size="small" color="danger" (click)="Deletelcv(itm.id)">
+                          Delete
+                        </ion-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+    </div>
+  </div>
+
+ 
+  
+</ion-content>
+

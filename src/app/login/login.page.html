@@ -1,0 +1,58 @@
+<ion-content>
+  <div class="main_wrapper">
+    <div class="login_wrapper">
+      <div class="round_back_div">
+        <img src="../../assets/images/rounded.png" class="round-img" alt="">
+        <div>
+          <h1>
+            <img src="../../assets/images/logo.png" class="logo" alt="">
+          </h1>
+          <h3>Indraprastha Gas Limited</h3>
+        </div>
+      </div>
+      <div class="form_div">
+        <div class="logo_div_onTab">
+          <span>
+            <img src="../../assets/images/logo.png" alt="">
+          </span>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+          <ion-list no-lines>
+            <h4 style="text-align: center;">Login Your Account</h4>
+            <ion-item>
+              <ion-input placeholder="Login ID"   
+                type="text" formControlName="loginid" 
+                (ionChange)="onKeyPressed($event)"
+                (ionInput)="onKeyFocus($event)">
+              </ion-input>
+              
+              <div class="erroeshow" *ngFor="let error of errorMessages.loginid">
+                <ng-container *ngIf="loginid.hasError(error.type) && (loginid.dirty || loginid.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+            </ion-item>
+            <ion-item *ngIf="ishidden == true">
+              <ion-input placeholder="Employee Code" type="text" formControlName="employeecode"></ion-input>
+              <div class="erroeshow" *ngFor="let error of errorMessages.employeecode">
+                <ng-container *ngIf="employeecode.hasError(error.type) && (employeecode.dirty || employeecode.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+            </ion-item>
+            <ion-item>
+              <ion-input placeholder="Password" type="password" formControlName="password"></ion-input>
+              <div class="erroeshow" *ngFor="let error of errorMessages.password">
+                <ng-container *ngIf="password.hasError(error.type) && (password.dirty || password.touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+            </ion-item>
+            <ion-button expand="block" class="login_btn" shape="round" block type="submit">Login </ion-button>
+          </ion-list>
+        </form>
+        <button ion-button clear class="forgot" (click)="forgetPassword()">Forgot Password?</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,219 @@
+<ion-header>
+	<header>
+		<div class="header">		
+			<div class="logo_div" routerLink="/admin-home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div>
+		<div class="main_heading1">
+			<div>
+				<ion-back-button defaultHref="sorting"></ion-back-button>
+			</div>
+			<div><h1>DSA Sorting</h1></div>
+			<div></div>
+		</div>
+	</div>
+</ion-header>
+
+<!-- ------- START TOGGEL MENU--- -->
+<ion-menu side="end" menuId="menuDsaSorting" contentId="menuDsaSorting">
+	<ion-header >
+	  <ion-toolbar>
+		<ion-row class="menu_header">
+			<ion-col size="3">
+				<div class="menu_img_cont">
+					<img src="../../assets/images/logo.png" />
+				</div>
+			</ion-col>
+			<ion-col size="9">
+				<div class="text_white">
+					<h4>Indraprastha</h4>
+					<p>Gas LImited</p>
+				</div>
+			</ion-col>
+		</ion-row>
+	  </ion-toolbar>
+	</ion-header>
+	<ion-content>
+		<ion-list>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Head Office User</h5>
+					<ion-text>Administration</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Current Date</h5>
+					<ion-text>15-06-2020</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>DSA Date</h5>
+					<ion-text>15-06-2020</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Password Notification <ion-badge color="success" class="ion-float-end">44</ion-badge></h5>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Help <ion-icon name="help-circle" class="ion-float-end font22"></ion-icon></h5>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5 class="logout_h5">Logout <ion-icon name="power" class="ion-float-end"></ion-icon></h5>
+				</div>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-menu>
+<ion-router-outlet id="menuDsaSorting"></ion-router-outlet>	
+<!-- ------- START TOGGEL MENU--- -->
+
+<ion-content>
+<ion-grid>
+	<!-- <ion-slides pager="true" scrollbar="true" [options]="slideOpts" > -->
+		<ion-slides pager="true" scrollbar="true">
+		<ion-slide>
+			<div class="myclass">
+				<ion-row class="ion-align-items-center" style="margin-bottom:13px;"> 
+					<ion-col size="6">
+						<ion-text>Region(7)</ion-text>
+					</ion-col>
+					<ion-col size="6" class="ion-text-right">
+						<ion-button size="small" color="dark"><ion-icon name="save"></ion-icon></ion-button>
+					</ion-col>
+				</ion-row>
+				<ion-card>
+					<ion-row class="ion-align-items-center">
+						<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+						<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+						<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+					</ion-row>
+				</ion-card>
+				<ion-card>
+					<ion-row class="ion-align-items-center">
+						<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+						<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+						<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+					</ion-row>
+				</ion-card>
+				<ion-card>
+					<ion-row class="ion-align-items-center">
+						<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+						<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+						<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+					</ion-row>
+				</ion-card>
+				<ion-card>
+					<ion-row class="ion-align-items-center">
+						<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+						<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+						<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+					</ion-row>
+				</ion-card>
+				<ion-card>
+					<ion-row class="ion-align-items-center">
+						<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+						<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+						<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+					</ion-row>
+				</ion-card>
+			</div>
+		</ion-slide>
+		<ion-slide>
+				<div class="myclass">
+					<ion-row class="ion-align-items-center" style="margin-bottom:13px;"> 
+						<ion-col size="6">
+							<ion-text>Company(6)</ion-text>
+						</ion-col>
+						<ion-col size="6" class="ion-text-right">
+							<ion-button size="small" color="dark"><ion-icon name="save"></ion-icon></ion-button>
+						</ion-col>
+					</ion-row>
+					<ion-card>
+						<ion-row class="ion-align-items-center">
+							<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+							<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+							<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+						</ion-row>
+					</ion-card>
+					<ion-card>
+						<ion-row class="ion-align-items-center">
+							<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+							<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+							<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+						</ion-row>
+					</ion-card>
+					<ion-card>
+						<ion-row class="ion-align-items-center">
+							<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+							<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+							<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+						</ion-row>
+					</ion-card>
+					<ion-card>
+						<ion-row class="ion-align-items-center">
+							<ion-col size="7"><ion-text>Delhi</ion-text></ion-col>
+							<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+							<ion-col size="2" class="ion-text-right"><ion-button size="small" color="light"><ion-icon name="arrow-forward"></ion-icon></ion-button></ion-col>
+						</ion-row>
+					</ion-card>
+				</div>
+			</ion-slide>
+			<ion-slide>
+					<div class="myclass width100">
+						<ion-row class="ion-align-items-center" > 
+							<ion-col size="6">
+								<ion-text>Station(7)</ion-text>
+							</ion-col>
+							<ion-col size="6" class="ion-text-right">
+								<ion-button size="small" color="dark"><ion-icon name="save"></ion-icon></ion-button>
+							</ion-col>
+						</ion-row>
+						<ion-card>
+							<ion-row class="ion-align-items-center">
+								<ion-col size="9"><ion-text>Delhi</ion-text></ion-col>
+								<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+							</ion-row>
+						</ion-card>
+						<ion-card>
+							<ion-row class="ion-align-items-center">
+								<ion-col size="9"><ion-text>Delhi</ion-text></ion-col>
+								<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+							</ion-row>
+						</ion-card>
+						<ion-card>
+							<ion-row class="ion-align-items-center">
+								<ion-col size="9"><ion-text>Delhi</ion-text></ion-col>
+								<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+							</ion-row>
+						</ion-card>
+						<ion-card>
+							<ion-row class="ion-align-items-center">
+								<ion-col size="9"><ion-text>Delhi</ion-text></ion-col>
+								<ion-col size="3"><ion-input type="number" class="inp_control"></ion-input></ion-col>
+							</ion-row>
+						</ion-card>
+					</div>
+				</ion-slide>
+			</ion-slides>
+</ion-grid>
+</ion-content>

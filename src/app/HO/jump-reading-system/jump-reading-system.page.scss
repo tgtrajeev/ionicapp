@@ -1,0 +1,43 @@
+.text_center
+{
+    text-align: center;
+}
+.mycheck
+{
+    color: #22d629;
+    font-size: 16px;
+}
+.myclose
+{
+    color:red;
+    font-size: 16px;
+}
+.date_btn
+{
+    position: relative;
+    width:100%;
+    ion-datetime
+    {
+        padding: 0px;
+        padding-left: 18px;
+        padding-top: 3px;
+    }
+}
+.date_btn::before
+{
+    font-family: "Font Awesome 5 Free";
+    content: "\f073";
+    position: absolute;
+    left: 5px;
+    top: 4px;
+    width: 20px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.inp_control{border:none;}

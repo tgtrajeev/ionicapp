@@ -1,0 +1,195 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<!-- <button class="home_btn" routerLink="/home">
+				<img src="../../assets/images/home.png" style="width:36px;margin-left: 5px;" />
+			</button> -->
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" style="width:53px;margin-left: 5px;" />
+			</div>
+			<span style="margin-left: auto;" class="logout_div">
+				<ion-buttons style="justify-content: flex-end;">
+					<ion-icon name="log-out" style="color:white;font-size: 28px;" routerLink="/login"></ion-icon>
+				</ion-buttons>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="dispenser-entry"></ion-back-button>
+		</div>
+		<div>
+			<h1>DSA Dispenser Entry</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<div class="mycard">
+			<div class="form_inp_container">
+				<div class="label_container">
+					<label>Shift</label>
+				</div>
+				<div class="input_container">
+					<ion-select placeholder="Select One">
+						<ion-select-option value="m">A(06:00 AM 02:00 PM)</ion-select-option>
+						<ion-select-option value="m">B(02:00 PM 10:00 PM)</ion-select-option>
+						<ion-select-option value="m">C(10:00 PM 11:59 PM)</ion-select-option>
+						<ion-select-option value="m">D(11:59 PM 06:00 AM)</ion-select-option>
+					</ion-select>
+				</div>
+			</div>
+			<div class="form_inp_container">
+				<div class="label_container">
+					<label>Sub Shift</label>
+				</div>
+				<div class="input_container">
+					<ion-select placeholder="Select One" interface="alert">
+						<ion-select-option value="m">D-1 (11:59 PM 06:00 AM)</ion-select-option>
+					</ion-select>
+				</div>
+			</div>
+			<div class="card_box">
+				<div class="card_heading">
+					<h5>
+						<span class="span1">
+							<span>1 </span>ARM A OF DISP CAR 17C-144928-21
+						</span>
+						<span class="span2" (click)="jumpReadingPop()">
+							<ion-icon name="apps"></ion-icon>
+						</span>
+					</h5>
+				</div>
+				<div class="card_content">
+					<ion-row>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<ion-row>
+										<ion-col>
+											<label>Prev A</label>
+										</ion-col>
+										<ion-col class="text_right">
+											<label>0.16</label>
+										</ion-col>
+									</ion-row>
+								</div>
+								<div class="input_container">
+									<ion-input type="number" placeholder="Arm A"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<ion-row>
+										<ion-col>
+											<label>Prev B</label>
+										</ion-col>
+										<ion-col class="text_right">
+											<label>0.16</label>
+										</ion-col>
+									</ion-row>
+								</div>
+								<div class="input_container">
+									<ion-input type="number" placeholder="Arm B"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row class="bottom_label_row">
+						<ion-col>
+							<div class="bottom_label_cont">
+								<label>Arm A Sale</label>
+								<span>0.0</span>
+							</div>
+						</ion-col>
+						<ion-col>
+							<div class="bottom_label_cont">
+								<label>Arm A Sale</label>
+								<span>0.0</span>
+							</div>
+						</ion-col>
+						<ion-col>
+							<div class="bottom_label_cont">
+								<label>Arm A Sale</label>
+								<span>0.0</span>
+							</div>
+						</ion-col>
+					</ion-row>
+				</div>
+			</div>
+			<div class="card_box">
+				<div class="card_heading">
+					<h5>
+						<span class="span1">
+							<span>1 </span>ARM A OF DISP CAR 17C-144928-21
+						</span>
+						<span class="span2">
+							<ion-icon name="apps"></ion-icon>
+						</span>
+					</h5>
+				</div>
+				<div class="card_content">
+					<ion-row>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<ion-row>
+										<ion-col>
+											<label>Prev A</label>
+										</ion-col>
+										<ion-col class="text_right">
+											<label>0.16</label>
+										</ion-col>
+									</ion-row>
+								</div>
+								<div class="input_container">
+									<ion-input type="number" placeholder="Arm A"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<ion-row>
+										<ion-col>
+											<label>Prev B</label>
+										</ion-col>
+										<ion-col class="text_right">
+											<label>0.16</label>
+										</ion-col>
+									</ion-row>
+								</div>
+								<div class="input_container">
+									<ion-input type="number" placeholder="Arm B"></ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row class="bottom_label_row">
+						<ion-col>
+							<div class="bottom_label_cont">
+								<label>Arm A Sale</label>
+								<span>0.0</span>
+							</div>
+						</ion-col>
+						<ion-col>
+							<div class="bottom_label_cont">
+								<label>Arm A Sale</label>
+								<span>0.0</span>
+							</div>
+						</ion-col>
+						<ion-col>
+							<div class="bottom_label_cont">
+								<label>Arm A Sale</label>
+								<span>0.0</span>
+							</div>
+						</ion-col>
+					</ion-row>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>

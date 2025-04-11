@@ -1,0 +1,46 @@
+.preview_container
+{
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
+
+    h3
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #e2e2e2;
+        padding: 8px 12px;
+
+    }
+}
+.default_container
+{
+    text-align: center;
+    padding-top: 35px;
+    display: none;
+    ion-text
+    {
+        display: block;
+        color:#ddd;
+    }
+    ion-icon
+    {
+        font-size: 120px;
+        color:#ddd;
+    }
+}
+.image_container
+{
+    width:95%;
+    margin:0px auto;
+    border:5px solid white;
+    box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+    margin-bottom: 10px;;
+
+    img
+    {
+        width:100%;
+    }
+}

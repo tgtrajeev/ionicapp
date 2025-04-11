@@ -1,0 +1,265 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<h1 class="text_white text_center title">{{SummeryDate}}</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="dsa-entry-detail"></ion-back-button>
+		</div>
+		<div>
+			<h1>Payment Collection</h1>
+		</div>
+		<div class="text_center">
+		</div>
+	</div>
+</ion-header>
+
+<ion-content>
+	<div class="content_area p0">
+		<!-- <form> -->
+		<ion-grid class="p0">
+			<ion-row class="ion-align-items-center">
+				<ion-col size="8">
+					<h5>Bifurcation of Sale</h5>
+				</ion-col>
+				<!-- <ion-col size="2">
+						<ion-button color="dark" size="small"><ion-icon name="arrow-back"></ion-icon></ion-button>
+					</ion-col>
+					<ion-col size="2">
+						<ion-button color="dark" size="small"><ion-icon name="arrow-forward"></ion-icon></ion-button>
+					</ion-col> -->
+			</ion-row>
+			<ion-row>
+				<ion-col class="inp_groupt">
+					<ion-label>Dispenser List</ion-label>
+					<ion-item class="inp_control">
+						<ion-label>Choose Option</ion-label>
+						<ion-select placeholder="Select One" (ionChange)="onSelectDispenser($event)"
+							name="dispenserlist">
+							<ion-select-option *ngFor="let itm of listDispensers" [value]="itm.DispenserId">
+								{{itm.DispenserName}}</ion-select-option>
+						</ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col class="inp_groupt">
+					<ion-label>Shift</ion-label>
+					<ion-item class="inp_control">
+						<ion-label>Choose Option</ion-label>
+						<ion-select placeholder="Select One" (ionChange)="onSelectShift($event.detail.value)"
+							name="optShift">
+							<ion-select-option *ngFor="let itm of cmbShiftData" [value]="itm.ShiftId">
+								{{itm.ShiftDetails}}</ion-select-option>
+						</ion-select>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="armA_detail_cont">
+						<h5 (click)="armACollapse()">For Arm A <ion-icon name="arrow-down" class="ion-float-right">
+							</ion-icon>
+						</h5>
+						<div *ngIf="ArmADetailSec">
+							<ion-card>
+								<ion-card-header>
+									<ion-card-subtitle>DSM (Gas Filler)</ion-card-subtitle>
+								</ion-card-header>
+								<ion-card-content>
+									<ion-row>
+										<ion-col class="inp_group">
+											<ion-item class="inp_control">
+												<ion-label>Choose Option</ion-label>
+												<ion-select placeholder="Select One" [(ngModel)]='SelectedDSMIdArmA'
+													(ionChange)="onDSMSelectArmA($event.detail.value)" name="dsm">
+													<ion-select-option *ngFor="let itm of listDSM" [value]="itm.DSMId">
+														{{itm.DSMName}}</ion-select-option>
+													<ion-select-option value="NA">NOT AVAILABLE</ion-select-option>
+												</ion-select>
+											</ion-item>
+
+										</ion-col>
+									</ion-row>
+								</ion-card-content>
+							</ion-card>
+							<ion-card>
+								<ion-card-header>
+									<ion-card-subtitle>Total Sale (₹)</ion-card-subtitle>
+								</ion-card-header>
+								<ion-card-content>
+									<ion-row>
+										<ion-col class="inp_group">
+											<ion-label>{{TotalSalesA}}</ion-label>
+											<ion-text>{{TotalReadingsA}}</ion-text>
+										</ion-col>
+									</ion-row>
+								</ion-card-content>
+							</ion-card>
+							<ion-card *ngFor="let pm of AddPaymentMode">
+								<ion-card-header>
+									<ion-card-subtitle for="{{pm.PaymentMode}">{{pm.PaymentMode}}</ion-card-subtitle>
+									</ion-card-header>
+								
+									<ion-card-content>
+										<ion-row>
+											<ion-col class="inp_group">
+										<ion-input class="inp_control" type="number"
+											(input)="onPayemntEntry($event.target,pm.PaymentModeId,'A')"
+											value="{{pm.PaymentAmountA}}" value="0.00" min="0.00" (blur)="checkout()">
+										</ion-input>
+				</ion-col>
+			</ion-row>
+			</ion-card-content>
+			<ion-card-header>
+				<ion-card-subtitle for="{{pm.PaymentMode}">Quantity : {{pm.PaymentQuantityA}} Kg
+											</ion-card-subtitle>
+									</ion-card-header>
+								
+									<!-- <ion-card-content>
+										<ion-row>
+											<ion-col class="inp_group">
+					<ion-input class="inp_control" type="number"
+						(input)="onPayemntEntry($event.target,pm.PaymentModeId,'B')" value="{{pm.PaymentAmountB}}"
+						value="0.00" min="0.00" (blur)="checkout()"></ion-input>
+					</ion-col>
+					</ion-row>
+					</ion-card-content> -->
+					</ion-card>
+
+					<ion-card>
+						<ion-card-header>
+							<ion-card-subtitle>Total (₹)</ion-card-subtitle>
+						</ion-card-header>
+
+						<ion-card-content>
+							<ion-row>
+								<ion-col class="inp_group">
+									<ion-text>{{TotalCurrentSalesA}}</ion-text>
+								</ion-col>
+							</ion-row>
+						</ion-card-content>
+					</ion-card>
+	</div>
+	</div>
+	</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col>
+			<div class="armA_detail_cont">
+				<h5 (click)="armBCollapse()">For Arm B <ion-icon name="arrow-down" class="ion-float-right"></ion-icon>
+				</h5>
+				<div *ngIf="ArmBDetailSec">
+					<ion-card>
+						<ion-card-header>
+							<ion-card-subtitle>DSM (Gas Filler)</ion-card-subtitle>
+						</ion-card-header>
+
+						<ion-card-content>
+							<ion-row>
+								<ion-col class="inp_group">
+
+									<ion-item class="inp_control">
+										<ion-label>Choose Option</ion-label>
+										<ion-select placeholder="Select One" name="DSM2" [(ngModel)]='SelectedDSMIdArmB'
+											(ionChange)="onDSMSelectArmB($event.target.value)">
+											<ion-select-option *ngFor="let itm of listDSM" [value]="itm.DSMId">
+												{{itm.DSMName}}</ion-select-option>
+											<ion-select-option value="NA">NOT AVAILABLE</ion-select-option>
+										</ion-select>
+									</ion-item>
+
+								</ion-col>
+							</ion-row>
+						</ion-card-content>
+					</ion-card>
+					<ion-card>
+						<ion-card-header>
+							<ion-card-subtitle>Total Sale (₹)</ion-card-subtitle>
+						</ion-card-header>
+						<ion-card-content>
+							<ion-row>
+								<ion-col class="inp_group">
+									<ion-label>{{TotalSalesB}}</ion-label>
+									<ion-text>{{TotalReadingsB}}</ion-text>
+								</ion-col>
+							</ion-row>
+						</ion-card-content>
+					</ion-card>
+					<ion-card *ngFor="let pm of AddPaymentMode">
+						<ion-card-header>
+							<ion-card-subtitle for="{{pm.PaymentMode}">{{pm.PaymentMode}}</ion-card-subtitle>
+								</ion-card-header>
+							
+								<!-- <ion-card-content>
+									<ion-row>
+										<ion-col class="inp_group">
+								<ion-input class="inp_control" type="number"
+									(input)="onPayemntEntry($event.target,pm.PaymentModeId,'A')"
+									value="{{pm.PaymentAmountA}}" value="0.00" min="0.00" (blur)="checkout()">
+								</ion-input>
+
+
+		</ion-col>
+	</ion-row>
+	</ion-card-content> -->
+
+	<ion-card-content>
+		<ion-row>
+			<ion-col class="inp_group">
+				<ion-input class="inp_control" type="number"
+					(input)="onPayemntEntry($event.target,pm.PaymentModeId,'B')" value="{{pm.PaymentAmountB}}"
+					value="0.00" min="0.00" (blur)="checkout()"></ion-input>
+			</ion-col>
+		</ion-row>
+	</ion-card-content>
+
+	<ion-card-header>
+		<ion-card-subtitle for="{{pm.PaymentMode}">Quantity : {{pm.PaymentQuantityB}} Kg</ion-card-subtitle>
+								</ion-card-header>
+							</ion-card>
+							<ion-card>
+								<ion-card-header>
+									<ion-card-subtitle>Total (₹)</ion-card-subtitle>
+								</ion-card-header>
+							  
+								<ion-card-content>
+									<ion-row>
+										<ion-col class="inp_group">
+			<ion-text>{{TotalCurrentSalesB}}</ion-text>
+			</ion-col>
+			</ion-row>
+			</ion-card-content>
+			</ion-card>
+			</div>
+			</div>
+			</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="inp_form_control">
+						<div class="button_container">
+							<ion-button color="dark_green_clr" type="submit" (click)="savePayment();">Save</ion-button>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			</ion-grid>
+			<!-- </form> -->
+			</div>
+</ion-content>

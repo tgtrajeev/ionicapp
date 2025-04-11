@@ -1,0 +1,128 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/admin-home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<h1 class="text_white text_center title">Dispenser Management</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent">
+		<ion-col size="2">
+			<ion-back-button defaultHref="admin-home"></ion-back-button>
+		</ion-col>
+		<ion-col size="2" offset="4">
+			<ion-button size="small" color="light" (click)="searchCollapse()">
+				<ion-icon name="search" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col size="2">
+			<ion-button size="small" color="light" (click)="goToaddDispenser()">
+				<ion-icon name="add" class="font22"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col >
+			<ion-button color="light" size="small" (click)="exportFile()">
+				<ion-icon name="arrow-down"></ion-icon>
+			</ion-button>
+		</ion-col>
+		<ion-col size="12" class="searchbar_container" *ngIf="searchShow">
+			<ion-searchbar type="text" showCancelButton="always" (ionCancel)="hideSearchBar()"
+				(ionInput)="getItems($event)"></ion-searchbar>
+			<ion-row *ngIf="isItemAvailable">
+				<ion-col>
+					<div class="my_table_container">
+						<table class="my_table">
+							<tbody>
+								<tr (click)="goToupdateDispenser(item.DispenserId)"
+									*ngFor="let item of items; let i = index">
+									<td>{{i+1}}</td>
+									<td>{{item.DispenserName}}</td>
+									<td>{{item.DispenserCodeA}}</td>
+									<td>{{item.DispenserCodeB}}</td>
+									<td>{{item.DispanserTypeCodeADisp}}</td>
+									<td>{{item.DispanserTypeCodeBDisp}}</td>
+									<td>{{item.DispanserTypeCodeBDisp}}</td>
+									<td>{{item.StationName}}</td>
+									<td>{{item.StationCode}}</td>
+									<td>{{item.StatusSort}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12">
+				<ion-segment class="status_bar" value="All" (ionChange)="segmentChanged($event)">
+					<ion-segment-button value="Active">
+						<ion-label>Active</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="All">
+						<ion-label>All</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="InActive">
+						<ion-label>InActive</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="my_table_container">
+					<table class="my_table">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Dispenser Name</th>
+								<th>Dispenser Code A</th>
+								<th>Dispenser Code B</th>
+								<th>Dispenser Type Code A</th>
+								<th>Dispenser Type Code B</th>
+								<th>Station Name</th>
+								<th>Station Code</th>
+								<th>Status</th>
+								<th>History</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let dslitem of DispenserResList;let i = index">
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">{{i+1}}</td>
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">{{dslitem.DispenserName}}</td>
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">{{dslitem.DispenserCodeA}}</td>
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">{{dslitem.DispenserCodeB}}</td>
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">
+									{{dslitem.DispanserTypeCodeADisp}}</td>
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">
+									{{dslitem.DispanserTypeCodeBDisp}}</td>
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">{{dslitem.StationName}}</td>
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">{{dslitem.StationCode}}</td>
+								<td (click)="goToupdateDispenser(dslitem.DispenserId)">{{dslitem.StatusSort}}</td>
+								<td>
+									<ion-button color="dark" size="small" (click)="viewHistory(dslitem.DispenserId)">
+										View History</ion-button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

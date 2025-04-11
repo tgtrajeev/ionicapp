@@ -1,0 +1,31 @@
+.mycard 
+{
+    padding: 0px 7px;
+}
+
+.inp_control.armlist {
+  
+display: inline-block;
+text-align: center!important;
+}
+
+.header-title ion-row{padding-left: 2%;}
+.my_table thead tr td{
+    background: aliceblue;
+    padding: 1%;
+}
+h5{
+    padding: 12px 10px 10px 10px;
+    background-color: var(--green_clr);
+    color: white;
+    margin-bottom: 2%;
+}
+.inp_control.coins div{
+    display: inherit;
+}
+ion-col, ion-grid{
+    padding-left: 0; padding-right: 0;;
+}
+ion-card{
+    margin-left: 0; margin-right: 0;
+}

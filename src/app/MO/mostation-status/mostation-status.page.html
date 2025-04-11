@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-row class="ion-align-items-center search_parent for_color">
+    <ion-col size="2" class="ion-text-left">
+      <ion-back-button defaultHref="station-detail" class="text_white"></ion-back-button>
+    </ion-col>
+    <ion-col size="8" class="ion-text-center">
+      <ion-text class="text_white">Dispensers</ion-text>
+    </ion-col>
+    <ion-col size="2">
+      <ion-button size="small" color="light" (click)="searchCollapse()">
+        <ion-icon name="search" class="font22"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="12" class="searchbar_container" *ngIf="searchShow">
+      <ion-searchbar type="text" showCancelButton="always" (ionCancel)="hideSearchBar()" debounce="500"
+        (ionInput)="getItems($event)"></ion-searchbar>
+      <ion-row *ngIf="isItemAvailable">
+        <ion-col>
+          <div class="my_table_container">
+            <table class="my_table">
+              <tbody>
+                <tr *ngFor="let item of items; let i=index">
+                  <td>{{i+1}}</td>
+                  <td>{{item.DispenserName}}</td>
+                  <td>{{item.DispenserCodeA}}</td>
+                  <td>{{item.DispenserCodeB}}</td>
+                  <td>{{item.DispanserTypeCodeADisp}}</td>
+                  <td>{{item.DispanserTypeCodeBDisp}}</td>
+                  <td>{{item.StatusSort}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="my_table_container">
+          <table class="my_table">
+            <thead>
+              <tr>
+                <th>Sr No.</th>
+                <th>Dispenser Name</th>
+                <th>Dispenser Code A</th>
+                <th>Dispenser Code B</th>
+                <th>Dispenser Type Code A</th>
+                <th>Dispenser Type Code B</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listDisp; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{item.DispenserName}}</td>
+                <td>{{item.DispenserCodeA}}</td>
+                <td>{{item.DispenserCodeB}}</td>
+                <td>{{item.DispanserTypeCodeADisp}}</td>
+                <td>{{item.DispanserTypeCodeBDisp}}</td>
+                <td>{{item.StatusSort}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

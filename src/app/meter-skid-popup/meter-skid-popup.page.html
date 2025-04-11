@@ -1,0 +1,32 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>meterSkidPopup</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+  <div class="mainDiv">
+    <ion-row class="mainHead">
+      <ion-col size="10" class="ion-align-self-center">
+        <ion-text style="color: white;margin-left: 5px;font-size: 16px">Logout</ion-text>
+      </ion-col>
+      <!-- <ion-col size="2" class="ion-align-self-center ion-text-end">
+        <ion-icon icon="close" style="color: white;font-size: 20px" (click)="dismiss()"></ion-icon>
+      </ion-col> -->
+    </ion-row>
+    <ion-row class="ion-margin-bottom ion-margin-top ion-text-center">
+    <ion-col>  <ion-text>
+        Are you sure you want to logout ?
+      </ion-text></ion-col>
+    </ion-row>
+
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <button ion-button class="login_btn_width ion-text-center" (click)="dismiss()">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button class="login_btn_width ion-text-center" (click)="logout()">OK</button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>  

@@ -1,0 +1,136 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" *ngIf="pageFlag !='dsaStationSummary'" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<div class="logo_div" *ngIf="pageFlag =='dsaStationSummary'" routerLink="/so-dashboard">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<!-- <div *ngIf="pageFlag !='dsaStationSummary'">
+			<ion-back-button defaultHref="dsa-entry-menu"></ion-back-button>
+		</div>
+		<div *ngIf="pageFlag =='dsaStationSummary'">
+			<ion-back-button defaultHref="so-dashboard"></ion-back-button>
+		</div> -->
+		<div>
+				<ion-back-button defaultHref="dsa-entry-detail"></ion-back-button>
+		</div>
+		<div>
+			<h1>DSA Summary (DSA REPORT)</h1>
+		</div>
+		<div class="text_center">
+			<!-- <ion-button size="small" color="light"><ion-icon name="arrow-down"></ion-icon></ion-button> -->
+		</div>
+	</div>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<div class="mycard shadow_none back_trans">
+			<ion-row style="margin-bottom:7px;" *ngIf="pageFlag =='dsaStationSummary'">
+				<ion-col size="8" offset="2" class="date_col">
+					<ion-datetime #selcteddate class="inp_control date" displayFormat="DD-MMM-YYYY"
+						pickerFormat="DD MMM YYYY" [ngModel]="SummeryDate" name="selcteddate" [max]="secondMaxDate"
+						(ngModelChange)="getSelectedDate(selcteddate.value)"></ion-datetime>
+					<ion-icon name="calendar"></ion-icon>
+				</ion-col>
+			</ion-row>
+			<ion-grid>
+				<ion-row>
+					<ion-col side="12">
+						<div class="dsa_smry_container">
+							<table class="dsa_stn_smry_table">
+								<tr>
+									<td colspan="8" class="text_center" class="head_col"></td>
+								</tr>
+								<tr>
+									<td colspan="4" class="text_center left_col">
+										<h6>Name of Station - {{stationName}}</h6>
+									</td>
+									<td colspan="4" class="text_center left_col">
+										<h6>Date : {{SummeryDate}}</h6>
+									</td>
+								</tr>
+								<tr class="head_tr">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td colspan="2" class="text_center">NON DISCOUNT</td>
+									<td colspan="2" class="text_center">DISCOUNT</td>
+									<td></td>
+								</tr>
+								<tr class="head_tr">
+									<td>SL.NO</td>
+									<td>PARTICULARS</td>
+									<td rowspan="2" class="text_center">TOTAL QUANTITY</td>
+									<td class="text_center">Qty.</td>
+									<td class="text_center">Amount = Rate * Qty</td>
+									<td class="text_center">Qty.</td>
+									<td class="text_center">Amount = Rate * Qty</td>
+									<td class="text_center">Total Amount</td>
+								</tr>
+								<tr class="head_tr">
+									<td></td>
+									<td></td>
+									<td class="text_center">A</td>
+									<td class="text_center">B</td>
+									<td class="text_center">C</td>
+									<td class="text_center">D</td>
+									<td class="text_center">E = (B+D)</td>
+								</tr>
+								<tr *ngFor="let itm of DispensarTable5, let i = index">
+									<td>{{i+1}}</td>
+									<td
+										[ngClass]="itm.Particulars == 'NET CASH SALE' || itm.Particulars == 'CASH COLLECTION FOR THE DAY (RS.)' || itm.Particulars == 'OPENING CASH BALANCE (RS.)' || itm.Particulars == 'CLOSING BALANCE (RS.)' || itm.Particulars == 'CASH DEPOSITED WITH BANK (RS.)' ? 'text_bold' : ''">
+										{{itm.Particulars}}</td>
+									<td class="text_right">{{itm.TotalQuntity}}</td>
+									<td class="text_right">{{itm.NonDiscount_QTY}}</td>
+									<td class="text_right">{{itm.NonDiscount_Amt}}</td>
+									<td class="text_right">{{itm.Discount_QTY}}</td>
+									<td class="text_right">{{itm.Discount_Amt}}</td>
+									<td class="text_right">{{itm.NonDiscount_Amt + itm.Discount_Amt | number:'1.2-2'}}
+									</td>
+								</tr>
+								<tr class="remark_tr">
+									<td rowspan="6"></td>
+									<td rowspan="6" colspan="5">REMARKS:</td>
+									<td colspan="2" rowspan="6"></td>
+								</tr>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row class="align_center">
+					<ion-col>
+						<ion-input type="file" [value]="submitFile" (change)="uploadImage($event)"></ion-input>
+					</ion-col>
+					<ion-col class="ion-text-right">
+						<ion-button size="small" color="light" (click)="presentModal()">View</ion-button>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="button_container" *ngIf="!SubmittedBySOFlaglocal">
+							<ion-button color="dark_green_clr" (click)="checkPendingEntry()" *ngIf="submitButton">
+								{{Submitbtn}}</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+	</div>
+</ion-content>

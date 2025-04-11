@@ -1,0 +1,65 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/admin-home">
+				<img src="../../assets/images/logo.png" /></div>
+			<h1 class="text_white text_center title">Dashboard DSA</h1>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col size="2">
+				<ion-back-button defaultHref="dashboard"></ion-back-button>
+			</ion-col>
+			<ion-col size="6" offset="1">
+				<ion-datetime #selcteddate class="datepick" displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY"
+					[(ngModel)]="dsaData.selcteddate" name="selcteddate" [max]="secondMaxDate"
+					(ngModelChange)="getSelectedDate(selcteddate.value)"></ion-datetime>
+			</ion-col>
+		</ion-row>
+		<ion-row *ngFor="let dsalist of dsaRes">
+			<ion-col>
+				<div class="prog_row">
+					<div class="prog_heading">
+						<div>
+							<h5>{{dsalist.Name}}</h5>
+						</div>
+						<div>
+							<span *ngIf="dsalist.MOPer == 100">
+								<ion-icon name="checkmark-circle"></ion-icon>
+							</span>
+							<span *ngIf="dsalist.MOPer != 100">
+								<ion-icon name="alert" class="red"></ion-icon>
+							</span>
+						</div>
+					</div>
+					<div class="ion-text-center">
+						<ion-text>{{dsalist.MOPer}}%</ion-text>
+					</div>
+					<div class="progress_container">
+						<span class="progress_content">
+							{{(dsalist.SubmitedStation=='0') ? dsalist.StCount : dsalist.SubmitedStation}}/{{dsalist.StCount}}
+						</span>
+						<div class="myprogress">
+							<ion-progress-bar class="prog" [style.width]="dsalist.MOPer + '%'">
+							</ion-progress-bar>
+						</div>
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

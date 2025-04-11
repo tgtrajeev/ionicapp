@@ -1,0 +1,52 @@
+.red
+{
+    color:red;
+}
+.green
+{
+    color:green;
+}
+.send_ho
+{
+    border: 1px solid #d8b10d;
+    padding: 5px 9px;
+    font-size: 14px;
+}
+.my_table .tooltiptext {    
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  .tooltiptext 
+  {    
+      background-color: rgba(0, 0, 0,0.8);
+      color: #fff;
+      text-align: center;
+      padding: 5px 0;
+      border-radius: 6px;
+      position: sticky;
+      z-index: 1;
+      left: 0;
+      right: 0;
+      top: 0;
+      width: 93%;
+    margin: 0 auto;
+  }
+
+  .button_container.downloadfile {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    position: fixed;
+    bottom: -24px;
+    width: 89%;
+    /* left: 0; */
+    /* right: 0; */
+}

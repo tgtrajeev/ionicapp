@@ -1,0 +1,92 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/admin-home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="admin-home"></ion-back-button>
+		</div>
+		<div>
+			<h1>Station Rejection</h1>
+		</div>
+		<div class="text_center">
+		</div>
+	</div>
+</ion-header>
+
+<ion-content>
+	<form [formGroup]="addupdateForm" (ngSubmit)="UpdateRejectStation()">
+		<ion-grid>
+			<ion-row>
+				<div class="content_area">
+					<div class="mycard">
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Select Date</label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Select Date:</ion-label>
+									<ion-datetime [ngModelOptions]="{standalone: true}" #selcteddateFrom class="date"
+										displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY"
+										[ngModel]="rejectiondatE" name="selcteddateForm"
+										(ngModelChange)="OnDateChnageFrom(selcteddateFrom.value)" [max]="secondMaxDate">
+									</ion-datetime>
+								</ion-item>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Select Control Room</ion-label>
+					<ion-select placeholder="Select One" class="inp_control" formControlName="SelectedCRoom"
+						(ionChange)="OnSelectCRoom($event)" interface="action-sheet">
+						<ion-select-option value="CR001">SARAI KALE KHAN</ion-select-option>
+						<ion-select-option value="CR002">LADO SARAI</ion-select-option>
+						<ion-select-option value="CR003">JAIL ROAD</ion-select-option>
+						<ion-select-option value="CR004">DHEERPUR</ion-select-option>
+						<ion-select-option value="CR005">CBD</ion-select-option>
+						<ion-select-option value="CR006">SHAKURPUR</ion-select-option>
+						<ion-select-option value="CR007">ROHINI</ion-select-option>
+						<ion-select-option value="CR031">NOIDA</ion-select-option>
+						<ion-select-option value="CR008">Dwarka</ion-select-option>
+						<ion-select-option value="CR033">GHAZIABAD</ion-select-option>
+						<ion-select-option value="CR035">REWARI</ion-select-option>
+					</ion-select>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Select Station for Rejection</ion-label>
+					<ion-select class="inp_control" formControlName="SelectedStationCode" interface="action-sheet">
+						<ion-select-option *ngFor="let itm of listStation" [value]="itm.StationCode">{{itm.StationName}}
+						</ion-select-option>
+					</ion-select>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col size="12">
+					<div class="button_container">
+						<ion-button color="dark_green" type="submit">Reject Reading</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>

@@ -1,0 +1,353 @@
+<ion-header *ngIf="hidelcv">
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="dpr-entry"></ion-back-button>
+		</div>
+		<div>
+			<h1>LCV</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+
+<ion-content *ngIf="hidelcv">
+	<div class="content_area">
+		<!-- <form class="myform"> -->
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<div class="sap_no_div">
+						<span>
+							<strong>SAP Equipment Number : </strong>
+							<span>{{SAPEquipmentNumber == "" ? '0.000' : SAPEquipmentNumber}}</span>
+						</span>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<label>Select Date
+								<span class="star">*</span>
+							</label>
+						</div>
+						<div class="input_container">
+							<ion-item>
+								<ion-label>Select Date:</ion-label>
+								<ion-datetime #selcteddate class="datepick" [(ngModel)]="geteDate.selcteddate"
+									displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY" name="selcteddate"
+									[max]="secondMaxDate" (ngModelChange)="getSelectedDate(selcteddate.value)">
+								</ion-datetime>
+							</ion-item>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container">
+						<div class="label_container">
+							<label>LCV Name</label>
+						</div>
+						<div class="input_container">
+							<ion-select placeholder="Select One" (ionChange)="GetStationLcv($event.detail.value)"
+								style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+								<ion-select-option *ngFor="let obj of stationLcvData2" [value]="obj.LcvId">
+									{{obj.LcvName}}</ion-select-option>
+							</ion-select>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container mb10">
+						<div class="label_container">
+							<label>LCV Meter Totaliser <span class="star">*</span></label>
+						</div>
+						<div class="input_container d_flex justify_space_beetween">
+							<ion-input placeholder="Flow Meter Totaliser" [value]="lcvmeterTotaliser"
+								(input)="lcvmeterTotaliser=$event.target.value"></ion-input>
+							<span class="font13 mr5">Prev
+								:{{LCVMeterTotaliserPrv == "" ? '0.000' : LCVMeterTotaliserPrv}}</span>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_container ion-text-right">
+						<ion-button size="small" (click)="showhidechangereset()" class="change_reset_btn">
+							Jump/Change/Reset</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+
+			<!-- New Comment -->
+			<!-- <ion-row>
+					<ion-col size="12">
+						<div class="form_inp_container">
+							<div class="input_container">
+								<ion-item>
+									<ion-checkbox (ionChange)="showFields_jump()"></ion-checkbox>&nbsp;&nbsp;Jump
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+					<ion-col size="12" *ngIf="varJump">
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input [value]="LCVjumpreading" (input)="LCVjumpreadingValue($event.target.value)">
+								</ion-input>
+							</div>
+						</div>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="file" name="LCVfileInput" id="LCVfileInput"
+									(change)="fileupload($event)" [disabled]="LCVfilevisible"></ion-input>
+							</div>
+						</div>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading Count</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input [value]="jumpreadingcount" (input)="jumpreadingcount=$event.target.value">
+								</ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+			<ion-row>
+				<ion-col>
+					<div class="form_inp_contaienr">
+						<div class="label_conatiner">
+							<ion-label>Remark</ion-label>
+						</div>
+						<!-- <div class="input_container" [hidden]="IsLCVhide">
+							<ion-input [value]="LCVremark" (input)="LCVremark=$event.target.value"></ion-input>
+						</div> -->
+						
+						<div class="input_container">
+							<ion-input [value]="LCVremark" (input)="LCVremark=$event.target.value"></ion-input>
+						</div>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<div class="button_container" [hidden]="IsLCVhide">
+						<ion-button color="dark_green_clr" 
+						[hidden]="LCVisStationSubmitted > 0 || LCVisCRSentToHo > 0"
+							(click)="InsertStationLCV()" type="submit">Save</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<div class="msg">
+			<span class="data_submit_msg" [hidden]="LCVisStationSubmitted == 0 ">* Data is submitted for the date
+				{{geteDate.selcteddate}} by Station.</span><br>
+			<span class="data_submit_msg" [hidden]="LCVisCRSentToHo == 0 ">* Submission is closed for date
+				{{geteDate.selcteddate}} by Control Room.</span>
+		</div>
+		
+		<div class="msg" *ngIf="IsLCVhide" style="margin-left: 15px;">
+			<span class="data_submit_msg" >* Equipment not available for this Station.</span>
+		</div>	
+		<!-- </form> -->
+	</div>
+</ion-content>
+
+<!-------------------------------------------------------- Start LCV Arm A Popup-------------------------------------------------------->
+
+<ion-header *ngIf="showhideflag">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="package" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text class="text_white">Jump/Change/Reset Meter</ion-text>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="showhideflag">
+	<div class="content_area">
+		<form>
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Action</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-item>
+									<ion-label>Action</ion-label>
+									<ion-select placeholder="Select One" [value]="LCVFlagJumpType"
+										(ionChange)="LCVresetchange($event.detail.value)">
+										<ion-select-option value='J'>Jump</ion-select-option>
+										<ion-select-option value="R">Reset</ion-select-option>
+										<ion-select-option value="C">Change</ion-select-option>
+									</ion-select>
+								</ion-item>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Before</ion-label>
+						<ion-input class="inp_control" placeholder="Before Meter Reading" [value]="OldMeterReading"
+							(input)="OldMeterReading=$event.target.value" name="Before"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>After</ion-label>
+						<ion-input class="inp_control" placeholder="After Meter Reading" [value]="NewMeterReading"
+							(input)="LCVJReadingvalue($event.target.value)"
+							(input)="NewMeterReading=$event.target.value" name="after"></ion-input>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Attachment</ion-label>
+						<ion-input #inputFile type="file" class="inp_control" id="LCVfileInputreset"
+							name="LCVfileInputreset" (ionChange)="fileuploadreset($event.target.files, $event)"
+							[disabled]="popupfilevisible">
+						</ion-input>
+						<!-- <span *ngIf="!IsFileSelected" class="temp_file_name" style="right:-6px;">{{FileName}}</span> -->
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12" class="inp_group">
+						<ion-label>Remark</ion-label>
+						<ion-textarea class="inp_control" [value]="MeterJumpRemark"
+							(input)="MeterJumpRemark=$event.target.value" placeholder="Remark" placeholder="Remark"
+							placeholder="Remark"></ion-textarea>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="12">
+						<div class="my_table_container">
+							<table class="my_table">
+								<thead>
+									<tr>
+										<th>Sr No</th>
+										<th>Before</th>
+										<th>After</th>
+										<th>Jumped</th>
+										<th>Action Type</th>
+										<th>Remark</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of LCVJumpListHistory, let i = index">
+										<td>{{i+1}}</td>
+										<td>{{itm.BeforeJumpReading}}</td>
+										<td>{{itm.AfterJumpReading}}</td>
+										<td>{{itm.JumpReading}}</td>
+										<td>{{itm.Action}}</td>
+										<td>{{itm.Remark}}</td>
+										<!-- <td>{{itm.DispanserJumpRemark}}</td> -->
+										<td>
+											<!-- <span (click)="UpdateLCVJumpHistory(itm.id, itm)">Edit</span>
+											<span class="closeicon"
+												(click)="DeleteLCVJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon ios="ios-close" md="md-close"></ion-icon>
+											</span> -->
+											<ion-button size="small" color="dark"
+												(click)="UpdateLCVJumpHistory(itm.id, itm)">
+												<ion-icon name="create"></ion-icon>
+											</ion-button>
+
+											<ion-button size="small" color="danger"
+												(click)="DeleteLCVJumpHistory(itm.id,itm.Action, itm)">
+												<ion-icon name="trash"></ion-icon>
+											</ion-button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+				<!-- <ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Old Meter Reading <span class="star">*</span></ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" [value]="OldMeterReading" (input)="OldMeterReading=$event.target.value"  placeholder="Old Meter Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Jump Reading(If any)</ion-label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" [value]="JReading" (input)="JReadingvalue($event.target.value)"  placeholder="Jump Reading"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<ion-label>Choose File</ion-label>
+							</div>
+						
+							<div class="input_container">
+								<ion-input type="file" name="LCVfileInputreset" id="LCVfileInputreset" (change)="fileuploadreset($event)" [disabled]="popupfilevisible"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr" (click)="LCVchangeresetpopup()" type="submit">Save
+							</ion-button>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>
+
+<!--************* end Popup  *************-->

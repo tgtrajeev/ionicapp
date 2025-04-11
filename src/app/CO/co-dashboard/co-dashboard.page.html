@@ -1,0 +1,67 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+</ion-header>
+
+<ion-content>
+	<div class="content_area">
+		<div class="main_head">
+			<h3><span>Menu</span></h3>
+		</div>
+		<div class="menu_container">
+			<div class="men_inner">
+				<div class="item" (click)="dashCORedirect()">
+					<div class="item_div">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Dashboard CO</h5>
+					</div>
+				</div>
+				<div class="item" (click)="reviewsCORedirect()">
+					<div class="item_div">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Reviews</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="stnDetailRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Station Details</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="dprReportRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Report DPR</h5>
+					</div>
+				</div>
+				<div class="item">
+					<div class="item_div" (click)="jumpReadingRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Jump Reading System</h5>
+					</div>
+				</div>
+				<!-- <div class="item">
+					<div class="item_div" (click)="activityLogDPRRedirect()">
+						<ion-icon name="desktop"></ion-icon>
+						<h5>Activity Log DPR</h5>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</ion-content>

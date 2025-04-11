@@ -1,0 +1,18 @@
+<ion-content>
+	<div class="attch_container">
+		<!-- <div class="trigger_div">Update Password <ion-icon name="close" (click)="dismiss()"></ion-icon></div> -->
+		<div class="content_div">
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="img_cont">
+							<ion-icon name="close" (click)="dismiss()"></ion-icon>
+							<div *ngIf="imgURL!=''"><img src={{imgURL}} alt="" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/No_image_available_600_x_450.svg/600px-No_image_available_600_x_450.svg.png';"></div>
+							<div *ngIf="imgURL==''">No attachment available</div>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+	</div>
+</ion-content>

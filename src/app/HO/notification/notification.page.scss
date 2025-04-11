@@ -1,0 +1,30 @@
+.for_color
+{
+    background-color: var(--green_clr);
+}
+.noti_card
+{
+    border-left: 3px solid var(--yellow_clr);
+    padding-left: 10px;
+    
+    ion-label:first-child
+    {
+        color:green;
+        overflow: hidden;
+        
+        ion-text
+        {
+            padding-top: 7px;
+        }
+    }
+    ion-label
+    {
+        display: block;
+        font-weight: bold;
+        color:black;
+    }
+    ion-text
+    {
+        display: block;
+    }
+}

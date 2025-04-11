@@ -1,0 +1,107 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/admin-home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+</ion-header>
+
+<!-- ------- START TOGGEL MENU--- -->
+<ion-menu side="end" menuId="menuSorting" contentId="menuSorting">
+	<ion-header >
+	  <ion-toolbar>
+		<ion-row class="menu_header">
+			<ion-col size="3">
+				<div class="menu_img_cont">
+					<img src="../../assets/images/logo.png" />
+				</div>
+			</ion-col>
+			<ion-col size="9">
+				<div class="text_white">
+					<h4>Indraprastha</h4>
+					<p>Gas LImited</p>
+				</div>
+			</ion-col>
+		</ion-row>
+	  </ion-toolbar>
+	</ion-header>
+	<ion-content>
+		<ion-list>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Head Office User</h5>
+					<ion-text>Administration</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Current Date</h5>
+					<ion-text>15-06-2020</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>DSA Date</h5>
+					<ion-text>15-06-2020</ion-text>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Password Notification <ion-badge color="success" class="ion-float-end">44</ion-badge></h5>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5>Help <ion-icon name="help-circle" class="ion-float-end font22"></ion-icon></h5>
+				</div>
+			</ion-item>
+			<ion-item>
+				<div class="head_info_div">
+					<h5 class="logout_h5">Logout <ion-icon name="power" class="ion-float-end"></ion-icon></h5>
+				</div>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-menu>
+<ion-router-outlet id="menuSorting"></ion-router-outlet>	
+<!-- ------- START TOGGEL MENU--- -->
+
+<ion-content>
+	<div class="content_area">
+		<ion-row class="ion-align-items-center mb5">
+			<ion-col size="2" size-sm ><ion-back-button defaultHref="admin-home"></ion-back-button></ion-col>
+			<ion-col size="8" size-sm class="text_center">
+				<div class="main_head">
+					<h3><span>Sorting</span></h3>
+				</div>
+			</ion-col>
+			<ion-col size="2" size-sm></ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ul class="menu_ul">
+					<li class="ion-activatable ripple-parent" (click)="sortingDSARedirect()">
+						<ion-icon name="tv"></ion-icon> Sorting DSA <ion-icon name="arrow-forward"></ion-icon>
+						<ion-ripple-effect></ion-ripple-effect>
+					</li>
+					<li class="ion-activatable ripple-parent" (click)="sortingDPRRedirect()">
+						<ion-icon name="tv"></ion-icon> Sorting DPR <ion-icon name="arrow-forward"></ion-icon>
+						<ion-ripple-effect></ion-ripple-effect>
+					</li>
+				</ul>
+			</ion-col>
+		</ion-row>
+	</div>
+</ion-content>

@@ -1,0 +1,47 @@
+.submited
+{
+    background-color:rgb(3, 156, 3);
+    color:white;
+    font-size: 14px;
+    padding: 0px 6px;
+    border-radius: 5px;
+}
+.not_submited
+{
+    background-color:#de2105;
+    color:white;
+    font-size: 14px;
+    padding: 0px 6px;
+    border-radius: 5px;
+}
+.row_red
+{
+    background-color: rgba(255, 0, 0, 0.07);
+}
+.row_green
+{
+    background-color: rgba(0, 255, 76, 0.07);
+}
+
+.my_table_container 
+{
+    position:relative;
+}
+.tooltiptext 
+{    
+    background-color: rgba(0, 0 ,0 ,0.8);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: sticky;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 93%;
+  margin: 0 auto;
+}
+
+  
+  

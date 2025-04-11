@@ -1,0 +1,267 @@
+<ion-header *ngIf="pageFlag !='dsaStationSummary'">
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home" *ngIf="DepartmentCode!= 'SOP'">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<div class="logo_div" routerLink="/so-dashboard" *ngIf="DepartmentCode == 'SOP'">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="home"></ion-back-button>
+		</div>
+		<div>
+			<h1>Summary Detail</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+
+<ion-content *ngIf="pageFlag !='dsaStationSummary'">
+	<div class="content_area">
+		<div class="mycard">
+			<form>
+				<div class="form_inp_container">
+					<div class="label_container">
+						<label>Region</label>
+					</div>
+					<div class="input_container">
+						<ion-select placeholder="Select One" [(ngModel)]='selectedRegion' name="Region"
+							(ionChange)="onRegionSelect()" [disabled]="IsDropdownDisable"
+							style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+							<ion-select-option *ngFor="let itm of RegionList" [value]="itm.RegionId">{{itm.RegionName}}
+							</ion-select-option>
+						</ion-select>
+					</div>
+				</div>
+				<div class="form_inp_container">
+					<div class="label_container">
+						<label>Station</label>
+					</div>
+					<div class="input_container">
+						<ion-select placeholder="Select One" [(ngModel)]='selectedStation' name="Station"
+							[disabled]="IsDropdownDisable"
+							style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+							<ion-select-option *ngFor="let itm of StationList" [value]="itm.StationId">
+								{{itm.StationName}}</ion-select-option>
+						</ion-select>
+					</div>
+				</div>
+				<div class="form_inp_container">
+					<div class="label_container">
+						<label>SAP Code</label>
+					</div>
+					<div class="input_container">
+						<ion-select placeholder="Select One" [(ngModel)]='selectedStation' name="Station"
+							[disabled]="IsDropdownDisable"
+							style="padding-top: 8px;padding-bottom: 8px;background-color: white;padding-right: 10px;">
+							<ion-select-option *ngFor="let itm of StationList" [value]="itm.StationId">{{itm.SapCode}}
+							</ion-select-option>
+						</ion-select>
+					</div>
+				</div>
+				<div class="form_inp_container">
+					<div class="label_container">
+						<label>Summary Date</label>
+					</div>
+					<div class="input_container">
+						<ion-item>
+							<ion-label>Select Date:</ion-label>
+							<ion-datetime #selcteddate class="datepick" [(ngModel)]="geteDate.selcteddate"
+								displayFormat="DD-MMM-YYYY" pickerFormat="DD MMM YYYY" 
+								[max]="secondMaxDate" name="selcteddate" (ngModelChange)="getSelectedDate(selcteddate.value)"></ion-datetime>
+								<!-- form="DispenserDate.selcteddate" -->
+						</ion-item>
+					</div>
+				</div>
+				<ion-row>
+					<ion-col>
+						<div *ngIf="isButtonDisplay">
+							<div class="button_container"
+							*ngIf="DepartmentCode !== 'HO' && DepartmentCode !== 'SOP' && DepartmentCode !== 'MO'">
+							<ion-button color="dark_green_clr" (click)="dsaEntryDetailRedirect()">DSA Entry</ion-button>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+			</form>
+
+
+			<!------SOP Summary -->
+
+			<ion-grid *ngIf="(DepartmentCode== 'SOP' && pageFlag== 'dsaEntry')">
+				<ion-row>
+					<ion-col class="inp_groupt">
+						<ion-label *ngIf="(dispenserList == undefined)"> No Dispenser found.</ion-label>
+
+						<!-- <ion-label *ngIf="(dispenserList != undefined)">Description</ion-label> -->
+						<ion-item class="inp_control" *ngIf="(dispenserList != undefined)">
+							<ion-label>Description</ion-label>
+							<ion-select name="dispenserlist">
+								<ion-select-option *ngFor="let itmDisp of dispenserList; let i = index">
+									{{itmDisp.DispencerName}}</ion-select-option>
+							</ion-select>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="armA_detail_cont">
+							<ion-card>
+								<div>
+									<h5 (click)="armACollapse()">Arm A <ion-icon name="arrow-down"
+											class="ion-float-right"></ion-icon>
+									</h5>
+									<div *ngIf="ArmADetailSec">
+										<div class="header-title" *ngFor="let iSum of Summary;">
+											<ion-card-header>
+												<ion-card-subtitle
+													*ngIf="(iSum.ShiftDescription.indexOf('SHIFT_BREAK') > -1)">
+													{{iSum.ShiftDescription.substr(12, iSum.ShiftDescription.length)}}
+												</ion-card-subtitle>
+												<ion-card-subtitle
+													*ngIf="( (iSum.ShiftDescription.indexOf('SHIFT') > -1) && (iSum.ShiftDescription.indexOf('SHIFT_BREAK') == -1) )">
+													{{iSum.ShiftTime}}</ion-card-subtitle>
+												<ion-card-subtitle
+													*ngIf="( (iSum.ShiftDescription.indexOf('SHIFT') == -1) && (iSum.ShiftDescription.indexOf('SHIFT_BREAK') == -1) )">
+													{{iSum.ShiftDescription}}</ion-card-subtitle>
+											</ion-card-header>
+											<ion-row *ngIf="(iSum.ShiftDescription.indexOf('SHIFT_BREAK') == -1)">
+												<ion-col class="inp_group">
+													<ion-item class="inp_control armlist"
+														*ngFor="let iDRead of dispenserList; let i = index">
+														<ion-label>
+															{{getReadingByDispName(iDRead.DispencerName, iSum, '_ArmA') | number }}
+														</ion-label>
+													</ion-item>
+												</ion-col>
+											</ion-row>
+										</div>
+									</div>
+								</div>
+								<div>
+									<h5 (click)="armBCollapse()">Arm B <ion-icon name="arrow-down"
+											class="ion-float-right"></ion-icon>
+									</h5>
+									<div *ngIf="ArmBDetailSec">
+										<div class="header-title" *ngFor="let iSum of Summary;">
+
+											<ion-card-header>
+												<ion-card-subtitle
+													*ngIf="(iSum.ShiftDescription.indexOf('SHIFT_BREAK') > -1)">
+													{{iSum.ShiftDescription.substr(12, iSum.ShiftDescription.length)}}
+												</ion-card-subtitle>
+												<ion-card-subtitle
+													*ngIf="( (iSum.ShiftDescription.indexOf('SHIFT') > -1) && (iSum.ShiftDescription.indexOf('SHIFT_BREAK') == -1) )">
+													{{iSum.ShiftTime}}</ion-card-subtitle>
+												<ion-card-subtitle
+													*ngIf="( (iSum.ShiftDescription.indexOf('SHIFT') == -1) && (iSum.ShiftDescription.indexOf('SHIFT_BREAK') == -1) )">
+													{{iSum.ShiftDescription}}</ion-card-subtitle>
+											</ion-card-header>
+											<ion-row *ngIf="(iSum.ShiftDescription.indexOf('SHIFT_BREAK') == -1)">
+												<ion-col class="inp_group">
+													<ion-item class="inp_control armlist"
+														*ngFor="let iDRead of dispenserList; let i = index">
+
+														<ion-label>
+															{{getReadingByDispName(iDRead.DispencerName, iSum, '_ArmB') | number}}
+														</ion-label>
+													</ion-item>
+												</ion-col>
+											</ion-row>
+										</div>
+									</div>
+								</div>
+								<ion-card-content>
+									<ion-row id="customers">
+										<ion-col class="inp_group">
+											<div *ngFor="let itm of lowerDetLeft; let ind = index">
+												<ion-item class="inp_control" *ngIf="itm.F_ShiftDescription !==null">
+													<ion-label>{{itm.F_ShiftDescription}}</ion-label>
+												</ion-item>
+												<ion-item class="inp_control" *ngIf="itm.F_Value !==null">
+													<ion-label>{{itm.F_Value}}</ion-label>
+												</ion-item>
+												<ion-item class="inp_control" *ngIf="itm.S_ShiftDescription !==null">
+													<ion-label>{{itm.S_ShiftDescription}}</ion-label>
+												</ion-item>
+												<ion-item class="inp_control" *ngIf="itm.S_Value !== null">
+													<ion-label>{{itm.S_Value}}</ion-label>
+												</ion-item>
+
+											</div>
+											<div *ngFor="let itm of lowerDetLeft; let ind = index">
+												<ion-item class="inp_control coins">
+													<div *ngIf="itm.T_Count !== null">
+														<div *ngIf="itm.T_ShiftDescription !== null">
+															{{itm.T_ShiftDescription}}</div>
+														<div
+															*ngIf="(itm.T_ShiftDescription != 'Other Notes' && itm.T_ShiftDescription !== 'Coins' && itm.T_ShiftDescription !== null)">
+															x {{itm.T_Count}} = {{itm.T_Value}}</div>
+														<div
+															*ngIf="(itm.T_ShiftDescription === 'Other Notes' && itm.T_ShiftDescription !== null)">
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = {{itm.T_Value}}</div>
+														<div
+															*ngIf="(itm.T_ShiftDescription === 'Coins' && itm.T_ShiftDescription !== null)">
+															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = {{itm.T_Value}}</div>
+													</div>
+												</ion-item>
+											</div>
+										</ion-col>
+									</ion-row>
+								</ion-card-content>
+							</ion-card>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="my_table_container">
+							<table class="my_table" id="customers" #customers>
+								<thead>
+									<tr>
+										<td colspan="100%"><b>Normal Rate:</b> {{ForRate}} &nbsp; <b>Discounted
+												Rate:</b> {{ForDiscountedRate}}</td>
+									</tr>
+									<tr>
+										<th>Particulars</th>
+										<th>Total quantity</th>
+										<th>Non discount quantity</th>
+										<th>Non discount amount</th>
+										<th>Discount quantity</th>
+										<th>Discount amount</th>
+										<th>Total amount</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let itm of DisNonDicSmmry; let ind = index">
+										<td>{{itm.Particulars}}</td>
+										<td>{{itm.TotalQuntity}}</td>
+										<td>{{itm.NonDiscount_QTY}}</td>
+										<td>{{itm.NonDiscount_Amt | number}}</td>
+										<td>{{itm.Discount_QTY}}</td>
+										<td>{{itm.Discount_Amt | number}}</td>
+										<td>{{itm.TotalAmount | number}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</div>
+	</div>
+</ion-content>

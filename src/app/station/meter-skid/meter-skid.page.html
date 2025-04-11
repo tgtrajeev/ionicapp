@@ -1,0 +1,183 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="home"></ion-back-button>
+		</div>
+		<div>
+			<h1>Meter Skid</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<form class="myform">
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="sap_no_div">
+							<span>
+								<strong>SAP Equipment Number : </strong>
+								<span>{{(MSMeterSkidCode == null) ? '0.00' : MSMeterSkidCode}}</span>
+							</span>
+						</div>
+					</ion-col>
+				</ion-row>
+				<form [formGroup]="addForm" (ngSubmit)="insertStationSkid()">
+					<ion-row>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<label>Select Date
+										<span class="star">*</span>
+									</label>
+								</div>
+								<div class="input_container">
+									<ion-item>
+										<ion-label>Select Date:</ion-label>
+										<!-- <ion-datetime displayFormat="DD-MMM-YYYY"  name="DPREntryDate" [max]="maxDate"></ion-datetime> -->
+										<ion-datetime #selcteddate class="datepick" formControlName="DPREntryDate"
+											[max]="secondMaxDate" displayFormat="DD-MMM-YYYY"
+											pickerFormat="DD MMM YYYY" name="selcteddate"
+											(ionChange)="getSelectedDate(selcteddate.value)">
+											<!-- form="DispenserDate.selcteddate" -->
+										</ion-datetime>
+									</ion-item>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="form_inp_container mb5">
+								<div class="label_container">
+									<label>Flow Meter Totaliser
+										<span class="star">*</span>
+									</label>
+								</div>
+								<div class="input_container d_flex justify_space_beetween">
+									<ion-input placeholder="Flow Meter Totaliser" formControlName="meterTotaliser">
+									</ion-input>
+									<span class="font13 mr5">Prev :{{(MSFlowMeterTotaliserPrv == null) ?
+									 '0.00': MSFlowMeterTotaliserPrv}}</span>
+								</div>
+							</div>
+							<div class="form_inp_container cng_reset_btn_div mb5">
+								<ion-button class="font11 change_reset_btn" size="small"
+									(click)="change_resetRedirect()">Jump/Change/Reset</ion-button>
+								<ion-ripple-effect type="unbounded"></ion-ripple-effect>
+							</div>
+						</ion-col>
+					</ion-row>
+
+					<!-- New Comment -->
+
+					<!-- <ion-row>
+					<ion-col size="12">
+						<div class="form_inp_container">
+							<div class="input_container">
+								<ion-list lines="none">
+									<ion-item >
+										<ion-label>Jump</ion-label>
+										<ion-checkbox slot="end" (ionChange)="showFields()" ></ion-checkbox>
+									</ion-item>
+								</ion-list>
+							</div>
+						</div>
+					</ion-col>
+					<ion-col size="12" *ngIf="myVar">
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Jump Reading </label>
+							</div>
+							<div class="input_container">
+								<ion-input placeholder="Jump Reading" formControlName="jumpReading"></ion-input>
+							</div>
+						</div>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Choose File</label>
+							</div>
+							<div class="input_container file_cont">
+								<input type="file"  name="MSfileInput" id="MSfileInput"  (change)="upload($event)"/>
+							</div>
+						</div>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Jump Reading Count</label>
+							</div>
+							<div class="input_container">
+								<ion-input placeholder="Enter Input" id="colFormLabel" formControlName="jumpReadingCount"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row> -->
+
+					<ion-row>
+						<ion-col>
+							<div class="form_inp_container">
+								<div class="label_container">
+									<label>Remark</label>
+								</div>
+								<div class="input_container">
+									<ion-input type="textarea" placeholder="Remark" formControlName="remark">
+									</ion-input>
+								</div>
+							</div>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col>
+							<div class="button_container" [hidden]="IsMSkidhide">
+								<ion-button color="dark_green_clr" type="submit"
+									[hidden]="MSisStationSubmitted > 0  || MSisCRSentToHo > 0">Save</ion-button>
+							</div>
+						</ion-col>
+					</ion-row>
+
+					<!-- <ion-row>
+					<ion-col size="12" [hidden]="MSisStationSubmitted == 0">
+						<ion-text class="redTextRis">
+							* Data is submitted for the date {{DPREntryDate}}.
+						</ion-text>
+					</ion-col>
+					<ion-col size="12" [hidden]="MSisCRSentToHo == 0">
+						<ion-text class="redTextRis">
+							* Submission is closed for date {{DPREntryDate}}  from Control Room.
+						</ion-text>
+					</ion-col>
+				</ion-row> -->
+
+				</form>
+			</ion-grid>
+			<div class="msg">
+				<span class="data_submit_msg" [hidden]="MSisStationSubmitted == 0 ">
+					* Data is submitted for the date {{meterDate.selcteddate}} by Station.</span><br>
+				<span class="data_submit_msg" [hidden]="MSisCRSentToHo == 0 ">
+					* Submission is closed for date {{meterDate.selcteddate}} by Control Room.</span>
+				<!-- DPREntryDate -->
+			</div>
+
+			<div class="msg" *ngIf="IsMSkidhide" style="margin-left: 15px;">
+				<span class="data_submit_msg" >* Equipment not available for this Station.</span>
+			</div>
+		</form>
+	</div>
+</ion-content>

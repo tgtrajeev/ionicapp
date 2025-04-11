@@ -1,0 +1,36 @@
+<div class="attch_container">
+	<div class="trigger_div">{{ heading }} <ion-icon name="close" (click)="dismiss()"></ion-icon></div>
+	<div class="content_div" *ngIf="uploadVar">
+		<!-- <h3 class="attc_head">Attach Image</h3> -->
+		
+		<ion-row>
+			<ion-col size="6" class="ion-text-center">
+				<ion-button class="camera_btn d_block">
+					<ion-icon name="camera"></ion-icon>
+				</ion-button>
+				<ion-text>Open Camera</ion-text>
+			</ion-col>
+			<ion-col size="6" class="ion-text-center">
+				<div class="attachment_cont">
+					<input type="file">
+					<ion-icon name="image"></ion-icon>
+				</div>
+				<ion-text>Choose File</ion-text>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<ion-button class="upload_btn" size="small">
+					Upload
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</div>
+	<div class="content_div" *ngIf="previewVar">
+		<figure>
+			<img src={{imgURL}} />
+		</figure>
+	</div>
+</div>
+	
+

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="dark_green">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="2" class="ion-text-left">
+        <ion-back-button defaultHref="entry-threshhold" class="text_white"></ion-back-button>
+      </ion-col>
+      <ion-col size="8" class="ion-text-center">
+        <ion-text class="text_white" *ngIf="pageFlag =='addds'">Add Entry Threshold</ion-text>
+        <ion-text class="text_white" *ngIf="pageFlag =='updateds'">Update Entry Threshold</ion-text>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addForm" (ngSubmit)="InsertThreshold()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="inp_group">
+          <ion-label>Meter Type<span class="star">*</span></ion-label>
+          <ion-select class="inp_control" formControlName="MeterType" [disabled]="metervisible">
+            <ion-select-option value="LCV">LCV</ion-select-option>
+            <ion-select-option value="Meter Skid">Meter Skid</ion-select-option>
+            <ion-select-option value="Package">Package</ion-select-option>
+            <ion-select-option value="Gas Genset">Gas Genset</ion-select-option>
+            <ion-select-option value="Dispenser">Dispenser</ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" class="inp_group">
+          <ion-label>Thresh Hold Value (in %) <span class="star">*</span></ion-label>
+          <ion-input class="inp_control" formControlName="ThresholdValue"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" class="inp_group">
+          <ion-label>Average Days (in days) <span class="star">*</span></ion-label>
+          <ion-input class="inp_control" formControlName="DaysForAverage"></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="align_center">
+        <ion-col>
+          Status
+        </ion-col>
+        <ion-col class="d_flex ion-justify-content-end">
+          <ion-toggle [(ngModel)]="status" [ngModelOptions]="{standalone: true}"></ion-toggle>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="button_container">
+            <ion-button type="submit" color="dark_green_clr">Save</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

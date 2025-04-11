@@ -1,0 +1,106 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/home">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<div class="main_heading1">
+		<div>
+			<ion-back-button defaultHref="dpr-entry"></ion-back-button>
+		</div>
+		<div>
+			<h1>Genral Entry</h1>
+		</div>
+		<div></div>
+	</div>
+</ion-header>
+<ion-content>
+	<div class="content_area">
+		<ion-row>
+			<ion-col>
+				<div class="form_inp_container">
+					<div class="label_container">
+						<label>Select Date
+							<span class="star">*</span>
+						</label>
+					</div>
+					<div class="input_container">
+						<ion-item>
+							<ion-label>Select Date:</ion-label>
+							<ion-datetime #selcteddate class="datepick" [max]="secondMaxDate"
+								[(ngModel)]="geteDate.selcteddate" displayFormat="DD-MMM-YYYY"
+								pickerFormat="DD MMM YYYY"  name="selcteddate"
+								(ionChange)="getSelectedDate(selcteddate.value)"></ion-datetime>
+						</ion-item>
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
+		<form class="myform">
+			<ion-grid>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Number Of Buses</label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" name="NOB" [(ngModel)]="NOB"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Number Of LCV</label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" name="NOL" [(ngModel)]="NOL"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="form_inp_container">
+							<div class="label_container">
+								<label>Energy Meter Reading (KVAH)</label>
+							</div>
+							<div class="input_container">
+								<ion-input type="text" name="ENERGY" [(ngModel)]= "ENERGY"></ion-input>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col>
+						<div class="button_container">
+							<ion-button color="dark_green_clr"
+								[hidden]="GEisStationSubmitted > 0  || GEisCRSentToHo > 0 "
+								(click)="InsertGeneralEntry()" type="submit">Save</ion-button>
+						</div>
+						<div class="msg">
+							<!-- /<span>* Data is submitted for the day</span> -->
+							<p class="data_submit_msg" [hidden]="GEisStationSubmitted == 0 ">* Data is submitted for the date {{geteDate.selcteddate}} by Station.</p>
+							<p class="data_submit_msg" [hidden]="GEisCRSentToHo == 0 ">* Submission is closed for date {{geteDate.selcteddate}} by Control Room.</p>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+	</div>
+</ion-content>

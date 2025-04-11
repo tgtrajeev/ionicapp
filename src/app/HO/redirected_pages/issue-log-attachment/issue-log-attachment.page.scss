@@ -1,0 +1,12 @@
+.for_color
+{
+    background-color: var(--green_clr);
+}
+.img_container
+{
+    width:100%;
+    img
+    {
+        box-shadow: 0px 0px 8px rgba(0,0,0,.5);
+    }
+}

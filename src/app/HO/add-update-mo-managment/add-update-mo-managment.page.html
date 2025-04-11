@@ -1,0 +1,193 @@
+<!--add Mo-->
+<ion-header *ngIf="pageFlag =='addmo'">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="mo-management" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text  class="text_white">Add DSO</ion-text>
+			</ion-col>
+			<ion-col size="2" class="ion-text-center">
+				
+			</ion-col>
+
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="pageFlag =='addmo'">
+	<form [formGroup]="addForm" (ngSubmit)="InsertMo()">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Name </ion-label>
+					<ion-input class="inp_control" placeholder="Name" formControlName="name"></ion-input>
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Login Id </ion-label>
+					<ion-input class="inp_control" formControlName="loginid"></ion-input>
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Password </ion-label>
+					<ion-input class="inp_control" formControlName="password"></ion-input>
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Confirm Password </ion-label>
+					<ion-input class="inp_control" formControlName="cpassword"></ion-input>
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Primary Email </ion-label>
+					<ion-input class="inp_control" placeholder="Primary Email" formControlName="email"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Email Id 2 </ion-label>
+					<ion-input class="inp_control" formControlName="email2"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Email Id 3 </ion-label>
+					<ion-input class="inp_control" formControlName="email3"></ion-input>
+
+				</ion-col>
+
+				<ion-col size="12" class="inp_group">
+					<ion-label>Primary Contact No </ion-label>
+					<ion-input class="inp_control" formControlName="contact1">
+					</ion-input>
+
+				</ion-col>
+
+				<ion-col size="12" class="inp_group">
+					<ion-label>Contact No 2 </ion-label>
+					<ion-input class="inp_control" formControlName="contact2"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Contact No 3 </ion-label>
+					<ion-input class="inp_control" formControlName="contact3"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Contact No 4 </ion-label>
+					<ion-input class="inp_control" formControlName="contact4"></ion-input>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<ion-row>
+			<ion-col>Status</ion-col>
+			<ion-col class="d_flex ion-justify-content-end">
+				<ion-toggle [(ngModel)]="status" [ngModelOptions]="{standalone: true}"></ion-toggle>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="button_container">
+					<ion-button color="dark_green_clr"  type="submit">Submit </ion-button>
+				</div>
+			</ion-col>
+		</ion-row>
+	</form>
+</ion-content>
+
+
+<!--Update Mo-->
+<ion-header *ngIf="pageFlag =='updatemo'">
+	<ion-toolbar color="dark_green">
+		<ion-row class="ion-align-items-center">
+			<ion-col size="2" class="ion-text-left">
+				<ion-back-button defaultHref="mo-management" class="text_white"></ion-back-button>
+			</ion-col>
+			<ion-col size="8" class="ion-text-center">
+				<ion-text  class="text_white">Update DSO</ion-text>
+			</ion-col>
+			<ion-col size="2" class="ion-text-center">
+				
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="pageFlag =='updatemo'">
+	<form [formGroup]="addForm" (ngSubmit)="UpdateMo()">
+		<ion-grid>
+			<ion-row>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Name </ion-label>
+					<ion-input class="inp_control" formControlName="name"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Login Id </ion-label>
+					<ion-input class="inp_control" formControlName="loginid"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Password </ion-label>
+					<ion-input class="inp_control" formControlName="password"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Confirm Password </ion-label>
+					<ion-input class="inp_control" formControlName="cpassword">
+					</ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Primary Email </ion-label>
+					<ion-input class="inp_control" formControlName="email"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Email Id 2 </ion-label>
+					<ion-input class="inp_control" formControlName="email2"></ion-input>
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Email Id 3 </ion-label>
+					<ion-input class="inp_control"  formControlName="email3"></ion-input>
+
+				</ion-col>
+
+				<ion-col size="12" class="inp_group">
+					<ion-label>Primary Contact No </ion-label>
+					<ion-input class="inp_control" formControlName="contact1">
+					</ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Contact No 2 </ion-label>
+					<ion-input class="inp_control" placeholder="" formControlName="contact2">
+					</ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Contact No 3</ion-label>
+					<ion-input class="inp_control" formControlName="contact3"></ion-input>
+
+				</ion-col>
+				<ion-col size="12" class="inp_group">
+					<ion-label>Contact No 4</ion-label>
+					<ion-input class="inp_control" formControlName="contact4"></ion-input>
+
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		<ion-row>
+			<ion-col>Status</ion-col>
+			<ion-col class="d_flex ion-justify-content-end">
+				<ion-toggle [(ngModel)]="status" [ngModelOptions]="{standalone: true}"></ion-toggle>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div class="button_container">
+					<ion-button color="dark_green_clr" type="submit">Submit </ion-button>
+				</div>
+			</ion-col>
+		</ion-row>
+
+		
+	</form>
+
+</ion-content>

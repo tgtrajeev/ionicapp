@@ -1,0 +1,72 @@
+<ion-header>
+	<header>
+		<div class="header">
+			<div class="logo_div" routerLink="/co-dashboard">
+				<img src="../../assets/images/logo.png" />
+			</div>
+			<span class="logout_div">
+				<div class="toggle_div">
+					<button (click)="openFirst()">
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</span>
+		</div>
+	</header>
+	<ion-row class="align_center search_parent">
+		<ion-col size="2">
+			<ion-back-button defaultHref="co-dashboard"></ion-back-button>
+		</ion-col>
+		<ion-col size="8">
+			<h4 class="ion-text-center">Dashboard Control</h4>
+		</ion-col>
+	</ion-row>
+</ion-header>
+
+<ion-content>
+	<div *ngIf="isShown" class="stcode tooltiptext">
+		{{stationCode}}
+	</div>
+    <ion-grid>
+		<ion-row>
+			<ion-col>
+				<div class="my_table_container">
+					
+					<table class="my_table">
+
+						<thead>
+							<tr>
+								<!-- <th>Sr No</th>
+								<th>Station Code</th> -->
+								<th>Station Name</th>
+								<!-- <th>Station Region</th> -->
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor ="let item of datashnoardcoRes; let i=index" >
+								<!-- <td>{{i+1}}</td>
+								<td>{{item.StationCode}}</td> -->
+								<td (click)="showStationCode(item.StationName)">{{item.StationName}}									
+								</td>
+								<!-- <td>{{item.Region}}</td> -->
+								<td *ngIf="item.DS=='!Not Submitted'"><span class="submited" >{{item.DS}}</span></td>
+								<td *ngIf ="item.DS=='Not Submitted'"><span class="not_submited" >{{item.DS}}</span></td>
+							</tr>
+							<!-- <tr class="row_red" *ngIf="dashCoItem.DS=='Not Submitted'" *ngFor ="let item of datashnoardcoRes; let i=index">
+								<td>{{i+1}}</td>
+								<td>{{item.StationCode}}</td>
+								<td>{{item.StationName}}</td>
+								<td>{{item.Region}}</td>
+								<td><span class="not_submited">{{dashCoItem.DS}}</span></td>
+							</tr> -->
+						</tbody>
+					</table>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
